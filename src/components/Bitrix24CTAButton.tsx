@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 interface Bitrix24CTAButtonProps {
   children: React.ReactNode;
   className?: string;
-  variant?: "default" | "login" | "outline" | "ghost";
+  variant?: "default" | "outline" | "ghost";
   size?: "default" | "sm" | "lg" | "icon";
 }
 
@@ -15,7 +15,7 @@ const BITRIX_LOADER_SRC = "https://cdn.bitrix24.com.br/b36341485/crm/form/loader
 const Bitrix24CTAButton = ({
   children,
   className,
-  variant = "login",
+  variant = "default",
   size = "lg",
 }: Bitrix24CTAButtonProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
