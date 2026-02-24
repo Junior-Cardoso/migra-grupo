@@ -1,4 +1,5 @@
 import MigraNavigation from "@/components/MigraNavigation";
+import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -61,7 +62,7 @@ const MigraHome = () => {
       <section id="sobre" className="py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div>
+            <ScrollReveal>
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-2 uppercase tracking-wide">
                 Sobre o MIGRA
               </h2>
@@ -71,33 +72,40 @@ const MigraHome = () => {
                 dedicado à pesquisa sobre migrações internacionais, refúgio e apatridia. 
                 Nosso trabalho combina rigor acadêmico com impacto social.
               </p>
-              <p className="text-muted-foreground leading-relaxed mb-8">
+              <p className="text-muted-foreground leading-relaxed mb-10">
                 Atuamos na produção de conhecimento, formação de pesquisadores e apoio 
                 à comunidade migrante, contribuindo para políticas públicas mais justas e inclusivas.
               </p>
-              <div className="grid grid-cols-3 gap-6">
-                <div className="text-center">
-                  <p className="font-heading text-3xl font-bold text-primary">15+</p>
-                  <p className="text-muted-foreground text-sm mt-1">Pesquisadores</p>
+
+              {/* Stats melhorados */}
+              <div className="grid grid-cols-3 gap-4">
+                <div className="bg-secondary/5 border border-border rounded-lg p-5 text-center">
+                  <p className="font-heading text-4xl font-bold text-primary leading-none">15+</p>
+                  <div className="w-6 h-0.5 bg-accent mx-auto my-2 rounded-full" />
+                  <p className="text-muted-foreground text-xs uppercase tracking-wider font-medium">Pesquisadores</p>
                 </div>
-                <div className="text-center">
-                  <p className="font-heading text-3xl font-bold text-primary">50+</p>
-                  <p className="text-muted-foreground text-sm mt-1">Publicações</p>
+                <div className="bg-secondary/5 border border-border rounded-lg p-5 text-center">
+                  <p className="font-heading text-4xl font-bold text-primary leading-none">50+</p>
+                  <div className="w-6 h-0.5 bg-accent mx-auto my-2 rounded-full" />
+                  <p className="text-muted-foreground text-xs uppercase tracking-wider font-medium">Publicações</p>
                 </div>
-                <div className="text-center">
-                  <p className="font-heading text-3xl font-bold text-primary">8</p>
-                  <p className="text-muted-foreground text-sm mt-1">Anos de atuação</p>
-                </div>
-              </div>
-            </div>
-            <div className="relative">
-              <div className="aspect-[4/3] rounded-lg bg-muted overflow-hidden">
-                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/30 flex items-center justify-center">
-                  <Globe className="h-24 w-24 text-primary/40" />
+                <div className="bg-secondary/5 border border-border rounded-lg p-5 text-center">
+                  <p className="font-heading text-4xl font-bold text-primary leading-none">8</p>
+                  <div className="w-6 h-0.5 bg-accent mx-auto my-2 rounded-full" />
+                  <p className="text-muted-foreground text-xs uppercase tracking-wider font-medium">Anos de atuação</p>
                 </div>
               </div>
-              <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-accent/20 rounded-lg -z-10" />
-            </div>
+            </ScrollReveal>
+            <ScrollReveal delay={200}>
+              <div className="relative">
+                <div className="aspect-[4/3] rounded-lg bg-muted overflow-hidden">
+                  <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/30 flex items-center justify-center">
+                    <Globe className="h-24 w-24 text-primary/40" />
+                  </div>
+                </div>
+                <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-accent/20 rounded-lg -z-10" />
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -105,80 +113,71 @@ const MigraHome = () => {
       {/* Linhas de Pesquisa */}
       <section id="pesquisa" className="py-20 md:py-28 bg-muted/50">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-              Áreas de Atuação
-            </h2>
-            <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Conheça as linhas de pesquisa que orientam nossos estudos e publicações.
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="text-center mb-16">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
+                Áreas de Atuação
+              </h2>
+              <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                Conheça as linhas de pesquisa que orientam nossos estudos e publicações.
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              {
-                icon: Globe,
-                title: "Migrações Internacionais",
-                desc: "Estudo dos fluxos migratórios contemporâneos e seus impactos sociais, econômicos e culturais.",
-              },
-              {
-                icon: Scale,
-                title: "Direito dos Refugiados",
-                desc: "Análise das normativas internacionais e nacionais de proteção a refugiados e solicitantes de refúgio.",
-              },
-              {
-                icon: Users,
-                title: "Apatridia",
-                desc: "Pesquisa sobre a condição de apatridia e mecanismos de proteção às pessoas sem nacionalidade.",
-              },
-              {
-                icon: MapPin,
-                title: "Políticas Migratórias",
-                desc: "Avaliação de políticas públicas de acolhimento e integração de migrantes no Brasil.",
-              },
-              {
-                icon: BookOpen,
-                title: "Direitos Humanos",
-                desc: "Estudo dos direitos fundamentais aplicados ao contexto das migrações e mobilidade humana.",
-              },
-              {
-                icon: Compass,
-                title: "Fronteiras e Mobilidade",
-                desc: "Análise das dinâmicas fronteiriças e seus efeitos na mobilidade humana contemporânea.",
-              },
+              { icon: Globe, title: "Migrações Internacionais", desc: "Estudo dos fluxos migratórios contemporâneos e seus impactos sociais, econômicos e culturais." },
+              { icon: Scale, title: "Direito dos Refugiados", desc: "Análise das normativas internacionais e nacionais de proteção a refugiados e solicitantes de refúgio." },
+              { icon: Users, title: "Apatridia", desc: "Pesquisa sobre a condição de apatridia e mecanismos de proteção às pessoas sem nacionalidade." },
+              { icon: MapPin, title: "Políticas Migratórias", desc: "Avaliação de políticas públicas de acolhimento e integração de migrantes no Brasil." },
+              { icon: BookOpen, title: "Direitos Humanos", desc: "Estudo dos direitos fundamentais aplicados ao contexto das migrações e mobilidade humana." },
+              { icon: Compass, title: "Fronteiras e Mobilidade", desc: "Análise das dinâmicas fronteiriças e seus efeitos na mobilidade humana contemporânea." },
             ].map((item, i) => (
-              <Card
-                key={i}
-                className="p-6 bg-background border-border hover:border-primary/30 transition-colors group"
-              >
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <item.icon className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="font-heading text-lg font-semibold text-foreground mb-2 uppercase tracking-wide">
-                  {item.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {item.desc}
-                </p>
-              </Card>
+              <ScrollReveal key={i} delay={i * 100}>
+                <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors group h-full">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                    <item.icon className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-heading text-lg font-semibold text-foreground mb-2 uppercase tracking-wide">
+                    {item.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {item.desc}
+                  </p>
+                </Card>
+              </ScrollReveal>
             ))}
           </div>
+
+          <ScrollReveal>
+            <div className="text-center mt-10">
+              <Button
+                size="lg"
+                className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
+              >
+                Saiba mais sobre nossas pesquisas
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Equipe */}
       <section id="equipe" className="py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-              Nossa Equipe
-            </h2>
-            <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Pesquisadores dedicados ao estudo das migrações e dos direitos humanos.
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="text-center mb-16">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
+                Nossa Equipe
+              </h2>
+              <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                Pesquisadores dedicados ao estudo das migrações e dos direitos humanos.
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
@@ -187,32 +186,48 @@ const MigraHome = () => {
               { name: "Pesquisador(a) 2", role: "Mestrando(a)" },
               { name: "Pesquisador(a) 3", role: "Graduando(a)" },
             ].map((member, i) => (
-              <div key={i} className="text-center group">
-                <div className="w-32 h-32 mx-auto rounded-full bg-muted mb-4 overflow-hidden flex items-center justify-center">
-                  <GraduationCap className="h-12 w-12 text-muted-foreground/40" />
+              <ScrollReveal key={i} delay={i * 100}>
+                <div className="text-center group">
+                  <div className="w-32 h-32 mx-auto rounded-full bg-muted mb-4 overflow-hidden flex items-center justify-center">
+                    <GraduationCap className="h-12 w-12 text-muted-foreground/40" />
+                  </div>
+                  <h3 className="font-heading text-base font-semibold text-foreground uppercase tracking-wide">
+                    {member.name}
+                  </h3>
+                  <p className="text-muted-foreground text-sm mt-1">{member.role}</p>
                 </div>
-                <h3 className="font-heading text-base font-semibold text-foreground uppercase tracking-wide">
-                  {member.name}
-                </h3>
-                <p className="text-muted-foreground text-sm mt-1">{member.role}</p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
+
+          <ScrollReveal>
+            <div className="text-center mt-10">
+              <Button
+                size="lg"
+                className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
+              >
+                Conheça toda a equipe
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Publicações / Acervo */}
       <section id="publicacoes" className="py-20 md:py-28 bg-muted/50">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-              Acervo Digital
-            </h2>
-            <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Publicações recentes do nosso grupo de estudos.
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="text-center mb-16">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
+                Acervo Digital
+              </h2>
+              <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                Publicações recentes do nosso grupo de estudos.
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
@@ -226,132 +241,133 @@ const MigraHome = () => {
               { type: "Working Paper", title: "Crianças migrantes e o direito à educação no Brasil", author: "Autor, O. P.", year: "2022" },
               { type: "Tese", title: "Fronteiras, soberania e hospitalidade: uma leitura decolonial", author: "Autor, Q. R.", year: "2021" },
             ].map((pub, i) => (
-              <Card
-                key={i}
-                className="p-6 bg-background border-border hover:border-primary/30 transition-colors"
-              >
-                <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full mb-4">
-                  {pub.type}
-                </span>
-                <h3 className="font-semibold text-foreground mb-3 leading-snug">
-                  {pub.title}
-                </h3>
-                <p className="text-muted-foreground text-sm">
-                  {pub.author} · {pub.year}
-                </p>
-              </Card>
+              <ScrollReveal key={i} delay={(i % 3) * 100}>
+                <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors h-full">
+                  <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full mb-4">
+                    {pub.type}
+                  </span>
+                  <h3 className="font-semibold text-foreground mb-3 leading-snug">
+                    {pub.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    {pub.author} · {pub.year}
+                  </p>
+                </Card>
+              </ScrollReveal>
             ))}
           </div>
 
-          <div className="text-center mt-10">
-            <Button
-              variant="outline"
-              className="border-primary text-primary hover:bg-primary/10 font-medium"
-            >
-              Ver todo o acervo
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
+          <ScrollReveal>
+            <div className="text-center mt-10">
+              <Button
+                size="lg"
+                className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
+              >
+                Ver todo o acervo
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Blog */}
       <section id="blog" className="py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-4">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-              Nosso Blog
-            </h2>
-            <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Acompanhe nossas publicações, novidades e reflexões sobre migração.
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="text-center mb-4">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
+                Nosso Blog
+              </h2>
+              <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                Acompanhe nossas publicações, novidades e reflexões sobre migração.
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="grid md:grid-cols-3 gap-8 mt-12">
             {[
-              {
-                category: "Pesquisa",
-                title: "Migração venezuelana em Pernambuco: desafios e acolhimento",
-                excerpt: "Uma análise sobre os fluxos migratórios recentes e as políticas de integração no estado.",
-                date: "15 Fev 2026",
-              },
-              {
-                category: "Eventos",
-                title: "Documentário 'Travessias' estreia em festival universitário",
-                excerpt: "Produção do MIGRA foi selecionada para o Festival de Cinema Acadêmico da UFPE.",
-                date: "02 Fev 2026",
-              },
-              {
-                category: "Políticas Públicas",
-                title: "Nova legislação brasileira sobre refúgio: o que muda?",
-                excerpt: "Entenda as principais alterações na política migratória e seus impactos práticos.",
-                date: "20 Jan 2026",
-              },
+              { category: "Pesquisa", title: "Migração venezuelana em Pernambuco: desafios e acolhimento", excerpt: "Uma análise sobre os fluxos migratórios recentes e as políticas de integração no estado.", date: "15 Fev 2026" },
+              { category: "Eventos", title: "Documentário 'Travessias' estreia em festival universitário", excerpt: "Produção do MIGRA foi selecionada para o Festival de Cinema Acadêmico da UFPE.", date: "02 Fev 2026" },
+              { category: "Políticas Públicas", title: "Nova legislação brasileira sobre refúgio: o que muda?", excerpt: "Entenda as principais alterações na política migratória e seus impactos práticos.", date: "20 Jan 2026" },
             ].map((post, i) => (
-              <Card
-                key={i}
-                className="overflow-hidden bg-background border-border hover:border-primary/30 transition-colors group"
-              >
-                <div className="aspect-[16/10] bg-secondary/80 relative overflow-hidden">
-                  <div className="w-full h-full bg-gradient-to-br from-secondary to-secondary/60 flex items-center justify-center">
-                    <BookOpen className="h-12 w-12 text-white/20" />
-                  </div>
-                  <span className="absolute top-3 left-3 px-3 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded uppercase tracking-wider">
-                    {post.category}
-                  </span>
-                </div>
-                <div className="p-5">
-                  <h3 className="font-heading text-base font-bold text-foreground leading-snug mb-2 uppercase tracking-wide group-hover:text-primary transition-colors">
-                    {post.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                    {post.excerpt}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-muted-foreground text-xs flex items-center gap-1">
-                      <FileText className="h-3 w-3" />
-                      {post.date}
+              <ScrollReveal key={i} delay={i * 150}>
+                <Card className="overflow-hidden bg-background border-border hover:border-primary/30 transition-colors group h-full">
+                  <div className="aspect-[16/10] bg-secondary/80 relative overflow-hidden">
+                    <div className="w-full h-full bg-gradient-to-br from-secondary to-secondary/60 flex items-center justify-center">
+                      <BookOpen className="h-12 w-12 text-white/20" />
+                    </div>
+                    <span className="absolute top-3 left-3 px-3 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded uppercase tracking-wider">
+                      {post.category}
                     </span>
-                    <a href="#" className="text-primary text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
-                      Ler mais <ArrowRight className="h-3.5 w-3.5" />
-                    </a>
                   </div>
-                </div>
-              </Card>
+                  <div className="p-5">
+                    <h3 className="font-heading text-base font-bold text-foreground leading-snug mb-2 uppercase tracking-wide group-hover:text-primary transition-colors">
+                      {post.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                      {post.excerpt}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-muted-foreground text-xs flex items-center gap-1">
+                        <FileText className="h-3 w-3" />
+                        {post.date}
+                      </span>
+                      <a href="#" className="text-primary text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
+                        Ler mais <ArrowRight className="h-3.5 w-3.5" />
+                      </a>
+                    </div>
+                  </div>
+                </Card>
+              </ScrollReveal>
             ))}
           </div>
+
+          <ScrollReveal>
+            <div className="text-center mt-10">
+              <Button
+                size="lg"
+                className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
+              >
+                Ver todos os posts
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* CTA / Contato */}
       <section id="contato" className="py-20 md:py-28 bg-secondary text-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <Mail className="h-10 w-10 text-accent mx-auto mb-6" />
-          <h2 className="font-heading text-3xl md:text-4xl font-bold uppercase tracking-wide mb-4">
-            Participe do MIGRA
-          </h2>
-          <p className="text-white/70 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
-            Tem interesse em estudar migrações internacionais, refúgio ou apatridia? 
-            Entre em contato e faça parte do nosso grupo de estudos.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-base px-8"
-            >
-              Entre em contato
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white/30 text-white hover:bg-white/10 font-medium text-base px-8"
-            >
-              <FileText className="mr-2 h-4 w-4" />
-              Leia nosso blog
-            </Button>
-          </div>
+          <ScrollReveal>
+            <Mail className="h-10 w-10 text-accent mx-auto mb-6" />
+            <h2 className="font-heading text-3xl md:text-4xl font-bold uppercase tracking-wide mb-4">
+              Participe do MIGRA
+            </h2>
+            <p className="text-white/70 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
+              Tem interesse em estudar migrações internacionais, refúgio ou apatridia? 
+              Entre em contato e faça parte do nosso grupo de estudos.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                size="lg"
+                className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
+              >
+                Entre em contato
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white text-white bg-transparent hover:bg-white/10 font-heading font-normal text-base px-8 uppercase tracking-wider"
+              >
+                <FileText className="mr-2 h-4 w-4" />
+                Leia nosso blog
+              </Button>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
