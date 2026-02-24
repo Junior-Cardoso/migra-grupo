@@ -28,12 +28,12 @@ const MigraHome = () => {
           <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-primary/30 blur-3xl" />
           <div className="absolute bottom-10 right-20 w-96 h-96 rounded-full bg-accent/20 blur-3xl" />
         </div>
-        <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 md:py-36">
+        <div className="relative z-10 max-w-6xl mx-auto px-6 py-16 md:py-24 lg:py-36">
           <div className="max-w-3xl">
             <p className="text-accent font-medium text-sm tracking-widest uppercase mb-4">
               Universidade Federal de Pernambuco
             </p>
-            <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 tracking-wide uppercase">
+            <h1 className="font-heading text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 tracking-wide uppercase">
               Grupo de Estudos sobre Migrações
             </h1>
             <p className="text-white/70 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
@@ -79,26 +79,24 @@ const MigraHome = () => {
               </p>
 
               {/* Stats melhorados */}
-              <div className="flex gap-10 mt-2">
+              <div className="grid grid-cols-3 gap-4 sm:gap-10 mt-2">
                 <div>
-                  <p className="font-heading text-5xl font-bold text-primary leading-none">
+                  <p className="font-heading text-3xl sm:text-5xl font-bold text-primary leading-none">
                     <AnimatedCounter end={15} suffix="+" />
                   </p>
-                  <p className="text-muted-foreground text-sm mt-2">Pesquisadores</p>
+                  <p className="text-muted-foreground text-xs sm:text-sm mt-2">Pesquisadores</p>
                 </div>
-                <div className="w-px bg-border" />
-                <div>
-                  <p className="font-heading text-5xl font-bold text-primary leading-none">
+                <div className="border-l border-border pl-4 sm:pl-0">
+                  <p className="font-heading text-3xl sm:text-5xl font-bold text-primary leading-none">
                     <AnimatedCounter end={50} suffix="+" />
                   </p>
-                  <p className="text-muted-foreground text-sm mt-2">Publicações</p>
+                  <p className="text-muted-foreground text-xs sm:text-sm mt-2">Publicações</p>
                 </div>
-                <div className="w-px bg-border" />
-                <div>
-                  <p className="font-heading text-5xl font-bold text-primary leading-none">
+                <div className="border-l border-border pl-4 sm:pl-0">
+                  <p className="font-heading text-3xl sm:text-5xl font-bold text-primary leading-none">
                     <AnimatedCounter end={8} />
                   </p>
-                  <p className="text-muted-foreground text-sm mt-2">Anos de atuação</p>
+                  <p className="text-muted-foreground text-xs sm:text-sm mt-2">Anos de atuação</p>
                 </div>
               </div>
             </ScrollReveal>
@@ -160,7 +158,7 @@ const MigraHome = () => {
             <div className="text-center mt-10">
               <Button
                 size="lg"
-                className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
+                className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-sm sm:text-base px-6 sm:px-8 uppercase tracking-wider"
               >
                 Saiba mais sobre nossas pesquisas
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -194,7 +192,7 @@ const MigraHome = () => {
             ].map((member, i) => (
               <ScrollReveal key={i} delay={i * 100}>
                 <div className="text-center group">
-                  <div className="w-32 h-32 mx-auto rounded-full bg-muted mb-4 overflow-hidden flex items-center justify-center">
+                  <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto rounded-full bg-muted mb-4 overflow-hidden flex items-center justify-center">
                     <GraduationCap className="h-12 w-12 text-muted-foreground/40" />
                   </div>
                   <h3 className="font-heading text-base font-semibold text-foreground uppercase tracking-wide">
@@ -284,7 +282,7 @@ const MigraHome = () => {
       <section id="blog" className="py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
           <ScrollReveal>
-            <div className="text-center mb-4">
+            <div className="text-center mb-16">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
                 Nosso Blog
               </h2>
@@ -295,7 +293,7 @@ const MigraHome = () => {
             </div>
           </ScrollReveal>
 
-          <div className="grid md:grid-cols-3 gap-8 mt-12">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               { category: "Pesquisa", title: "Migração venezuelana em Pernambuco: desafios e acolhimento", excerpt: "Uma análise sobre os fluxos migratórios recentes e as políticas de integração no estado.", date: "15 Fev 2026" },
               { category: "Eventos", title: "Documentário 'Travessias' estreia em festival universitário", excerpt: "Produção do MIGRA foi selecionada para o Festival de Cinema Acadêmico da UFPE.", date: "02 Fev 2026" },
