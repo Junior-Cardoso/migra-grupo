@@ -40,7 +40,7 @@ const MigraHome = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-base px-8 uppercase tracking-wider"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
               >
                 Conheça o grupo
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -48,7 +48,7 @@ const MigraHome = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white/50 text-white hover:bg-white/10 font-semibold text-base px-8 uppercase tracking-wider"
+                className="border-white text-white bg-transparent hover:bg-white/10 font-heading font-normal text-base px-8 uppercase tracking-wider"
               >
                 Contato
               </Button>
