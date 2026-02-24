@@ -43,12 +43,6 @@ const MigraHome = () => {
         <div className="absolute inset-0 bg-secondary/20" />
 
         {/* CSS pattern texture overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.08]"
-          style={{
-            backgroundImage: "repeating-linear-gradient(0deg, white 0px, white 1px, transparent 1px, transparent 4px)",
-          }}
-        />
 
         {/* Ambient glow */}
         <div className="absolute inset-0 opacity-10">
