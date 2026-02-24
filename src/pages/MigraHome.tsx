@@ -1,4 +1,5 @@
 import MigraNavigation from "@/components/MigraNavigation";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -78,21 +79,26 @@ const MigraHome = () => {
               </p>
 
               {/* Stats melhorados */}
-              <div className="grid grid-cols-3 gap-4">
-                <div className="bg-secondary/5 border border-border rounded-lg p-5 text-center">
-                  <p className="font-heading text-4xl font-bold text-primary leading-none">15+</p>
-                  <div className="w-6 h-0.5 bg-accent mx-auto my-2 rounded-full" />
-                  <p className="text-muted-foreground text-xs uppercase tracking-wider font-medium">Pesquisadores</p>
+              <div className="flex gap-10 mt-2">
+                <div>
+                  <p className="font-heading text-5xl font-bold text-primary leading-none">
+                    <AnimatedCounter end={15} suffix="+" />
+                  </p>
+                  <p className="text-muted-foreground text-sm mt-2">Pesquisadores</p>
                 </div>
-                <div className="bg-secondary/5 border border-border rounded-lg p-5 text-center">
-                  <p className="font-heading text-4xl font-bold text-primary leading-none">50+</p>
-                  <div className="w-6 h-0.5 bg-accent mx-auto my-2 rounded-full" />
-                  <p className="text-muted-foreground text-xs uppercase tracking-wider font-medium">Publicações</p>
+                <div className="w-px bg-border" />
+                <div>
+                  <p className="font-heading text-5xl font-bold text-primary leading-none">
+                    <AnimatedCounter end={50} suffix="+" />
+                  </p>
+                  <p className="text-muted-foreground text-sm mt-2">Publicações</p>
                 </div>
-                <div className="bg-secondary/5 border border-border rounded-lg p-5 text-center">
-                  <p className="font-heading text-4xl font-bold text-primary leading-none">8</p>
-                  <div className="w-6 h-0.5 bg-accent mx-auto my-2 rounded-full" />
-                  <p className="text-muted-foreground text-xs uppercase tracking-wider font-medium">Anos de atuação</p>
+                <div className="w-px bg-border" />
+                <div>
+                  <p className="font-heading text-5xl font-bold text-primary leading-none">
+                    <AnimatedCounter end={8} />
+                  </p>
+                  <p className="text-muted-foreground text-sm mt-2">Anos de atuação</p>
                 </div>
               </div>
             </ScrollReveal>
