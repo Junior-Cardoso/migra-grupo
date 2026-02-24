@@ -1,0 +1,297 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 12% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 12% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 195 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 10% 12%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 8% 15%;
+    --muted-foreground: 240 5% 60%;
+
+    --accent: 195 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    
+    --accent-orange: 15 100% 70%;
+
+    --destructive: 0 62.8% 50.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 8% 18%;
+    --input: 240 8% 18%;
+    --ring: 195 100% 50%;
+
+    --nav-link: 0 0% 70%;
+    --nav-link-hover: 0 0% 100%;
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@keyframes carousel-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes carousel-scroll-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-carousel {
+  animation: carousel-scroll 30s linear infinite;
+}
+
+.animate-carousel-mobile {
+  animation: carousel-scroll 20s linear infinite;
+}
+
+.animate-carousel-reverse {
+  animation: carousel-scroll-reverse 20s linear infinite;
+}
+
+.animate-carousel:hover,
+.animate-carousel-mobile:hover,
+.animate-carousel-reverse:hover {
+  animation-play-state: paused;
+}
+
+/* ===== Bitrix24 Form Customization ===== */
+/* Sobrescreve estilos do modal para alinhar com a identidade visual do site */
+
+.b24-form-wrapper,
+.b24-form-wrapper-popup {
+  background: linear-gradient(135deg, hsl(240 12% 6%) 0%, hsl(240 12% 10%) 100%) !important;
+  border: 1px solid hsl(240 8% 18%) !important;
+  border-radius: 12px !important;
+}
+
+.b24-form {
+  background: transparent !important;
+}
+
+.b24-form-header,
+.b24-form-header-title {
+  color: hsl(0 0% 98%) !important;
+  background: transparent !important;
+}
+
+.b24-form-header-description {
+  color: hsl(240 5% 60%) !important;
+}
+
+/* Campos de input */
+.b24-form-control input,
+.b24-form-control textarea,
+.b24-form-control select,
+.b24-form-control-container input,
+.b24-form-control-container textarea,
+.b24-form-control-container select {
+  background: hsl(240 12% 8%) !important;
+  border: 1px solid hsl(240 8% 18%) !important;
+  color: hsl(0 0% 98%) !important;
+  border-radius: 8px !important;
+}
+
+.b24-form-control input:focus,
+.b24-form-control textarea:focus,
+.b24-form-control-container input:focus,
+.b24-form-control-container textarea:focus {
+  border-color: hsl(195 100% 50%) !important;
+  box-shadow: 0 0 0 2px hsla(195, 100%, 50%, 0.2) !important;
+  outline: none !important;
+}
+
+/* Labels */
+.b24-form-control-label,
+.b24-form-control-container label {
+  color: hsl(240 5% 70%) !important;
+}
+
+/* Placeholder */
+.b24-form-control input::placeholder,
+.b24-form-control textarea::placeholder,
+.b24-form-control-container input::placeholder {
+  color: hsl(240 5% 45%) !important;
+}
+
+/* Botão de envio - cor primária ciano */
+.b24-form-btn,
+.b24-form-btn-container button,
+.b24-form-btn-block {
+  background: linear-gradient(135deg, hsl(195 100% 50%) 0%, hsl(195 100% 40%) 100%) !important;
+  border: none !important;
+  color: hsl(0 0% 100%) !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+.b24-form-btn:hover,
+.b24-form-btn-container button:hover,
+.b24-form-btn-block:hover {
+  background: linear-gradient(135deg, hsl(195 100% 55%) 0%, hsl(195 100% 50%) 100%) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Overlay/backdrop escuro */
+.b24-form-shadow,
+.b24-widget-button-shadow {
+  background: hsla(0, 0%, 0%, 0.85) !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+/* Botão de fechar minimalista - apenas ícone */
+.b24-form-close,
+.b24-form-btn-close,
+.b24-window-close,
+.b24-window-panel-close {
+  width: 24px !important;
+  height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  border: none !important;
+  color: hsl(0 0% 50%) !important;
+  cursor: pointer !important;
+  transition: color 0.2s ease !important;
+  opacity: 1 !important;
+  padding: 0 !important;
+}
+
+.b24-form-close:hover,
+.b24-form-btn-close:hover,
+.b24-window-close:hover,
+.b24-window-panel-close:hover {
+  color: hsl(0 0% 90%) !important;
+}
+
+/* Esconde elementos originais do botão */
+.b24-form-close *,
+.b24-window-close *,
+.b24-window-panel-close * {
+  display: none !important;
+}
+
+/* Esconde ícone original do Bitrix24 (pseudo-elemento ::before) */
+.b24-form-close::before,
+.b24-form-btn-close::before,
+.b24-window-close::before,
+.b24-window-panel-close::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Ícone X simples */
+.b24-form-close::after,
+.b24-window-close::after,
+.b24-window-panel-close::after {
+  content: "✕" !important;
+  font-size: 16px !important;
+  font-weight: 300 !important;
+  color: inherit !important;
+  display: block !important;
+}
+
+/* Ícones e elementos decorativos */
+.b24-form-icon {
+  color: hsl(195 100% 50%) !important;
+}
+
+/* Mensagens de erro */
+.b24-form-control-alert,
+.b24-form-control-error {
+  color: hsl(0 62.8% 50.6%) !important;
+}
+
+/* Checkbox e radio customizados */
+.b24-form-control-checkbox,
+.b24-form-control-radio {
+  accent-color: hsl(195 100% 50%) !important;
+}
+
+/* Scrollbar minimalista - estilo thin */
+.b24-form-content,
+.b24-window-body,
+.b24-window-scrollable {
+  scrollbar-width: thin !important;
+  scrollbar-color: hsl(240 8% 20%) transparent !important;
+}
+
+.b24-form-content::-webkit-scrollbar,
+.b24-window-body::-webkit-scrollbar,
+.b24-window-scrollable::-webkit-scrollbar {
+  width: 4px !important;
+  background: transparent !important;
+}
+
+.b24-form-content::-webkit-scrollbar-track,
+.b24-window-body::-webkit-scrollbar-track,
+.b24-window-scrollable::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.b24-form-content::-webkit-scrollbar-thumb,
+.b24-window-body::-webkit-scrollbar-thumb,
+.b24-window-scrollable::-webkit-scrollbar-thumb {
+  background: hsl(240 8% 25%) !important;
+  border-radius: 2px !important;
+}
+
+.b24-form-content::-webkit-scrollbar-thumb:hover,
+.b24-window-body::-webkit-scrollbar-thumb:hover,
+.b24-window-scrollable::-webkit-scrollbar-thumb:hover {
+  background: hsl(195 100% 40%) !important;
+}
+
+/* Link/texto secundário */
+.b24-form-sign,
+.b24-form-agreement {
+  color: hsl(240 5% 50%) !important;
+}
+
+.b24-form-sign a,
+.b24-form-agreement a {
+  color: hsl(195 100% 50%) !important;
+}
+
+/* Hide scroll arrow that overlays the send button */
+.b24-window-scroll-arrow-down-box {
+  display: none !important;
+}
