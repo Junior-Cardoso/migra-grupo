@@ -41,7 +41,7 @@ const MigraHome = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
+                className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
               >
                 Conheça o grupo
                 <ArrowRight className="ml-2 h-4 w-4" />
