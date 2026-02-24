@@ -50,7 +50,7 @@ const MigraHome = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-white bg-transparent hover:bg-white/10 font-heading font-normal text-base px-8 uppercase tracking-wider"
+                className="border-white text-white bg-transparent hover:bg-white/10 hover:text-white font-heading font-normal text-base px-8 uppercase tracking-wider"
               >
                 Contato
               </Button>
@@ -368,7 +368,7 @@ const MigraHome = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-white bg-transparent hover:bg-white/10 font-heading font-normal text-base px-8 uppercase tracking-wider"
+                className="border-white text-white bg-transparent hover:bg-white/10 hover:text-white font-heading font-normal text-base px-8 uppercase tracking-wider"
               >
                 <FileText className="mr-2 h-4 w-4" />
                 Leia nosso blog
