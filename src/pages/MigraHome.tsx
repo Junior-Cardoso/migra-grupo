@@ -39,19 +39,14 @@ const MigraHome = () => {
           }}
         />
 
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-secondary/40" />
+        {/* Light overlay for brighter image */}
+        <div className="absolute inset-0 bg-secondary/20" />
 
         {/* CSS pattern texture overlay */}
         <div
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute inset-0 opacity-[0.06]"
           style={{
-            backgroundImage: `
-              radial-gradient(circle at 1px 1px, white 1px, transparent 0),
-              linear-gradient(45deg, transparent 48%, white 49%, white 51%, transparent 52%),
-              linear-gradient(-45deg, transparent 48%, white 49%, white 51%, transparent 52%)
-            `,
-            backgroundSize: "24px 24px, 60px 60px, 60px 60px",
+            backgroundImage: "repeating-linear-gradient(0deg, white 0px, white 1px, transparent 1px, transparent 6px)",
           }}
         />
 
