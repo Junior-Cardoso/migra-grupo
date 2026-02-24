@@ -9,13 +9,12 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "relative bg-background border-2 border-transparent text-foreground hover:bg-secondary overflow-hidden transition-all duration-300 [background:linear-gradient(hsl(var(--background)),hsl(var(--background)))_padding-box,linear-gradient(175deg,hsl(195,100%,50%)_0%,hsl(200,100%,60%)_50%,hsl(15,100%,70%)_100%)_border-box] shadow-[0_-10px_24px_-12px_rgba(0,191,255,0.6),0_-4px_14px_-8px_rgba(0,191,255,0.7)] hover:shadow-[0_-14px_32px_-14px_rgba(0,191,255,0.8),0_-6px_18px_-10px_rgba(0,191,255,0.9)]",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+        outline: "border border-input bg-background hover:bg-muted hover:text-foreground",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        ghost: "hover:bg-muted hover:text-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        login: "relative bg-background border-2 border-transparent text-foreground hover:bg-secondary overflow-hidden transition-all duration-300 [background:linear-gradient(hsl(var(--background)),hsl(var(--background)))_padding-box,linear-gradient(175deg,hsl(195,100%,50%)_0%,hsl(200,100%,60%)_50%,hsl(15,100%,70%)_100%)_border-box] shadow-[0_-10px_24px_-12px_rgba(0,191,255,0.6),0_-4px_14px_-8px_rgba(0,191,255,0.7)] hover:shadow-[0_-14px_32px_-14px_rgba(0,191,255,0.8),0_-6px_18px_-10px_rgba(0,191,255,0.9)]",
       },
       size: {
         default: "h-10 px-4 py-2",

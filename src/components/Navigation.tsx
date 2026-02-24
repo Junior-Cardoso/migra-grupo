@@ -34,7 +34,7 @@ const Navigation = () => {
                 {link.name}
               </a>
             ))}
-            <Button variant="login" size="sm" asChild>
+            <Button variant="default" size="sm" asChild>
               <a href="/consultor-ia">
                 Consultor IA
               </a>
@@ -61,7 +61,7 @@ const Navigation = () => {
                       {link.name}
                     </a>
                   ))}
-                  <Button variant="login" className="w-full mt-2" asChild>
+                  <Button variant="default" className="w-full mt-2" asChild>
                     <a
                       href="/consultor-ia"
                       onClick={() => setOpen(false)}

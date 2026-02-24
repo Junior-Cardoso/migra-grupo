@@ -149,7 +149,7 @@ const ContactModal = () => {
 
             <Button 
               type="submit" 
-              variant="login" 
+              variant="default" 
               size="lg" 
               className="w-full mt-6"
             >
