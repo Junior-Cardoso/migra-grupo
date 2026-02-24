@@ -86,13 +86,13 @@ const MigraHome = () => {
                   </p>
                   <p className="text-muted-foreground text-xs sm:text-sm mt-2">Pesquisadores</p>
                 </div>
-                <div className="border-l border-border pl-4 sm:pl-0">
+                <div className="border-l border-border pl-6 sm:pl-8">
                   <p className="font-heading text-3xl sm:text-5xl font-bold text-primary leading-none">
                     <AnimatedCounter end={50} suffix="+" />
                   </p>
                   <p className="text-muted-foreground text-xs sm:text-sm mt-2">Publicações</p>
                 </div>
-                <div className="border-l border-border pl-4 sm:pl-0">
+                <div className="border-l border-border pl-6 sm:pl-8">
                   <p className="font-heading text-3xl sm:text-5xl font-bold text-primary leading-none">
                     <AnimatedCounter end={8} />
                   </p>
