@@ -2,6 +2,7 @@ import MigraNavigation from "@/components/MigraNavigation";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
+import heroMigraBg from "@/assets/hero-migra-bg.jpg";
 import { Card } from "@/components/ui/card";
 import {
   Globe,
@@ -23,7 +24,38 @@ const MigraHome = () => {
 
       {/* Hero */}
       <section className="relative pt-16 overflow-hidden">
+        {/* Solid color base */}
         <div className="absolute inset-0 bg-secondary" />
+
+        {/* Hero image fading in from the right */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url(${heroMigraBg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center right",
+            maskImage: "linear-gradient(to right, transparent 0%, transparent 15%, rgba(0,0,0,0.3) 35%, rgba(0,0,0,0.7) 60%, black 80%)",
+            WebkitMaskImage: "linear-gradient(to right, transparent 0%, transparent 15%, rgba(0,0,0,0.3) 35%, rgba(0,0,0,0.7) 60%, black 80%)",
+          }}
+        />
+
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-secondary/40" />
+
+        {/* CSS pattern texture overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage: `
+              radial-gradient(circle at 1px 1px, white 1px, transparent 0),
+              linear-gradient(45deg, transparent 48%, white 49%, white 51%, transparent 52%),
+              linear-gradient(-45deg, transparent 48%, white 49%, white 51%, transparent 52%)
+            `,
+            backgroundSize: "24px 24px, 60px 60px, 60px 60px",
+          }}
+        />
+
+        {/* Ambient glow */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-primary/30 blur-3xl" />
           <div className="absolute bottom-10 right-20 w-96 h-96 rounded-full bg-accent/20 blur-3xl" />
