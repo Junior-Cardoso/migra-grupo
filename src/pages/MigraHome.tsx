@@ -201,7 +201,7 @@ const MigraHome = () => {
         </div>
       </section>
 
-      {/* Publicações */}
+      {/* Publicações / Acervo */}
       <section id="publicacoes" className="py-20 md:py-28 bg-muted/50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
@@ -213,26 +213,17 @@ const MigraHome = () => {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              {
-                type: "Artigo",
-                title: "Migrações venezuelanas no Nordeste brasileiro: desafios e perspectivas",
-                author: "Autor, A. B.",
-                year: "2024",
-              },
-              {
-                type: "Capítulo",
-                title: "Apatridia e proteção internacional: uma análise do caso brasileiro",
-                author: "Autor, C. D.",
-                year: "2024",
-              },
-              {
-                type: "Working Paper",
-                title: "Políticas públicas de acolhimento: estudo comparado Brasil-Portugal",
-                author: "Autor, E. F.",
-                year: "2023",
-              },
+              { type: "Artigo", title: "Migrações venezuelanas no Nordeste brasileiro: desafios e perspectivas", author: "Autor, A. B.", year: "2024" },
+              { type: "Capítulo", title: "Apatridia e proteção internacional: uma análise do caso brasileiro", author: "Autor, C. D.", year: "2024" },
+              { type: "Working Paper", title: "Políticas públicas de acolhimento: estudo comparado Brasil-Portugal", author: "Autor, E. F.", year: "2023" },
+              { type: "Artigo", title: "Direito ao refúgio e a crise humanitária na fronteira norte", author: "Autor, G. H.", year: "2023" },
+              { type: "Dissertação", title: "Integração local de refugiados sírios em Recife", author: "Autor, I. J.", year: "2023" },
+              { type: "Artigo", title: "Mobilidade humana e direitos fundamentais no Mercosul", author: "Autor, K. L.", year: "2022" },
+              { type: "Capítulo", title: "Gênero e migração: perspectivas interseccionais", author: "Autor, M. N.", year: "2022" },
+              { type: "Working Paper", title: "Crianças migrantes e o direito à educação no Brasil", author: "Autor, O. P.", year: "2022" },
+              { type: "Tese", title: "Fronteiras, soberania e hospitalidade: uma leitura decolonial", author: "Autor, Q. R.", year: "2021" },
             ].map((pub, i) => (
               <Card
                 key={i}
@@ -259,6 +250,75 @@ const MigraHome = () => {
               Ver todo o acervo
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog */}
+      <section id="blog" className="py-20 md:py-28">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-4">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
+              Nosso <span className="text-primary">Blog</span>
+            </h2>
+            <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Acompanhe nossas publicações, novidades e reflexões sobre migração.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mt-12">
+            {[
+              {
+                category: "Pesquisa",
+                title: "Migração venezuelana em Pernambuco: desafios e acolhimento",
+                excerpt: "Uma análise sobre os fluxos migratórios recentes e as políticas de integração no estado.",
+                date: "15 Fev 2026",
+              },
+              {
+                category: "Eventos",
+                title: "Documentário 'Travessias' estreia em festival universitário",
+                excerpt: "Produção do MIGRA foi selecionada para o Festival de Cinema Acadêmico da UFPE.",
+                date: "02 Fev 2026",
+              },
+              {
+                category: "Políticas Públicas",
+                title: "Nova legislação brasileira sobre refúgio: o que muda?",
+                excerpt: "Entenda as principais alterações na política migratória e seus impactos práticos.",
+                date: "20 Jan 2026",
+              },
+            ].map((post, i) => (
+              <Card
+                key={i}
+                className="overflow-hidden bg-background border-border hover:border-primary/30 transition-colors group"
+              >
+                <div className="aspect-[16/10] bg-secondary/80 relative overflow-hidden">
+                  <div className="w-full h-full bg-gradient-to-br from-secondary to-secondary/60 flex items-center justify-center">
+                    <BookOpen className="h-12 w-12 text-white/20" />
+                  </div>
+                  <span className="absolute top-3 left-3 px-3 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded uppercase tracking-wider">
+                    {post.category}
+                  </span>
+                </div>
+                <div className="p-5">
+                  <h3 className="font-heading text-base font-bold text-foreground leading-snug mb-2 uppercase tracking-wide group-hover:text-primary transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                    {post.excerpt}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground text-xs flex items-center gap-1">
+                      <FileText className="h-3 w-3" />
+                      {post.date}
+                    </span>
+                    <a href="#" className="text-primary text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
+                      Ler mais <ArrowRight className="h-3.5 w-3.5" />
+                    </a>
+                  </div>
+                </div>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
