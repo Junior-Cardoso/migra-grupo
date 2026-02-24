@@ -62,12 +62,10 @@ const MigraHome = () => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
-              <p className="text-primary font-medium text-sm tracking-widest uppercase mb-3">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-2 uppercase tracking-wide">
                 Sobre o MIGRA
-              </p>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6 uppercase tracking-wide">
-                Pesquisa que transforma realidades
               </h2>
+              <div className="w-12 h-1 bg-accent mt-3 mb-6 rounded-full" />
               <p className="text-muted-foreground leading-relaxed mb-4">
                 O MIGRA é um grupo de estudos vinculado à Universidade Federal de Pernambuco, 
                 dedicado à pesquisa sobre migrações internacionais, refúgio e apatridia. 
@@ -108,12 +106,13 @@ const MigraHome = () => {
       <section id="pesquisa" className="py-20 md:py-28 bg-muted/50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <p className="text-primary font-medium text-sm tracking-widest uppercase mb-3">
-              Linhas de Pesquisa
-            </p>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-              Áreas de atuação
+              Áreas de Atuação
             </h2>
+            <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Conheça as linhas de pesquisa que orientam nossos estudos e publicações.
+            </p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -172,12 +171,13 @@ const MigraHome = () => {
       <section id="equipe" className="py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <p className="text-primary font-medium text-sm tracking-widest uppercase mb-3">
-              Nossa Equipe
-            </p>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-              Pesquisadores
+              Nossa Equipe
             </h2>
+            <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Pesquisadores dedicados ao estudo das migrações e dos direitos humanos.
+            </p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -205,12 +205,13 @@ const MigraHome = () => {
       <section id="publicacoes" className="py-20 md:py-28 bg-muted/50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <p className="text-primary font-medium text-sm tracking-widest uppercase mb-3">
-              Publicações Recentes
-            </p>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
               Acervo Digital
             </h2>
+            <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Publicações recentes do nosso grupo de estudos.
+            </p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -259,7 +260,7 @@ const MigraHome = () => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-4">
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-              Nosso <span className="text-primary">Blog</span>
+              Nosso Blog
             </h2>
             <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
