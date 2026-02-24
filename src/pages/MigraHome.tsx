@@ -237,27 +237,30 @@ const MigraHome = () => {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { type: "Artigo", title: "Migrações venezuelanas no Nordeste brasileiro: desafios e perspectivas", author: "Autor, A. B.", year: "2024" },
-              { type: "Capítulo", title: "Apatridia e proteção internacional: uma análise do caso brasileiro", author: "Autor, C. D.", year: "2024" },
-              { type: "Working Paper", title: "Políticas públicas de acolhimento: estudo comparado Brasil-Portugal", author: "Autor, E. F.", year: "2023" },
-              { type: "Artigo", title: "Direito ao refúgio e a crise humanitária na fronteira norte", author: "Autor, G. H.", year: "2023" },
-              { type: "Dissertação", title: "Integração local de refugiados sírios em Recife", author: "Autor, I. J.", year: "2023" },
-              { type: "Artigo", title: "Mobilidade humana e direitos fundamentais no Mercosul", author: "Autor, K. L.", year: "2022" },
-              { type: "Capítulo", title: "Gênero e migração: perspectivas interseccionais", author: "Autor, M. N.", year: "2022" },
-              { type: "Working Paper", title: "Crianças migrantes e o direito à educação no Brasil", author: "Autor, O. P.", year: "2022" },
-              { type: "Tese", title: "Fronteiras, soberania e hospitalidade: uma leitura decolonial", author: "Autor, Q. R.", year: "2021" },
+              { type: "Artigo", title: "Migrações venezuelanas no Nordeste brasileiro: desafios e perspectivas", author: "Ana Beatriz Souza", initials: "AS", year: "2024" },
+              { type: "Capítulo", title: "Apatridia e proteção internacional: uma análise do caso brasileiro", author: "Carlos Drummond", initials: "CD", year: "2024" },
+              { type: "Working Paper", title: "Políticas públicas de acolhimento: estudo comparado Brasil-Portugal", author: "Elena Ferreira", initials: "EF", year: "2023" },
+              { type: "Artigo", title: "Direito ao refúgio e a crise humanitária na fronteira norte", author: "Gabriel Henrique", initials: "GH", year: "2023" },
+              { type: "Dissertação", title: "Integração local de refugiados sírios em Recife", author: "Isabela Jardim", initials: "IJ", year: "2023" },
+              { type: "Artigo", title: "Mobilidade humana e direitos fundamentais no Mercosul", author: "Karen Lima", initials: "KL", year: "2022" },
             ].map((pub, i) => (
               <ScrollReveal key={i} delay={(i % 3) * 100}>
                 <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors h-full">
-                  <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full mb-4">
-                    {pub.type}
-                  </span>
-                  <h3 className="font-semibold text-foreground mb-3 leading-snug">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
+                      {pub.type}
+                    </span>
+                    <span className="text-muted-foreground text-xs">{pub.year}</span>
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-4 leading-snug">
                     {pub.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm">
-                    {pub.author} · {pub.year}
-                  </p>
+                  <div className="flex items-center gap-3 mt-auto">
+                    <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center shrink-0">
+                      <span className="text-white text-xs font-semibold">{pub.initials}</span>
+                    </div>
+                    <p className="text-muted-foreground text-sm">{pub.author}</p>
+                  </div>
                 </Card>
               </ScrollReveal>
             ))}
