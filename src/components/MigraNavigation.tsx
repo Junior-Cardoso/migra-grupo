@@ -9,11 +9,12 @@ const MigraNavigation = () => {
 
   const navLinks = [
     { name: "Sobre", href: "#sobre" },
-    { name: "Linhas de Pesquisa", href: "#pesquisa" },
+    { name: "Áreas de Atuação", href: "#pesquisa" },
     { name: "Equipe", href: "#equipe" },
-    { name: "Publicações", href: "#publicacoes" },
-    { name: "Contato", href: "#contato" },
+    { name: "Acervo", href: "/acervo", isRoute: true },
     { name: "Blog", href: "/blog", isRoute: true },
+    { name: "Videografia", href: "/videografia", isRoute: true },
+    { name: "Contato", href: "#contato" },
   ];
 
   return (

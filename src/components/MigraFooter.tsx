@@ -10,7 +10,7 @@ const MigraFooter = () => {
               MIGRA
             </Link>
             <p className="text-sm mt-3 leading-relaxed">
-              Grupo de Estudos sobre Migrações Internacionais, Refúgio e Apatridia – UFPE
+              Grupo de Pesquisa e Extensão em Migrações, Mobilidades e Gestão Contemporânea de Populações – UFPE
             </p>
           </div>
           <div>
@@ -20,8 +20,9 @@ const MigraFooter = () => {
             <div className="flex flex-col gap-2 text-sm">
               <Link to="/#sobre" className="hover:text-primary transition-colors">Sobre</Link>
               <Link to="/#pesquisa" className="hover:text-primary transition-colors">Pesquisa</Link>
-              <Link to="/#publicacoes" className="hover:text-primary transition-colors">Publicações</Link>
+              <Link to="/acervo" className="hover:text-primary transition-colors">Acervo</Link>
               <Link to="/blog" className="hover:text-primary transition-colors">Blog</Link>
+              <Link to="/videografia" className="hover:text-primary transition-colors">Videografia</Link>
               <Link to="/#contato" className="hover:text-primary transition-colors">Contato</Link>
             </div>
           </div>
