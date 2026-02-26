@@ -7,7 +7,6 @@ import { Card } from "@/components/ui/card";
 import {
   Globe,
   BookOpen,
-  Users,
   Scale,
   FileText,
   MapPin,
@@ -15,6 +14,8 @@ import {
   Mail,
   GraduationCap,
   Compass,
+  Radio,
+  Map,
 } from "lucide-react";
 
 const MigraHome = () => {
@@ -55,10 +56,10 @@ const MigraHome = () => {
               Universidade Federal de Pernambuco
             </p>
             <h1 className="font-heading text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 tracking-wide uppercase">
-              Grupo de Estudos sobre Migrações
+              MIGRA
             </h1>
             <p className="text-white/70 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
-              Pesquisa, ensino e extensão dedicados ao estudo das migrações internacionais, refúgio e apatridia.
+              Grupo de Pesquisa e Extensão em Migrações, Mobilidades e Gestão Contemporânea de Populações — UFPE.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
@@ -90,8 +91,8 @@ const MigraHome = () => {
               </h2>
               <div className="w-12 h-1 bg-accent mt-3 mb-6 rounded-full" />
               <p className="text-muted-foreground leading-relaxed mb-4">
-                O MIGRA é um grupo de estudos vinculado à Universidade Federal de Pernambuco, 
-                dedicado à pesquisa sobre migrações internacionais, refúgio e apatridia. 
+                O MIGRA é um grupo de pesquisa e extensão vinculado à Universidade Federal de Pernambuco, 
+                dedicado ao estudo das migrações, mobilidades e gestão contemporânea de populações. 
                 Nosso trabalho combina rigor acadêmico com impacto social.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-10">
@@ -154,9 +155,9 @@ const MigraHome = () => {
             {[
               { icon: Globe, title: "Migrações Internacionais", desc: "Estudo dos fluxos migratórios contemporâneos e seus impactos sociais, econômicos e culturais." },
               { icon: Scale, title: "Direito dos Refugiados", desc: "Análise das normativas internacionais e nacionais de proteção a refugiados e solicitantes de refúgio." },
-              { icon: Users, title: "Apatridia", desc: "Pesquisa sobre a condição de apatridia e mecanismos de proteção às pessoas sem nacionalidade." },
+              { icon: Radio, title: "Comunicação e Migração", desc: "Estudos sobre narrativas midiáticas, representação e comunicação intercultural no contexto migratório." },
               { icon: MapPin, title: "Políticas Migratórias", desc: "Avaliação de políticas públicas de acolhimento e integração de migrantes no Brasil." },
-              { icon: BookOpen, title: "Direitos Humanos", desc: "Estudo dos direitos fundamentais aplicados ao contexto das migrações e mobilidade humana." },
+              { icon: Map, title: "Geografia das Migrações", desc: "Análise espacial dos fluxos migratórios, territorialidades e dinâmicas socioespaciais." },
               { icon: Compass, title: "Fronteiras e Mobilidade", desc: "Análise das dinâmicas fronteiriças e seus efeitos na mobilidade humana contemporânea." },
             ].map((item, i) => (
               <ScrollReveal key={i} delay={i * 100}>
@@ -199,7 +200,7 @@ const MigraHome = () => {
               </h2>
               <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Pesquisadores dedicados ao estudo das migrações e dos direitos humanos.
+                Pesquisadores dedicados ao estudo das migrações, mobilidades e gestão de populações.
               </p>
             </div>
           </ScrollReveal>
@@ -249,7 +250,7 @@ const MigraHome = () => {
               </h2>
               <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Publicações recentes do nosso grupo de estudos.
+                Publicações recentes do nosso grupo de pesquisa.
               </p>
             </div>
           </ScrollReveal>
@@ -375,8 +376,8 @@ const MigraHome = () => {
               Participe do MIGRA
             </h2>
             <p className="text-white/70 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
-              Tem interesse em estudar migrações internacionais, refúgio ou apatridia? 
-              Entre em contato e faça parte do nosso grupo de estudos.
+              Tem interesse em estudar migrações, mobilidades e gestão contemporânea de populações? 
+              Entre em contato e faça parte do nosso grupo de pesquisa e extensão.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -408,7 +409,7 @@ const MigraHome = () => {
                 MIGRA
               </span>
               <p className="text-sm mt-3 leading-relaxed">
-                Grupo de Estudos sobre Migrações Internacionais, Refúgio e Apatridia – UFPE
+                Grupo de Pesquisa e Extensão em Migrações, Mobilidades e Gestão Contemporânea de Populações – UFPE
               </p>
             </div>
             <div>

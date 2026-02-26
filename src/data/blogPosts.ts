@@ -14,7 +14,6 @@ export const categories = [
   "Pesquisa",
   "Eventos",
   "Políticas Públicas",
-  "Direitos Humanos",
   "Opinião",
 ] as const;
 
@@ -102,29 +101,29 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 4,
-    slug: "apatridia-invisibilidade-juridica",
-    title: "Apatridia: a invisibilidade jurídica de milhões de pessoas",
+    slug: "narrativas-midiaticas-migracao",
+    title: "Narrativas midiáticas sobre migração: representação e impacto",
     excerpt:
-      "Reflexão sobre a condição de apátrida e os desafios para garantir direitos fundamentais a pessoas sem nacionalidade reconhecida.",
+      "Como os meios de comunicação constroem narrativas sobre migrantes e de que forma isso influencia a percepção pública e as políticas migratórias.",
     content: `
-      <p>Estima-se que mais de 10 milhões de pessoas no mundo vivam sem nacionalidade reconhecida por qualquer Estado. A apatridia é uma das formas mais extremas de exclusão social e jurídica.</p>
-      <h2>O que é apatridia?</h2>
-      <p>Uma pessoa apátrida é aquela que não é considerada nacional por nenhum Estado. Isso pode ocorrer por diversas razões, incluindo conflitos de leis de nacionalidade, discriminação étnica ou de gênero, e dissolução de Estados.</p>
-      <h2>Situação no Brasil</h2>
-      <p>O Brasil deu passos importantes com a Lei de Migração de 2017, que incluiu disposições sobre proteção a apátridas. No entanto, os mecanismos de identificação e proteção ainda são insuficientes.</p>
+      <p>A forma como a mídia retrata os processos migratórios tem impacto direto na percepção pública e, consequentemente, nas políticas adotadas pelos governos.</p>
+      <h2>Representação midiática</h2>
+      <p>Estudos recentes mostram que a cobertura jornalística sobre migração tende a focar em aspectos negativos, como criminalidade e sobrecarga de serviços públicos, em detrimento de narrativas sobre contribuições culturais e econômicas dos migrantes.</p>
+      <h2>Impacto na opinião pública</h2>
       <ul>
-        <li>Dificuldade de acesso a documentos</li>
-        <li>Impossibilidade de exercer direitos básicos</li>
-        <li>Vulnerabilidade à exploração</li>
+        <li>Construção de estereótipos e preconceitos</li>
+        <li>Influência na formulação de políticas restritivas</li>
+        <li>Desumanização das experiências migratórias</li>
+        <li>Invisibilização de vozes migrantes</li>
       </ul>
-      <blockquote>Sem nacionalidade, uma pessoa perde não apenas um documento, mas o próprio direito a ter direitos.</blockquote>
-      <h3>Caminhos para solução</h3>
-      <p>A implementação efetiva dos instrumentos internacionais e o fortalecimento das políticas nacionais são fundamentais para enfrentar esse desafio.</p>
+      <blockquote>A comunicação intercultural é uma ferramenta essencial para desconstruir preconceitos e promover uma convivência mais justa entre comunidades locais e migrantes.</blockquote>
+      <h3>Caminhos para uma cobertura mais plural</h3>
+      <p>É fundamental que os veículos de comunicação diversifiquem suas fontes, incluindo as vozes dos próprios migrantes, e contextualizem os fenômenos migratórios em sua complexidade histórica e geopolítica.</p>
     `,
     author: { name: "Gabriel Henrique", initials: "GH" },
     date: "10 Jan 2026",
-    category: "Direitos Humanos",
-    tags: ["apatridia", "legislacao", "refugio"],
+    category: "Pesquisa",
+    tags: ["comunicacao", "legislacao", "refugio"],
   },
   {
     id: 5,
@@ -145,7 +144,7 @@ export const blogPosts: BlogPost[] = [
       </ul>
       <h2>Inscrições</h2>
       <p>As inscrições estarão abertas a partir de fevereiro, com vagas limitadas. Estudantes de graduação e pós-graduação terão prioridade.</p>
-      <blockquote>O diálogo entre academia, sociedade civil e poder público é essencial para construir políticas migratórias que respeitem os direitos humanos.</blockquote>
+      <blockquote>O diálogo entre academia, sociedade civil e poder público é essencial para construir políticas migratórias mais justas e eficazes.</blockquote>
       <p>Para mais informações, entre em contato pelo email migra@ufpe.br.</p>
     `,
     author: { name: "Isabela Jardim", initials: "IJ" },
@@ -207,42 +206,42 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 8,
-    slug: "direito-nacionalidade-criancas",
-    title: "O direito à nacionalidade de crianças nascidas em contexto migratório",
+    slug: "territorialidades-migrantes-recife",
+    title: "Territorialidades migrantes na Região Metropolitana do Recife",
     excerpt:
-      "Análise jurídica sobre os desafios para garantir o registro civil e a nacionalidade de filhos de migrantes nascidos no Brasil.",
+      "Estudo geográfico sobre como migrantes internacionais constroem territorialidades e redes de pertencimento na RMR.",
     content: `
-      <p>O direito à nacionalidade é um direito humano fundamental, reconhecido pela Declaração Universal dos Direitos Humanos e por diversos tratados internacionais. No entanto, crianças nascidas em contexto migratório frequentemente enfrentam obstáculos para seu reconhecimento.</p>
-      <h2>Marco legal brasileiro</h2>
-      <p>A Constituição brasileira adota o critério do jus soli, garantindo a nacionalidade brasileira a todos os nascidos em território nacional, independentemente da nacionalidade dos pais. Isso coloca o Brasil em posição favorável em relação a muitos outros países.</p>
-      <h2>Desafios práticos</h2>
+      <p>A presença de migrantes internacionais na Região Metropolitana do Recife tem reconfigurado espaços urbanos e criado novas territorialidades que merecem atenção acadêmica.</p>
+      <h2>Abordagem geográfica</h2>
+      <p>Esta pesquisa utiliza ferramentas da geografia humana para analisar como migrantes de diferentes nacionalidades se apropriam de espaços urbanos, criam redes de solidariedade e constroem sentidos de pertencimento.</p>
+      <h2>Principais achados</h2>
       <ul>
-        <li>Falta de documentação dos pais</li>
-        <li>Desconhecimento dos direitos por parte dos migrantes</li>
-        <li>Barreiras burocráticas nos cartórios</li>
-        <li>Risco de apatridia quando há conflito de leis</li>
+        <li>Concentração residencial em bairros específicos da RMR</li>
+        <li>Formação de redes comerciais étnicas</li>
+        <li>Espaços de sociabilidade e práticas culturais</li>
+        <li>Disputas territoriais e negociações cotidianas</li>
       </ul>
-      <blockquote>Toda criança tem direito a um nome, uma nacionalidade e uma identidade. Garantir esses direitos é uma obrigação do Estado e da sociedade.</blockquote>
-      <p>O MIGRA tem atuado junto a cartórios e órgãos públicos para capacitar funcionários e facilitar o registro de crianças filhas de migrantes.</p>
+      <blockquote>O espaço urbano é produzido coletivamente, e os migrantes são agentes ativos dessa produção, transformando a cidade ao mesmo tempo em que são transformados por ela.</blockquote>
+      <p>O MIGRA tem atuado com mapeamento participativo junto a comunidades migrantes, produzindo cartografias sociais que revelam dinâmicas invisíveis aos olhares institucionais.</p>
     `,
     author: { name: "Patrícia Rocha", initials: "PR" },
     date: "15 Nov 2025",
-    category: "Direitos Humanos",
-    tags: ["apatridia", "legislacao", "acolhimento"],
+    category: "Pesquisa",
+    tags: ["geografia", "UFPE", "acolhimento"],
   },
   {
     id: 9,
     slug: "opiniao-politica-migratoria-humanizada",
     title: "Por uma política migratória humanizada: desafios e utopias",
     excerpt:
-      "Artigo de opinião sobre a necessidade de repensar as políticas migratórias à luz dos direitos humanos e da solidariedade internacional.",
+      "Artigo de opinião sobre a necessidade de repensar as políticas migratórias à luz da solidariedade internacional.",
     content: `
       <p>Vivemos em um mundo de contradições: enquanto mercadorias e capitais circulam livremente através das fronteiras, pessoas são barradas, criminalizadas e desumanizadas em seus deslocamentos.</p>
       <h2>A crise como oportunidade</h2>
       <p>Os desafios migratórios contemporâneos não são apenas problemas a serem resolvidos, mas também oportunidades para repensar nossas sociedades e nossas relações com o outro.</p>
       <h2>Princípios para uma nova política</h2>
       <ul>
-        <li>Reconhecimento da migração como direito humano</li>
+        <li>Reconhecimento da migração como fenômeno estrutural</li>
         <li>Desmilitarização das fronteiras</li>
         <li>Combate às causas estruturais da migração forçada</li>
         <li>Participação dos migrantes na formulação de políticas</li>
@@ -250,7 +249,7 @@ export const blogPosts: BlogPost[] = [
       <blockquote>Uma política migratória verdadeiramente humanizada não é utopia — é uma necessidade ética e um imperativo de justiça social.</blockquote>
       <h3>O papel da academia</h3>
       <p>As universidades têm a responsabilidade de produzir conhecimento que contribua para a construção de sociedades mais justas e acolhedoras. O MIGRA assume esse compromisso como parte de sua missão institucional.</p>
-      <p>É preciso ir além da análise técnica e assumir um posicionamento ético claro em defesa dos direitos humanos de todas as pessoas, independentemente de sua nacionalidade ou status migratório.</p>
+      <p>É preciso ir além da análise técnica e assumir um posicionamento ético claro em defesa da dignidade de todas as pessoas, independentemente de sua nacionalidade ou status migratório.</p>
     `,
     author: { name: "Roberto Santos", initials: "RS" },
     date: "01 Nov 2025",
