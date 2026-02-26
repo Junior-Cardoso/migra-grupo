@@ -1,107 +1,141 @@
 
-# Blog: Pagina de Feed + Pagina de Artigo
+
+# Atualizacoes de Conteudo + Acervo + Videografia
 
 ## Visao Geral
 
-Criar duas novas paginas completas seguindo os padroes visuais do projeto (Oswald para headings, Inter para body, cores primary/secondary/accent, uppercase tracking-wide nos titulos, divisor dourado, ScrollReveal):
+Quatro frentes de alteracao:
 
-1. **`/blog`** -- Feed de posts com sidebar lateral
-2. **`/blog/:slug`** -- Pagina individual do artigo
+1. **Correcao de identidade**: "Grupo de Estudos" vira "Grupo de Pesquisa e Extensao" em todo o site
+2. **Remocao de termos**: Retirar mencoes a "direitos humanos" e "apatridia" do site (textos, categorias, tags, cards de areas de atuacao, blog posts)
+3. **Pagina de Acervo** (`/acervo`): Repositorio de publicacoes com cards linkando para URLs externas
+4. **Pagina de Videografia** (`/videografia`): Grid de videos do YouTube com embed
 
 ---
 
-## Estrutura de Arquivos
+## 1. Correcao de Identidade
 
+Substituir **"Grupo de Estudos"** por **"Grupo de Pesquisa e Extensao"** nos seguintes locais:
+
+- `MigraHome.tsx` -- hero (h1), secao "Sobre", secao CTA/Contato, footer inline
+- `MigraFooter.tsx` -- descricao do grupo
+- `MigraNavigation.tsx` -- sem alteracao necessaria (ja usa apenas "MIGRA")
+- `blogPosts.ts` -- conteudo dos posts que mencionem "grupo de estudos"
+
+Tambem atualizar o subtitulo do hero: trocar "refúgio e apatridia" por algo como "mobilidades e gestao contemporanea de populacoes" (conforme o titulo oficial mostrado na imagem do Lattes: **"Migracoes, Mobilidades e Gestao Contemporanea de Populacoes (MIGRA)"**).
+
+---
+
+## 2. Remocao de "Direitos Humanos" e "Apatridia"
+
+### Areas de Atuacao (MigraHome.tsx)
+- Remover o card **"Direitos Humanos"** (icone BookOpen)
+- Remover o card **"Apatridia"** (icone Users)
+- Adicionar 2 novos cards mais alinhados com Comunicacao e Geografia, como:
+  - **"Comunicacao e Migracao"** -- Estudos sobre narrativas midiaticas, representacao e comunicacao intercultural
+  - **"Geografia das Migracoes"** -- Analise espacial dos fluxos migratorios e territorialidades
+
+### Blog (blogPosts.ts)
+- Remover a categoria **"Direitos Humanos"** do array `categories`
+- Atualizar os posts que usam essa categoria (posts 4 e 8) -- trocar para "Pesquisa" ou "Opiniao"
+- Remover a tag **"apatridia"** de todos os posts
+- Ajustar conteudo dos posts 4 ("Apatridia: a invisibilidade juridica...") e 8 ("Direito a nacionalidade de criancas...") -- reescrever para temas mais alinhados ou remover
+
+### Secao CTA/Contato (MigraHome.tsx)
+- Remover mencao a "apatridia" no texto do paragrafo
+
+### Equipe (MigraHome.tsx)
+- Remover "direitos humanos" da descricao da equipe
+
+---
+
+## 3. Pagina de Acervo (`/acervo`)
+
+### Novos Arquivos
+- `src/data/acervoPublications.ts` -- dados mock das publicacoes
+- `src/pages/Acervo.tsx` -- pagina do repositorio
+
+### Estrutura de Dados (`acervoPublications.ts`)
 ```text
-src/
-  data/
-    blogPosts.ts          -- Dados mock dos posts (titulo, slug, excerpt, conteudo, autor, data, categoria, tags, imagem)
-  pages/
-    Blog.tsx              -- Pagina do feed
-    BlogPost.tsx          -- Pagina do artigo individual
-  components/
-    BlogSidebar.tsx       -- Sidebar reutilizavel (busca, categorias, tags, posts recentes)
-    BlogCard.tsx          -- Card de post no feed
-    MigraFooter.tsx       -- Footer extraido (reutilizavel entre paginas)
+interface Publication {
+  id: number
+  title: string
+  type: "Artigo" | "Dissertacao" | "Tese" | "Capitulo" | "Working Paper" | "Relatorio"
+  authors: string[]
+  year: number
+  abstract: string
+  externalUrl?: string   // link externo (quando disponivel)
+  tags: string[]
+}
 ```
+- Array de ~8-10 publicacoes mock
+
+### Layout da Pagina
+- Header/banner no padrao do site (bg-secondary, titulo "ACERVO" em Oswald uppercase, divisor dourado)
+- Barra de busca + filtro por tipo de publicacao (chips)
+- Grid de cards (3 colunas desktop, 1 mobile)
+- Cada card mostra: badge de tipo, titulo, autores, ano, resumo truncado
+- Se `externalUrl` existe: botao "Acessar publicacao" que abre em nova aba
+- Se nao existe: apenas informacoes textuais no card
+- Nao ha pagina de detalhe individual -- tudo no card
+- Navegacao e footer reutilizados
+
+### Rota
+- Adicionar `/acervo` no `App.tsx`
+- Adicionar "Acervo" na navegacao (`MigraNavigation.tsx`)
 
 ---
 
-## 1. Dados Mock (`src/data/blogPosts.ts`)
+## 4. Pagina de Videografia (`/videografia`)
 
-- Array de ~9 posts com campos: `id`, `slug`, `title`, `excerpt`, `content` (HTML string longo para simular artigo real), `author` (nome + iniciais), `date`, `category`, `tags[]`, `coverImage` (placeholder gradient).
-- Categorias fixas: "Pesquisa", "Eventos", "Politicas Publicas", "Direitos Humanos", "Opiniao".
-- Tags variadas: "refugio", "venezuela", "apatridia", "fronteiras", "UFPE", "legislacao", "acolhimento", etc.
+### Novos Arquivos
+- `src/data/videos.ts` -- dados mock dos videos
+- `src/pages/Videografia.tsx` -- pagina da videografia
 
----
+### Estrutura de Dados (`videos.ts`)
+```text
+interface Video {
+  id: number
+  title: string
+  description: string
+  youtubeId: string    // ID do video para embed
+  date: string
+  category?: string
+}
+```
+- Array de ~6 videos mock (com IDs placeholder por enquanto)
 
-## 2. Pagina do Feed (`/blog`)
+### Layout da Pagina
+- Header/banner padrao (bg-secondary, titulo "VIDEOGRAFIA", divisor dourado)
+- Grid de videos (2 colunas desktop, 1 mobile)
+- Cada card: iframe embed do YouTube (aspect-ratio 16/9), titulo, descricao, data
+- Sem pagina de detalhe -- o video e reproduzido diretamente no card
+- Futuramente integravel com API do YouTube para alimentacao automatica
 
-### Layout
-- **Header da pagina**: Banner com bg-secondary, titulo "BLOG" em Oswald uppercase + subtitulo + divisor dourado (mesmo padrao das secoes da home).
-- **Conteudo**: Grid de 2 colunas no desktop (`lg:grid-cols-[1fr_320px]`), coluna unica no mobile.
-  - **Coluna principal**: Lista de BlogCards.
-  - **Sidebar direita**: Componente BlogSidebar (sticky no desktop).
-
-### Filtros e Busca (acima do grid)
-- **Campo de busca**: Input com icone Search, filtra posts por titulo/excerpt.
-- **Filtro por categoria**: Chips/badges horizontais clicaveis ("Todos", "Pesquisa", "Eventos", ...). Categoria ativa recebe estilo `bg-primary text-white`, inativas `bg-muted`.
-- Filtragem via `useState` local, sem backend.
-
-### BlogCard
-- Card com imagem placeholder (gradient com icone BookOpen), badge de categoria, titulo (Oswald uppercase), excerpt (2-3 linhas truncadas), autor com avatar circular (iniciais), data, link "Ler mais" com seta. Hover sutil no border.
-- Link para `/blog/:slug` usando `react-router-dom` `Link`.
-
-### Paginacao
-- Paginacao simples no rodape do feed (anterior/proximo) usando o componente Pagination existente, ou botoes simples.
-
----
-
-## 3. Sidebar (`BlogSidebar.tsx`)
-
-- **Busca**: Input com icone (duplica funcionalidade do topo, mas disponivel na sidebar tambem no desktop).
-- **Categorias**: Lista vertical com contagem de posts por categoria, clicavel para filtrar.
-- **Nuvem de Tags**: Tags renderizadas como badges com tamanhos variados (baseado em frequencia), clicaveis para filtrar por tag.
-- **Posts Recentes**: Lista dos 3-4 posts mais recentes com thumbnail mini e titulo linkado.
+### Rota
+- Adicionar `/videografia` no `App.tsx`
+- Adicionar "Videografia" na navegacao
 
 ---
 
-## 4. Pagina do Artigo (`/blog/:slug`)
+## 5. Navegacao Atualizada
 
-### Layout
-- **Header**: Banner similar ao feed, porem com categoria badge + titulo do post + meta (autor, data, tags).
-- **Conteudo**: Grid `lg:grid-cols-[1fr_320px]`.
-  - **Coluna principal**: 
-    - Imagem de capa (placeholder).
-    - Conteudo do artigo renderizado com `dangerouslySetInnerHTML` e classes de tipografia (prose-like styling manual com Tailwind: paragrafos, h2, h3, listas, blockquotes estilizados).
-    - Secao de tags no final.
-    - Navegacao prev/next post.
-  - **Sidebar**: Mesmo BlogSidebar.
-
-### Breadcrumb
-- Breadcrumb no topo: Home > Blog > Titulo do post (usando componente Breadcrumb existente).
-
----
-
-## 5. Rotas e Navegacao
-
-- Adicionar rotas no `App.tsx`: `/blog` e `/blog/:slug`.
-- Adicionar link "Blog" na `MigraNavigation` (desktop e mobile).
-- Footer sera extraido como `MigraFooter.tsx` e reutilizado nas 3 paginas.
-
----
-
-## 6. Responsividade
-
-- Mobile: sidebar some, fica abaixo do feed em coluna unica. Filtros e busca empilham verticalmente. Nuvem de tags com scroll horizontal ou wrap.
-- Tablet: sidebar pode aparecer abaixo do conteudo principal.
-- Desktop: layout 2 colunas com sidebar sticky.
+Links na `MigraNavigation`:
+1. Sobre
+2. Areas de Atuacao
+3. Equipe
+4. Acervo (rota `/acervo`)
+5. Blog (rota `/blog`)
+6. Videografia (rota `/videografia`)
+7. Contato
 
 ---
 
 ## Detalhes Tecnicos
 
-- Todo o estado (busca, categoria ativa, tag ativa, paginacao) gerenciado com `useState` local.
-- Navegacao com `react-router-dom` (`Link`, `useParams`, `useSearchParams` para filtros opcionais).
-- Componentes reutilizam `ScrollReveal`, `Card`, `Button`, `Badge`, `Input`, `Breadcrumb` existentes.
-- Tipografia do artigo estilizada manualmente via classes Tailwind (sem plugin `@tailwindcss/typography`).
+- Estado local com `useState` para busca e filtros nas paginas Acervo e Videografia
+- Embeds do YouTube via iframe padrao (`https://www.youtube-nocookie.com/embed/{youtubeId}`)
+- Componentes reutilizam `ScrollReveal`, `Card`, `Button`, `Badge`, `Input` existentes
+- Todas as paginas incluem `MigraNavigation` + `MigraFooter`
+- Responsividade: grids adaptam de 3/2 colunas para 1 coluna no mobile
+
