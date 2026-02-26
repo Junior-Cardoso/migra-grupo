@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const MigraNavigation = () => {
   const [open, setOpen] = useState(false);
@@ -12,6 +13,7 @@ const MigraNavigation = () => {
     { name: "Equipe", href: "#equipe" },
     { name: "Publicações", href: "#publicacoes" },
     { name: "Contato", href: "#contato" },
+    { name: "Blog", href: "/blog", isRoute: true },
   ];
 
   return (
@@ -27,15 +29,25 @@ const MigraNavigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              (link as any).isRoute ? (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
+                >
+                  {link.name}
+                </Link>
+              ) : (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
+                >
+                  {link.name}
+                </a>
+              )
+            )}
             <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
               Área de Membros
             </Button>
@@ -54,16 +66,27 @@ const MigraNavigation = () => {
                   <span className="font-heading text-xl font-bold tracking-wider text-secondary mb-4">
                     MIGRA
                   </span>
-                  {navLinks.map((link) => (
-                    <a
-                      key={link.name}
-                      href={link.href}
-                      onClick={() => setOpen(false)}
-                      className="text-muted-foreground hover:text-primary transition-colors text-base font-medium py-3 border-b border-border"
-                    >
-                      {link.name}
-                    </a>
-                  ))}
+                  {navLinks.map((link) =>
+                    (link as any).isRoute ? (
+                      <Link
+                        key={link.name}
+                        to={link.href}
+                        onClick={() => setOpen(false)}
+                        className="text-muted-foreground hover:text-primary transition-colors text-base font-medium py-3 border-b border-border"
+                      >
+                        {link.name}
+                      </Link>
+                    ) : (
+                      <a
+                        key={link.name}
+                        href={link.href}
+                        onClick={() => setOpen(false)}
+                        className="text-muted-foreground hover:text-primary transition-colors text-base font-medium py-3 border-b border-border"
+                      >
+                        {link.name}
+                      </a>
+                    )
+                  )}
                   <Button className="w-full mt-4 bg-primary text-primary-foreground hover:bg-primary/90">
                     Área de Membros
                   </Button>
