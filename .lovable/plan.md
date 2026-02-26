@@ -1,98 +1,107 @@
 
+# Blog: Pagina de Feed + Pagina de Artigo
 
-# Plano de Responsividade Completa -- MIGRA
+## Visao Geral
 
-## Problemas Identificados
+Criar duas novas paginas completas seguindo os padroes visuais do projeto (Oswald para headings, Inter para body, cores primary/secondary/accent, uppercase tracking-wide nos titulos, divisor dourado, ScrollReveal):
 
-1. **Stats (Sobre o MIGRA)**: Os 3 indicadores (15+, 50+, 8) usam `flex gap-10` que transborda no mobile -- o terceiro item ("8 Anos de atuacao") fica cortado/invisivel
-2. **Paragrafos cortados**: Na secao Sobre, o texto dos paragrafos esta sendo cortado na lateral direita no mobile
-3. **Equipe em coluna unica**: Os 4 membros empilham verticalmente no mobile, ocupando espaco excessivo -- falta breakpoint intermediario (grid `sm:grid-cols-2`)
-4. **Blog sem breakpoint intermediario**: O grid do blog pula de 1 coluna direto para `md:grid-cols-3`, sem estagio `sm:grid-cols-2`
-5. **Secao header do blog**: `mb-4` em vez de `mb-16` como nas outras secoes -- inconsistencia de espacamento
-6. **Tamanhos de fonte dos titulos de secao**: Todos usam `text-3xl md:text-4xl`, mas falta ajuste para telas muito pequenas
-7. **Botoes CTA**: Texto longo como "Saiba mais sobre nossas pesquisas" pode quebrar mal em telas pequenas
-8. **Padding vertical das secoes**: Todas usam `py-20 md:py-28`, o que esta consistente, mas o hero usa `py-24 md:py-36` que pode ser excessivo no mobile
+1. **`/blog`** -- Feed de posts com sidebar lateral
+2. **`/blog/:slug`** -- Pagina individual do artigo
 
 ---
 
-## Alteracoes Planejadas
+## Estrutura de Arquivos
 
-### 1. Stats responsivos (Secao Sobre)
-- Trocar `flex gap-10` por um grid: `grid grid-cols-3 gap-4 sm:gap-10`
-- Reduzir o tamanho da fonte dos numeros no mobile: `text-3xl sm:text-5xl`
-- Garantir que os separadores verticais funcionem no mobile
+```text
+src/
+  data/
+    blogPosts.ts          -- Dados mock dos posts (titulo, slug, excerpt, conteudo, autor, data, categoria, tags, imagem)
+  pages/
+    Blog.tsx              -- Pagina do feed
+    BlogPost.tsx          -- Pagina do artigo individual
+  components/
+    BlogSidebar.tsx       -- Sidebar reutilizavel (busca, categorias, tags, posts recentes)
+    BlogCard.tsx          -- Card de post no feed
+    MigraFooter.tsx       -- Footer extraido (reutilizavel entre paginas)
+```
 
-### 2. Texto sem overflow
-- Garantir que os paragrafos da secao Sobre nao transbordem, verificando `max-w-2xl` e padding
+---
 
-### 3. Grid da Equipe com breakpoint intermediario
-- Ja usa `sm:grid-cols-2 lg:grid-cols-4` -- esta correto, so precisa reduzir o avatar no mobile (`w-24 h-24` no mobile, `w-32 h-32` no sm+)
+## 1. Dados Mock (`src/data/blogPosts.ts`)
 
-### 4. Grid do Blog com breakpoint intermediario
-- Mudar de `md:grid-cols-3` para `sm:grid-cols-2 lg:grid-cols-3`
+- Array de ~9 posts com campos: `id`, `slug`, `title`, `excerpt`, `content` (HTML string longo para simular artigo real), `author` (nome + iniciais), `date`, `category`, `tags[]`, `coverImage` (placeholder gradient).
+- Categorias fixas: "Pesquisa", "Eventos", "Politicas Publicas", "Direitos Humanos", "Opiniao".
+- Tags variadas: "refugio", "venezuela", "apatridia", "fronteiras", "UFPE", "legislacao", "acolhimento", etc.
 
-### 5. Corrigir espacamento do header do Blog
-- Mudar `mb-4` para `mb-16` para consistencia com as outras secoes
+---
 
-### 6. Hero padding mobile
-- Reduzir para `py-16 md:py-24 lg:py-36`
+## 2. Pagina do Feed (`/blog`)
 
-### 7. Botoes CTA responsivos
-- Reduzir `px-8` para `px-6 sm:px-8` e `text-sm sm:text-base` nos botoes mais longos
+### Layout
+- **Header da pagina**: Banner com bg-secondary, titulo "BLOG" em Oswald uppercase + subtitulo + divisor dourado (mesmo padrao das secoes da home).
+- **Conteudo**: Grid de 2 colunas no desktop (`lg:grid-cols-[1fr_320px]`), coluna unica no mobile.
+  - **Coluna principal**: Lista de BlogCards.
+  - **Sidebar direita**: Componente BlogSidebar (sticky no desktop).
 
-### 8. Footer responsivo
-- O footer ja usa `md:grid-cols-3` e empilha no mobile -- esta ok
+### Filtros e Busca (acima do grid)
+- **Campo de busca**: Input com icone Search, filtra posts por titulo/excerpt.
+- **Filtro por categoria**: Chips/badges horizontais clicaveis ("Todos", "Pesquisa", "Eventos", ...). Categoria ativa recebe estilo `bg-primary text-white`, inativas `bg-muted`.
+- Filtragem via `useState` local, sem backend.
+
+### BlogCard
+- Card com imagem placeholder (gradient com icone BookOpen), badge de categoria, titulo (Oswald uppercase), excerpt (2-3 linhas truncadas), autor com avatar circular (iniciais), data, link "Ler mais" com seta. Hover sutil no border.
+- Link para `/blog/:slug` usando `react-router-dom` `Link`.
+
+### Paginacao
+- Paginacao simples no rodape do feed (anterior/proximo) usando o componente Pagination existente, ou botoes simples.
+
+---
+
+## 3. Sidebar (`BlogSidebar.tsx`)
+
+- **Busca**: Input com icone (duplica funcionalidade do topo, mas disponivel na sidebar tambem no desktop).
+- **Categorias**: Lista vertical com contagem de posts por categoria, clicavel para filtrar.
+- **Nuvem de Tags**: Tags renderizadas como badges com tamanhos variados (baseado em frequencia), clicaveis para filtrar por tag.
+- **Posts Recentes**: Lista dos 3-4 posts mais recentes com thumbnail mini e titulo linkado.
+
+---
+
+## 4. Pagina do Artigo (`/blog/:slug`)
+
+### Layout
+- **Header**: Banner similar ao feed, porem com categoria badge + titulo do post + meta (autor, data, tags).
+- **Conteudo**: Grid `lg:grid-cols-[1fr_320px]`.
+  - **Coluna principal**: 
+    - Imagem de capa (placeholder).
+    - Conteudo do artigo renderizado com `dangerouslySetInnerHTML` e classes de tipografia (prose-like styling manual com Tailwind: paragrafos, h2, h3, listas, blockquotes estilizados).
+    - Secao de tags no final.
+    - Navegacao prev/next post.
+  - **Sidebar**: Mesmo BlogSidebar.
+
+### Breadcrumb
+- Breadcrumb no topo: Home > Blog > Titulo do post (usando componente Breadcrumb existente).
+
+---
+
+## 5. Rotas e Navegacao
+
+- Adicionar rotas no `App.tsx`: `/blog` e `/blog/:slug`.
+- Adicionar link "Blog" na `MigraNavigation` (desktop e mobile).
+- Footer sera extraido como `MigraFooter.tsx` e reutilizado nas 3 paginas.
+
+---
+
+## 6. Responsividade
+
+- Mobile: sidebar some, fica abaixo do feed em coluna unica. Filtros e busca empilham verticalmente. Nuvem de tags com scroll horizontal ou wrap.
+- Tablet: sidebar pode aparecer abaixo do conteudo principal.
+- Desktop: layout 2 colunas com sidebar sticky.
 
 ---
 
 ## Detalhes Tecnicos
 
-Arquivo unico a editar: `src/pages/MigraHome.tsx`
-
-### Mudancas especificas:
-
-**Linha 31 (Hero padding)**:
-```
-py-16 md:py-24 lg:py-36
-```
-
-**Linha 36 (Hero h1)**:
-```
-text-3xl sm:text-4xl md:text-6xl lg:text-7xl
-```
-
-**Linha 82 (Stats container)**:
-```
-grid grid-cols-3 gap-4 sm:gap-10
-```
-
-**Linhas 84, 91, 98 (Stats numeros)**:
-```
-text-3xl sm:text-5xl
-```
-
-**Linhas 89, 96 (Separadores verticais dentro do grid)**:
-Remover os `<div className="w-px bg-border" />` separados e usar `border-l border-border pl-4 sm:pl-0` nos itens 2 e 3, ou manter separadores como `hidden sm:block`
-
-**Linha 287 (Blog header mb)**:
-```
-mb-16 (em vez de mb-4)
-```
-
-**Linha 298 (Blog grid)**:
-```
-grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-12
-```
-
-**Linha 197 (Avatar equipe)**:
-```
-w-24 h-24 sm:w-32 sm:h-32
-```
-
-**Todos os botoes CTA longos**:
-```
-text-sm sm:text-base px-6 sm:px-8
-```
-
-Sao aproximadamente 15-20 linhas de alteracao, todas no mesmo arquivo, focadas em classes Tailwind responsivas.
-
+- Todo o estado (busca, categoria ativa, tag ativa, paginacao) gerenciado com `useState` local.
+- Navegacao com `react-router-dom` (`Link`, `useParams`, `useSearchParams` para filtros opcionais).
+- Componentes reutilizam `ScrollReveal`, `Card`, `Button`, `Badge`, `Input`, `Breadcrumb` existentes.
+- Tipografia do artigo estilizada manualmente via classes Tailwind (sem plugin `@tailwindcss/typography`).
