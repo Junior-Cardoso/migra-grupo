@@ -1,32 +1,45 @@
 import { useState, useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
 import MigraNavigation from "@/components/MigraNavigation";
 import MigraFooter from "@/components/MigraFooter";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { videos } from "@/data/videos";
-import { Search, Video } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { Search, Video, Loader2 } from "lucide-react";
 
 const Videografia = () => {
   const [search, setSearch] = useState("");
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const { data: videos = [], isLoading } = useQuery({
+    queryKey: ["videos"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("videos")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      return data;
+    },
+  });
 
   const categories = useMemo(
     () => [...new Set(videos.map((v) => v.category).filter(Boolean))],
-    []
+    [videos]
   );
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const filtered = useMemo(() => {
     return videos.filter((v) => {
       const matchesSearch =
         !search ||
         v.title.toLowerCase().includes(search.toLowerCase()) ||
-        v.description.toLowerCase().includes(search.toLowerCase());
+        (v.description ?? "").toLowerCase().includes(search.toLowerCase());
       const matchesCat = !activeCategory || v.category === activeCategory;
       return matchesSearch && matchesCat;
     });
-  }, [search, activeCategory]);
+  }, [videos, search, activeCategory]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -84,7 +97,11 @@ const Videografia = () => {
       {/* Grid */}
       <section className="py-12 md:py-16">
         <div className="max-w-6xl mx-auto px-6">
-          {filtered.length === 0 ? (
+          {isLoading ? (
+            <div className="flex justify-center py-16">
+              <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+            </div>
+          ) : filtered.length === 0 ? (
             <div className="text-center py-16">
               <Video className="h-12 w-12 text-muted-foreground/40 mx-auto mb-4" />
               <p className="text-muted-foreground">Nenhum vídeo encontrado.</p>
@@ -96,7 +113,7 @@ const Videografia = () => {
                   <Card className="overflow-hidden bg-background border-border hover:border-primary/30 transition-colors">
                     <div className="aspect-video">
                       <iframe
-                        src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}`}
+                        src={`https://www.youtube-nocookie.com/embed/${video.youtube_id}`}
                         title={video.title}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
