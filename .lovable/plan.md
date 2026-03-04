@@ -1,141 +1,58 @@
 
 
-# Atualizacoes de Conteudo + Acervo + Videografia
+# Adicionar vídeo real + Criar tabela de vídeos no Supabase
 
-## Visao Geral
+## Dados extraídos do vídeo
 
-Quatro frentes de alteracao:
-
-1. **Correcao de identidade**: "Grupo de Estudos" vira "Grupo de Pesquisa e Extensao" em todo o site
-2. **Remocao de termos**: Retirar mencoes a "direitos humanos" e "apatridia" do site (textos, categorias, tags, cards de areas de atuacao, blog posts)
-3. **Pagina de Acervo** (`/acervo`): Repositorio de publicacoes com cards linkando para URLs externas
-4. **Pagina de Videografia** (`/videografia`): Grid de videos do YouTube com embed
-
----
-
-## 1. Correcao de Identidade
-
-Substituir **"Grupo de Estudos"** por **"Grupo de Pesquisa e Extensao"** nos seguintes locais:
-
-- `MigraHome.tsx` -- hero (h1), secao "Sobre", secao CTA/Contato, footer inline
-- `MigraFooter.tsx` -- descricao do grupo
-- `MigraNavigation.tsx` -- sem alteracao necessaria (ja usa apenas "MIGRA")
-- `blogPosts.ts` -- conteudo dos posts que mencionem "grupo de estudos"
-
-Tambem atualizar o subtitulo do hero: trocar "refúgio e apatridia" por algo como "mobilidades e gestao contemporanea de populacoes" (conforme o titulo oficial mostrado na imagem do Lattes: **"Migracoes, Mobilidades e Gestao Contemporanea de Populacoes (MIGRA)"**).
+- **Título**: Questão Migratória: Aspectos Jurídicos, Culturais e Integração Social dos Migrantes - Aula 1
+- **YouTube ID**: F7JKJEQYA9o
+- **Data**: 24 Jul 2021
+- **Categoria**: Aulas (nova categoria, pois é uma aula do ciclo de formação)
+- **Descrição**: Ciclo 1 — Migrações, sua normatização jurídica e os direitos sociais e humanos. Aula ministrada pela Profª Dra. Natália Medina Araújo (UFOB).
 
 ---
 
-## 2. Remocao de "Direitos Humanos" e "Apatridia"
+## Plano
 
-### Areas de Atuacao (MigraHome.tsx)
-- Remover o card **"Direitos Humanos"** (icone BookOpen)
-- Remover o card **"Apatridia"** (icone Users)
-- Adicionar 2 novos cards mais alinhados com Comunicacao e Geografia, como:
-  - **"Comunicacao e Migracao"** -- Estudos sobre narrativas midiaticas, representacao e comunicacao intercultural
-  - **"Geografia das Migracoes"** -- Analise espacial dos fluxos migratorios e territorialidades
+### 1. Conectar Lovable Cloud (Supabase)
 
-### Blog (blogPosts.ts)
-- Remover a categoria **"Direitos Humanos"** do array `categories`
-- Atualizar os posts que usam essa categoria (posts 4 e 8) -- trocar para "Pesquisa" ou "Opiniao"
-- Remover a tag **"apatridia"** de todos os posts
-- Ajustar conteudo dos posts 4 ("Apatridia: a invisibilidade juridica...") e 8 ("Direito a nacionalidade de criancas...") -- reescrever para temas mais alinhados ou remover
+Antes de criar a tabela, o projeto precisa estar conectado ao Lovable Cloud. O usuário precisa habilitar isso nas configurações do projeto (Settings > Cloud).
 
-### Secao CTA/Contato (MigraHome.tsx)
-- Remover mencao a "apatridia" no texto do paragrafo
+### 2. Criar tabela `videos` no Supabase
 
-### Equipe (MigraHome.tsx)
-- Remover "direitos humanos" da descricao da equipe
+Migração SQL para criar a tabela:
 
----
-
-## 3. Pagina de Acervo (`/acervo`)
-
-### Novos Arquivos
-- `src/data/acervoPublications.ts` -- dados mock das publicacoes
-- `src/pages/Acervo.tsx` -- pagina do repositorio
-
-### Estrutura de Dados (`acervoPublications.ts`)
 ```text
-interface Publication {
-  id: number
-  title: string
-  type: "Artigo" | "Dissertacao" | "Tese" | "Capitulo" | "Working Paper" | "Relatorio"
-  authors: string[]
-  year: number
-  abstract: string
-  externalUrl?: string   // link externo (quando disponivel)
-  tags: string[]
-}
+videos
+├── id          uuid (PK, default gen_random_uuid())
+├── title       text NOT NULL
+├── description text
+├── youtube_id  text NOT NULL
+├── date        text NOT NULL
+├── category    text
+├── created_at  timestamptz (default now())
 ```
-- Array de ~8-10 publicacoes mock
 
-### Layout da Pagina
-- Header/banner no padrao do site (bg-secondary, titulo "ACERVO" em Oswald uppercase, divisor dourado)
-- Barra de busca + filtro por tipo de publicacao (chips)
-- Grid de cards (3 colunas desktop, 1 mobile)
-- Cada card mostra: badge de tipo, titulo, autores, ano, resumo truncado
-- Se `externalUrl` existe: botao "Acessar publicacao" que abre em nova aba
-- Se nao existe: apenas informacoes textuais no card
-- Nao ha pagina de detalhe individual -- tudo no card
-- Navegacao e footer reutilizados
+RLS: leitura pública (SELECT para anon e authenticated), escrita restrita.
 
-### Rota
-- Adicionar `/acervo` no `App.tsx`
-- Adicionar "Acervo" na navegacao (`MigraNavigation.tsx`)
+### 3. Seed com os 7 vídeos (6 mock + 1 real)
 
----
+Inserir os 6 vídeos mock existentes + o novo vídeo real via insert tool.
 
-## 4. Pagina de Videografia (`/videografia`)
+### 4. Atualizar a página Videografia
 
-### Novos Arquivos
-- `src/data/videos.ts` -- dados mock dos videos
-- `src/pages/Videografia.tsx` -- pagina da videografia
+- Substituir import de `src/data/videos.ts` por query ao Supabase (`supabase.from('videos').select('*').order('created_at', { ascending: false })`)
+- Usar `@tanstack/react-query` (já instalado) para fetch
+- Manter filtros e busca no client-side sobre os dados retornados
+- Arquivo `src/data/videos.ts` pode ser removido ou mantido como fallback
 
-### Estrutura de Dados (`videos.ts`)
-```text
-interface Video {
-  id: number
-  title: string
-  description: string
-  youtubeId: string    // ID do video para embed
-  date: string
-  category?: string
-}
-```
-- Array de ~6 videos mock (com IDs placeholder por enquanto)
+### 5. Adicionar `videos` ao tipo gerado do Supabase
 
-### Layout da Pagina
-- Header/banner padrao (bg-secondary, titulo "VIDEOGRAFIA", divisor dourado)
-- Grid de videos (2 colunas desktop, 1 mobile)
-- Cada card: iframe embed do YouTube (aspect-ratio 16/9), titulo, descricao, data
-- Sem pagina de detalhe -- o video e reproduzido diretamente no card
-- Futuramente integravel com API do YouTube para alimentacao automatica
-
-### Rota
-- Adicionar `/videografia` no `App.tsx`
-- Adicionar "Videografia" na navegacao
+O tipo será gerado automaticamente após a migração.
 
 ---
 
-## 5. Navegacao Atualizada
+## Pré-requisito
 
-Links na `MigraNavigation`:
-1. Sobre
-2. Areas de Atuacao
-3. Equipe
-4. Acervo (rota `/acervo`)
-5. Blog (rota `/blog`)
-6. Videografia (rota `/videografia`)
-7. Contato
-
----
-
-## Detalhes Tecnicos
-
-- Estado local com `useState` para busca e filtros nas paginas Acervo e Videografia
-- Embeds do YouTube via iframe padrao (`https://www.youtube-nocookie.com/embed/{youtubeId}`)
-- Componentes reutilizam `ScrollReveal`, `Card`, `Button`, `Badge`, `Input` existentes
-- Todas as paginas incluem `MigraNavigation` + `MigraFooter`
-- Responsividade: grids adaptam de 3/2 colunas para 1 coluna no mobile
+O projeto precisa estar conectado ao Lovable Cloud/Supabase. Se ainda não estiver, o primeiro passo será habilitá-lo nas configurações.
 
