@@ -18,12 +18,12 @@ const MigraFooter = () => {
               Links
             </h4>
             <div className="flex flex-col gap-2 text-sm">
-              <Link to="/#sobre" className="hover:text-primary transition-colors">Sobre</Link>
-              <Link to="/#pesquisa" className="hover:text-primary transition-colors">Pesquisa</Link>
-              <Link to="/acervo" className="hover:text-primary transition-colors">Acervo</Link>
+              <Link to="/sobre" className="hover:text-primary transition-colors">Sobre</Link>
+              <Link to="/producao" className="hover:text-primary transition-colors">Produção</Link>
+              <Link to="/grupos-de-estudo" className="hover:text-primary transition-colors">Grupos de Estudo</Link>
               <Link to="/blog" className="hover:text-primary transition-colors">Blog</Link>
               <Link to="/videografia" className="hover:text-primary transition-colors">Videografia</Link>
-              <Link to="/#contato" className="hover:text-primary transition-colors">Contato</Link>
+              <Link to="/radio" className="hover:text-primary transition-colors">Rádio MIGRA</Link>
             </div>
           </div>
           <div>
@@ -31,7 +31,8 @@ const MigraFooter = () => {
               Contato
             </h4>
             <div className="flex flex-col gap-2 text-sm">
-              <p>migra@ufpe.br</p>
+              <a href="mailto:migra@ufpe.br" className="hover:text-primary transition-colors">migra@ufpe.br</a>
+              <a href="mailto:migra.extensao@ufpe.br" className="hover:text-primary transition-colors">migra.extensao@ufpe.br</a>
               <p>UFPE – Centro de Ciências Jurídicas</p>
               <p>Recife, PE – Brasil</p>
             </div>

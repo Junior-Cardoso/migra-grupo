@@ -6,7 +6,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MigraHome from "./pages/MigraHome";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
-import Acervo from "./pages/Acervo";
+import Producao from "./pages/Producao";
+import Sobre from "./pages/Sobre";
+import GruposDeEstudo from "./pages/GruposDeEstudo";
+import RadioMigra from "./pages/RadioMigra";
 import Videografia from "./pages/Videografia";
 import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -29,7 +32,10 @@ const App = () => (
           <Route path="/" element={<MigraHome />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/acervo" element={<Acervo />} />
+          <Route path="/producao" element={<Producao />} />
+          <Route path="/sobre" element={<Sobre />} />
+          <Route path="/grupos-de-estudo" element={<GruposDeEstudo />} />
+          <Route path="/radio" element={<RadioMigra />} />
           <Route path="/videografia" element={<Videografia />} />
           
           {/* Admin */}

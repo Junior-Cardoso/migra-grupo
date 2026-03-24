@@ -1,5 +1,4 @@
 import MigraNavigation from "@/components/MigraNavigation";
-import AnimatedCounter from "@/components/AnimatedCounter";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import heroMigraBg from "@/assets/hero-migra-bg.jpg";
@@ -16,7 +15,10 @@ import {
   Compass,
   Radio,
   Map,
+  Users,
 } from "lucide-react";
+import { Link } from "react-router-dom";
+import MigraFooter from "@/components/MigraFooter";
 
 const MigraHome = () => {
   return (
@@ -25,10 +27,7 @@ const MigraHome = () => {
 
       {/* Hero */}
       <section className="relative pt-16 overflow-hidden">
-        {/* Solid color base */}
         <div className="absolute inset-0 bg-secondary" />
-
-        {/* Hero image fading in from the right */}
         <div
           className="absolute inset-0"
           style={{
@@ -39,13 +38,7 @@ const MigraHome = () => {
             WebkitMaskImage: "linear-gradient(to right, transparent 0%, transparent 15%, rgba(0,0,0,0.3) 35%, rgba(0,0,0,0.7) 60%, black 80%)",
           }}
         />
-
-        {/* Light overlay for brighter image */}
         <div className="absolute inset-0 bg-secondary/20" />
-
-        {/* CSS pattern texture overlay */}
-
-        {/* Ambient glow */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-primary/30 blur-3xl" />
           <div className="absolute bottom-10 right-20 w-96 h-96 rounded-full bg-accent/20 blur-3xl" />
@@ -65,16 +58,20 @@ const MigraHome = () => {
               <Button
                 size="lg"
                 className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
+                asChild
               >
-                Conheça o grupo
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <Link to="/sobre">
+                  Conheça o grupo
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
                 className="border-white text-white bg-transparent hover:bg-white/10 hover:text-white font-heading font-normal text-base px-8 uppercase tracking-wider"
+                asChild
               >
-                Contato
+                <a href="#contato">Contato</a>
               </Button>
             </div>
           </div>
@@ -95,32 +92,10 @@ const MigraHome = () => {
                 dedicado ao estudo das migrações, mobilidades e gestão contemporânea de populações. 
                 Nosso trabalho combina rigor acadêmico com impacto social.
               </p>
-              <p className="text-muted-foreground leading-relaxed mb-10">
+              <p className="text-muted-foreground leading-relaxed">
                 Atuamos na produção de conhecimento, formação de pesquisadores e apoio 
                 à comunidade migrante, contribuindo para políticas públicas mais justas e inclusivas.
               </p>
-
-              {/* Stats melhorados */}
-              <div className="grid grid-cols-3 gap-4 sm:gap-10 mt-2">
-                <div>
-                  <p className="font-heading text-3xl sm:text-5xl font-bold text-primary leading-none">
-                    <AnimatedCounter end={15} suffix="+" />
-                  </p>
-                  <p className="text-muted-foreground text-xs sm:text-sm mt-2">Pesquisadores</p>
-                </div>
-                <div className="border-l border-border pl-6 sm:pl-8">
-                  <p className="font-heading text-3xl sm:text-5xl font-bold text-primary leading-none">
-                    <AnimatedCounter end={50} suffix="+" />
-                  </p>
-                  <p className="text-muted-foreground text-xs sm:text-sm mt-2">Publicações</p>
-                </div>
-                <div className="border-l border-border pl-6 sm:pl-8">
-                  <p className="font-heading text-3xl sm:text-5xl font-bold text-primary leading-none">
-                    <AnimatedCounter end={8} />
-                  </p>
-                  <p className="text-muted-foreground text-xs sm:text-sm mt-2">Anos de atuação</p>
-                </div>
-              </div>
             </ScrollReveal>
             <ScrollReveal delay={200}>
               <div className="relative">
@@ -231,22 +206,79 @@ const MigraHome = () => {
               <Button
                 size="lg"
                 className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
+                asChild
               >
-                Conheça toda a equipe
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <Link to="/sobre">
+                  Conheça toda a equipe
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
             </div>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* Publicações / Acervo */}
-      <section id="publicacoes" className="py-20 md:py-28 bg-muted/50">
+      {/* Grupos de Estudo */}
+      <section id="grupos" className="py-20 md:py-28 bg-muted/50">
         <div className="max-w-6xl mx-auto px-6">
           <ScrollReveal>
             <div className="text-center mb-16">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-                Acervo Digital
+                Grupos de Estudo
+              </h2>
+              <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                Espaços de aprendizado colaborativo sobre temas centrais das migrações contemporâneas.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { icon: Globe, title: "Migração e Direitos Humanos", desc: "Estudo aprofundado sobre a proteção jurídica dos migrantes e refugiados no cenário internacional." },
+              { icon: Users, title: "Interculturalidade e Pertencimentos", desc: "Reflexões sobre identidade, diversidade cultural e processos de integração de comunidades migrantes." },
+              { icon: Scale, title: "Políticas Migratórias Comparadas", desc: "Análise comparativa de legislações e políticas públicas de diferentes países sobre migração." },
+            ].map((group, i) => (
+              <ScrollReveal key={i} delay={i * 100}>
+                <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors group h-full">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                    <group.icon className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-heading text-lg font-semibold text-foreground mb-2 uppercase tracking-wide">
+                    {group.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {group.desc}
+                  </p>
+                </Card>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          <ScrollReveal>
+            <div className="text-center mt-10">
+              <Button
+                size="lg"
+                className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
+                asChild
+              >
+                <Link to="/grupos-de-estudo">
+                  Conheça nossos grupos
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Produção */}
+      <section id="producao" className="py-20 md:py-28">
+        <div className="max-w-6xl mx-auto px-6">
+          <ScrollReveal>
+            <div className="text-center mb-16">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
+                Produção
               </h2>
               <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -291,9 +323,12 @@ const MigraHome = () => {
               <Button
                 size="lg"
                 className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
+                asChild
               >
-                Ver todo o acervo
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <Link to="/producao">
+                  Ver toda a produção
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
             </div>
           </ScrollReveal>
@@ -301,7 +336,7 @@ const MigraHome = () => {
       </section>
 
       {/* Blog */}
-      <section id="blog" className="py-20 md:py-28">
+      <section id="blog" className="py-20 md:py-28 bg-muted/50">
         <div className="max-w-6xl mx-auto px-6">
           <ScrollReveal>
             <div className="text-center mb-16">
@@ -343,9 +378,9 @@ const MigraHome = () => {
                         <FileText className="h-3 w-3" />
                         {post.date}
                       </span>
-                      <a href="#" className="text-primary text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
+                      <span className="text-primary text-sm font-medium flex items-center gap-1">
                         Ler mais <ArrowRight className="h-3.5 w-3.5" />
-                      </a>
+                      </span>
                     </div>
                   </div>
                 </Card>
@@ -358,87 +393,51 @@ const MigraHome = () => {
               <Button
                 size="lg"
                 className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
+                asChild
               >
-                Ver todos os posts
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <Link to="/blog">
+                  Ver todos os posts
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
             </div>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* CTA / Contato */}
+      {/* CTA / Contato — somente emails */}
       <section id="contato" className="py-20 md:py-28 bg-secondary text-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <ScrollReveal>
             <Mail className="h-10 w-10 text-accent mx-auto mb-6" />
             <h2 className="font-heading text-3xl md:text-4xl font-bold uppercase tracking-wide mb-4">
-              Participe do MIGRA
+              Entre em Contato
             </h2>
             <p className="text-white/70 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
               Tem interesse em estudar migrações, mobilidades e gestão contemporânea de populações? 
               Entre em contato e faça parte do nosso grupo de pesquisa e extensão.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <a
+                href="mailto:migra@ufpe.br"
+                className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors text-lg font-medium"
               >
-                Entre em contato
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white bg-transparent hover:bg-white/10 hover:text-white font-heading font-normal text-base px-8 uppercase tracking-wider"
+                <Mail className="h-5 w-5" />
+                migra@ufpe.br
+              </a>
+              <a
+                href="mailto:migra.extensao@ufpe.br"
+                className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors text-lg font-medium"
               >
-                <FileText className="mr-2 h-4 w-4" />
-                Leia nosso blog
-              </Button>
+                <Mail className="h-5 w-5" />
+                migra.extensao@ufpe.br
+              </a>
             </div>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 bg-foreground text-white/60">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-10">
-            <div>
-              <span className="font-heading text-xl font-bold tracking-wider text-white">
-                MIGRA
-              </span>
-              <p className="text-sm mt-3 leading-relaxed">
-                Grupo de Pesquisa e Extensão em Migrações, Mobilidades e Gestão Contemporânea de Populações – UFPE
-              </p>
-            </div>
-            <div>
-              <h4 className="font-heading text-sm font-semibold text-white uppercase tracking-wider mb-4">
-                Links
-              </h4>
-              <div className="flex flex-col gap-2 text-sm">
-                <a href="#sobre" className="hover:text-primary transition-colors">Sobre</a>
-                <a href="#pesquisa" className="hover:text-primary transition-colors">Pesquisa</a>
-                <a href="#publicacoes" className="hover:text-primary transition-colors">Publicações</a>
-                <a href="#contato" className="hover:text-primary transition-colors">Contato</a>
-              </div>
-            </div>
-            <div>
-              <h4 className="font-heading text-sm font-semibold text-white uppercase tracking-wider mb-4">
-                Contato
-              </h4>
-              <div className="flex flex-col gap-2 text-sm">
-                <p>migra@ufpe.br</p>
-                <p>UFPE – Centro de Ciências Jurídicas</p>
-                <p>Recife, PE – Brasil</p>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-white/10 mt-10 pt-6 text-center text-xs">
-            © {new Date().getFullYear()} MIGRA – UFPE. Todos os direitos reservados.
-          </div>
-        </div>
-      </footer>
+      <MigraFooter />
     </div>
   );
 };

@@ -7,6 +7,7 @@ export interface Publication {
   abstract: string;
   externalUrl?: string;
   tags: string[];
+  thematicCategories: string[];
 }
 
 export const publicationTypes = [
@@ -16,6 +17,18 @@ export const publicationTypes = [
   "Capítulo",
   "Working Paper",
   "Relatório",
+] as const;
+
+export const thematicCategories = [
+  "Migração e trabalho",
+  "Migração e fronteira",
+  "Interculturalidade",
+  "Comunidade",
+  "Pertencimentos",
+  "Direitos humanos",
+  "Políticas públicas",
+  "Comunicação",
+  "Geografia",
 ] as const;
 
 export const publications: Publication[] = [
@@ -28,6 +41,7 @@ export const publications: Publication[] = [
     abstract: "Análise dos fluxos migratórios venezuelanos para a região Nordeste do Brasil, com foco nos processos de interiorização e nas políticas de acolhimento implementadas em Pernambuco.",
     externalUrl: "https://example.com/artigo-1",
     tags: ["venezuela", "nordeste", "acolhimento"],
+    thematicCategories: ["Políticas públicas", "Comunidade"],
   },
   {
     id: 2,
@@ -37,6 +51,7 @@ export const publications: Publication[] = [
     year: 2025,
     abstract: "Capítulo de livro que examina o sistema brasileiro de proteção a refugiados, suas bases normativas e os desafios práticos enfrentados pelos solicitantes de refúgio no país.",
     tags: ["refugio", "legislacao", "brasil"],
+    thematicCategories: ["Direitos humanos"],
   },
   {
     id: 3,
@@ -47,6 +62,7 @@ export const publications: Publication[] = [
     abstract: "Estudo comparativo das políticas de integração de migrantes no Brasil e em Portugal, identificando boas práticas e lacunas nos dois contextos.",
     externalUrl: "https://example.com/wp-3",
     tags: ["politicas publicas", "portugal", "acolhimento"],
+    thematicCategories: ["Políticas públicas", "Interculturalidade"],
   },
   {
     id: 4,
@@ -57,6 +73,7 @@ export const publications: Publication[] = [
     abstract: "Investigação sobre os processos de solicitação de refúgio na fronteira norte brasileira, com ênfase nas dinâmicas de Roraima e Amazonas.",
     externalUrl: "https://example.com/artigo-4",
     tags: ["refugio", "fronteiras", "roraima"],
+    thematicCategories: ["Migração e fronteira", "Direitos humanos"],
   },
   {
     id: 5,
@@ -66,6 +83,7 @@ export const publications: Publication[] = [
     year: 2024,
     abstract: "Dissertação de mestrado que analisa os processos de integração social, econômica e cultural de refugiados sírios reassentados na cidade do Recife.",
     tags: ["refugio", "recife", "integracao"],
+    thematicCategories: ["Interculturalidade", "Pertencimentos", "Comunidade"],
   },
   {
     id: 6,
@@ -76,6 +94,7 @@ export const publications: Publication[] = [
     abstract: "Análise dos acordos de livre circulação de pessoas no âmbito do Mercosul e seus impactos na proteção dos direitos fundamentais dos migrantes regionais.",
     externalUrl: "https://example.com/artigo-6",
     tags: ["mercosul", "fronteiras", "legislacao"],
+    thematicCategories: ["Migração e fronteira", "Direitos humanos"],
   },
   {
     id: 7,
@@ -85,6 +104,7 @@ export const publications: Publication[] = [
     year: 2023,
     abstract: "Estudo sobre a representação dos migrantes na mídia pernambucana, analisando enquadramentos jornalísticos e seu impacto na percepção pública.",
     tags: ["comunicacao", "midia", "nordeste"],
+    thematicCategories: ["Comunicação"],
   },
   {
     id: 8,
@@ -94,6 +114,7 @@ export const publications: Publication[] = [
     year: 2023,
     abstract: "Mapeamento participativo das territorialidades construídas por migrantes internacionais na RMR, com foco nas dinâmicas socioespaciais e redes de pertencimento.",
     tags: ["geografia", "recife", "territorialidade"],
+    thematicCategories: ["Geografia", "Pertencimentos"],
   },
   {
     id: 9,
@@ -103,6 +124,7 @@ export const publications: Publication[] = [
     year: 2022,
     abstract: "Tese de doutorado que investiga como os fluxos migratórios internacionais reconfiguram o espaço urbano da cidade do Recife, criando novas centralidades e dinâmicas territoriais.",
     tags: ["geografia", "recife", "urbanismo"],
+    thematicCategories: ["Geografia", "Comunidade"],
   },
   {
     id: 10,
@@ -113,5 +135,6 @@ export const publications: Publication[] = [
     abstract: "Relatório institucional com balanço das atividades de pesquisa, ensino e extensão realizadas pelo grupo durante o ano de 2022.",
     externalUrl: "https://example.com/relatorio-2022",
     tags: ["institucional", "extensao", "UFPE"],
+    thematicCategories: ["Políticas públicas"],
   },
 ];
