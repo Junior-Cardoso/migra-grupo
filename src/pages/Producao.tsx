@@ -6,12 +6,35 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { publications, publicationTypes } from "@/data/acervoPublications";
-import { Search, ExternalLink, BookOpen } from "lucide-react";
+import { publications, publicationTypes, thematicCategories } from "@/data/acervoPublications";
+import { Search, ExternalLink, BookOpen, X } from "lucide-react";
 
-const Acervo = () => {
+const Producao = () => {
   const [search, setSearch] = useState("");
   const [activeType, setActiveType] = useState<string | null>(null);
+  const [activeAuthors, setActiveAuthors] = useState<string[]>([]);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const allAuthors = useMemo(() => {
+    const set = new Set<string>();
+    publications.forEach((p) => p.authors.forEach((a) => set.add(a)));
+    return Array.from(set).sort();
+  }, []);
+
+  const toggleAuthor = (author: string) => {
+    setActiveAuthors((prev) =>
+      prev.includes(author) ? prev.filter((a) => a !== author) : [...prev, author]
+    );
+  };
+
+  const hasFilters = !!search || !!activeType || activeAuthors.length > 0 || !!activeCategory;
+
+  const clearFilters = () => {
+    setSearch("");
+    setActiveType(null);
+    setActiveAuthors([]);
+    setActiveCategory(null);
+  };
 
   const filtered = useMemo(() => {
     return publications.filter((pub) => {
@@ -21,9 +44,15 @@ const Acervo = () => {
         pub.abstract.toLowerCase().includes(search.toLowerCase()) ||
         pub.authors.some((a) => a.toLowerCase().includes(search.toLowerCase()));
       const matchesType = !activeType || pub.type === activeType;
-      return matchesSearch && matchesType;
+      const matchesAuthor =
+        activeAuthors.length === 0 ||
+        pub.authors.some((a) => activeAuthors.includes(a));
+      const matchesCategory =
+        !activeCategory ||
+        pub.thematicCategories.includes(activeCategory);
+      return matchesSearch && matchesType && matchesAuthor && matchesCategory;
     });
-  }, [search, activeType]);
+  }, [search, activeType, activeAuthors, activeCategory]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -33,7 +62,7 @@ const Acervo = () => {
       <section className="pt-16 bg-secondary">
         <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
           <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-white uppercase tracking-wide">
-            Acervo
+            Produção
           </h1>
           <div className="w-12 h-1 bg-accent mt-4 mb-4 rounded-full" />
           <p className="text-white/70 text-lg max-w-2xl">
@@ -44,17 +73,21 @@ const Acervo = () => {
 
       {/* Filters */}
       <section className="py-8 border-b border-border">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-            <div className="relative w-full sm:max-w-sm">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Buscar publicações..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="pl-10"
-              />
-            </div>
+        <div className="max-w-6xl mx-auto px-6 space-y-4">
+          {/* Search */}
+          <div className="relative w-full sm:max-w-sm">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Buscar publicações..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="pl-10"
+            />
+          </div>
+
+          {/* Modalidade / Formato */}
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Formato</p>
             <div className="flex flex-wrap gap-2">
               <Badge
                 variant={activeType === null ? "default" : "outline"}
@@ -75,6 +108,54 @@ const Acervo = () => {
               ))}
             </div>
           </div>
+
+          {/* Categoria temática */}
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Categoria temática</p>
+            <div className="flex flex-wrap gap-2">
+              <Badge
+                variant={activeCategory === null ? "default" : "outline"}
+                className="cursor-pointer"
+                onClick={() => setActiveCategory(null)}
+              >
+                Todas
+              </Badge>
+              {thematicCategories.map((cat) => (
+                <Badge
+                  key={cat}
+                  variant={activeCategory === cat ? "default" : "outline"}
+                  className="cursor-pointer"
+                  onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+                >
+                  {cat}
+                </Badge>
+              ))}
+            </div>
+          </div>
+
+          {/* Autores */}
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Autores</p>
+            <div className="flex flex-wrap gap-2">
+              {allAuthors.map((author) => (
+                <Badge
+                  key={author}
+                  variant={activeAuthors.includes(author) ? "default" : "outline"}
+                  className="cursor-pointer"
+                  onClick={() => toggleAuthor(author)}
+                >
+                  {author}
+                </Badge>
+              ))}
+            </div>
+          </div>
+
+          {hasFilters && (
+            <Button variant="ghost" size="sm" onClick={clearFilters} className="text-muted-foreground">
+              <X className="h-3.5 w-3.5 mr-1" />
+              Limpar filtros
+            </Button>
+          )}
         </div>
       </section>
 
@@ -104,9 +185,19 @@ const Acervo = () => {
                       {pub.abstract}
                     </p>
                     <div className="mt-auto">
-                      <p className="text-muted-foreground text-xs mb-4">
+                      <p className="text-muted-foreground text-xs mb-3">
                         {pub.authors.join(", ")}
                       </p>
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        {pub.thematicCategories.map((cat) => (
+                          <span
+                            key={cat}
+                            className="text-xs px-2 py-0.5 bg-primary/10 text-primary rounded-full"
+                          >
+                            {cat}
+                          </span>
+                        ))}
+                      </div>
                       <div className="flex flex-wrap gap-1.5 mb-4">
                         {pub.tags.map((tag) => (
                           <span
@@ -144,4 +235,4 @@ const Acervo = () => {
   );
 };
 
-export default Acervo;
+export default Producao;

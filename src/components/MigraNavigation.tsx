@@ -8,30 +8,31 @@ const MigraNavigation = () => {
   const [open, setOpen] = useState(false);
 
   const navLinks = [
-    { name: "Sobre", href: "#sobre" },
-    { name: "Áreas de Atuação", href: "#pesquisa" },
-    { name: "Equipe", href: "#equipe" },
-    { name: "Acervo", href: "/acervo", isRoute: true },
+    { name: "Sobre", href: "/sobre", isRoute: true },
+    { name: "Áreas de Atuação", href: "/#pesquisa" },
+    { name: "Equipe", href: "/#equipe" },
+    { name: "Grupos de Estudo", href: "/grupos-de-estudo", isRoute: true },
+    { name: "Produção", href: "/producao", isRoute: true },
     { name: "Blog", href: "/blog", isRoute: true },
     { name: "Videografia", href: "/videografia", isRoute: true },
-    { name: "Contato", href: "#contato" },
+    { name: "Rádio MIGRA", href: "/radio", isRoute: true },
+    { name: "Contato", href: "/#contato" },
   ];
 
   return (
     <nav className="fixed top-0 left-0 z-50 w-full">
       <div className="bg-background/95 backdrop-blur-md border-b border-border">
         <div className="flex items-center justify-between h-16 px-6 mx-auto max-w-6xl">
-          {/* Logo */}
-          <a href="/" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <span className="font-heading text-2xl font-bold tracking-wider text-secondary">
               MIGRA
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) =>
-              (link as any).isRoute ? (
+              link.isRoute ? (
                 <Link
                   key={link.name}
                   to={link.href}
@@ -49,13 +50,10 @@ const MigraNavigation = () => {
                 </a>
               )
             )}
-            <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-              Área de Membros
-            </Button>
           </div>
 
           {/* Mobile Menu */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
@@ -68,7 +66,7 @@ const MigraNavigation = () => {
                     MIGRA
                   </span>
                   {navLinks.map((link) =>
-                    (link as any).isRoute ? (
+                    link.isRoute ? (
                       <Link
                         key={link.name}
                         to={link.href}
@@ -88,9 +86,6 @@ const MigraNavigation = () => {
                       </a>
                     )
                   )}
-                  <Button className="w-full mt-4 bg-primary text-primary-foreground hover:bg-primary/90">
-                    Área de Membros
-                  </Button>
                 </div>
               </SheetContent>
             </Sheet>
