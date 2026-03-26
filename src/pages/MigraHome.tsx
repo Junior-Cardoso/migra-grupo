@@ -2,6 +2,7 @@ import MigraNavigation from "@/components/MigraNavigation";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import heroMigraBg from "@/assets/hero-migra-bg.jpg";
+import sobreMigraImg from "@/assets/sobre-migra.png";
 import { Card } from "@/components/ui/card";
 import {
   Globe,
@@ -100,9 +101,7 @@ const MigraHome = () => {
             <ScrollReveal delay={200}>
               <div className="relative">
                 <div className="aspect-[4/3] rounded-lg bg-muted overflow-hidden">
-                  <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/30 flex items-center justify-center">
-                    <Globe className="h-24 w-24 text-primary/40" />
-                  </div>
+                  <img src={sobreMigraImg} alt="Pessoas caminhando em pátio universitário" className="w-full h-full object-cover" />
                 </div>
                 <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-accent/20 rounded-lg -z-10" />
               </div>
