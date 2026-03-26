@@ -2,6 +2,7 @@ import MigraNavigation from "@/components/MigraNavigation";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import heroMigraBg from "@/assets/hero-migra-bg.jpg";
+import sobreMigraImg from "@/assets/sobre-migra.png";
 import { Card } from "@/components/ui/card";
 import {
   Globe,
