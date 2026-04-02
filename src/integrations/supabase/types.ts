@@ -21,6 +21,7 @@ export type Database = {
           created_at: string
           external_url: string | null
           id: string
+          subcategory: string | null
           tags: string[]
           thematic_categories: string[]
           title: string
@@ -33,6 +34,7 @@ export type Database = {
           created_at?: string
           external_url?: string | null
           id?: string
+          subcategory?: string | null
           tags?: string[]
           thematic_categories?: string[]
           title: string
@@ -45,6 +47,7 @@ export type Database = {
           created_at?: string
           external_url?: string | null
           id?: string
+          subcategory?: string | null
           tags?: string[]
           thematic_categories?: string[]
           title?: string

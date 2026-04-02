@@ -17,12 +17,17 @@ import {
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from "@/components/ui/select";
 import { Plus, Pencil, Trash2, Search, Loader2, BookOpen } from "lucide-react";
 import { toast } from "sonner";
+import { FIXED_CATEGORIES } from "@/data/acervoPublications";
 
 interface PubForm {
   title: string;
   type: string;
+  subcategory: string;
   authors: string;
   year: string;
   abstract: string;
@@ -32,7 +37,7 @@ interface PubForm {
 }
 
 const emptyForm: PubForm = {
-  title: "", type: "", authors: "", year: "", abstract: "",
+  title: "", type: "", subcategory: "", authors: "", year: "", abstract: "",
   external_url: "", tags: "", thematic_categories: "",
 };
 
@@ -57,9 +62,12 @@ const AdminProducao = () => {
     },
   });
 
-  const types = [...new Set(publications.map((p) => p.type).filter(Boolean))];
+  // Existing subcategories for datalist suggestions
+  const existingSubcategories = [...new Set(
+    publications.map((p: any) => p.subcategory).filter(Boolean)
+  )].sort();
 
-  const filtered = publications.filter((p) => {
+  const filtered = publications.filter((p: any) => {
     const matchSearch =
       !search ||
       p.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -70,9 +78,10 @@ const AdminProducao = () => {
 
   const saveMutation = useMutation({
     mutationFn: async () => {
-      const payload = {
+      const payload: any = {
         title: form.title,
         type: form.type,
+        subcategory: form.subcategory || null,
         authors: form.authors.split(",").map((s) => s.trim()).filter(Boolean),
         year: parseInt(form.year),
         abstract: form.abstract,
@@ -118,6 +127,7 @@ const AdminProducao = () => {
     setForm({
       title: pub.title,
       type: pub.type,
+      subcategory: pub.subcategory ?? "",
       authors: pub.authors.join(", "),
       year: String(pub.year),
       abstract: pub.abstract ?? "",
@@ -133,7 +143,7 @@ const AdminProducao = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.title || !form.type || !form.year) {
-      toast.error("Preencha título, tipo e ano."); return;
+      toast.error("Preencha título, categoria e ano."); return;
     }
     saveMutation.mutate();
   };
@@ -154,11 +164,14 @@ const AdminProducao = () => {
           <Badge variant={activeType === null ? "default" : "outline"} className="cursor-pointer" onClick={() => setActiveType(null)}>
             Todos ({publications.length})
           </Badge>
-          {types.map((t) => (
-            <Badge key={t} variant={activeType === t ? "default" : "outline"} className="cursor-pointer" onClick={() => setActiveType(activeType === t ? null : t)}>
-              {t} ({publications.filter((p) => p.type === t).length})
-            </Badge>
-          ))}
+          {FIXED_CATEGORIES.map((t) => {
+            const count = publications.filter((p: any) => p.type === t).length;
+            return (
+              <Badge key={t} variant={activeType === t ? "default" : "outline"} className="cursor-pointer" onClick={() => setActiveType(activeType === t ? null : t)}>
+                {t} ({count})
+              </Badge>
+            );
+          })}
         </div>
       </div>
 
@@ -175,20 +188,23 @@ const AdminProducao = () => {
             <TableHeader>
               <TableRow>
                 <TableHead>Título</TableHead>
-                <TableHead className="hidden md:table-cell">Tipo</TableHead>
+                <TableHead className="hidden md:table-cell">Categoria</TableHead>
                 <TableHead className="hidden md:table-cell">Ano</TableHead>
                 <TableHead className="hidden lg:table-cell">Autores</TableHead>
                 <TableHead className="text-right">Ações</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filtered.map((pub) => (
+              {filtered.map((pub: any) => (
                 <TableRow key={pub.id}>
                   <TableCell>
                     <p className="font-medium text-sm line-clamp-2">{pub.title}</p>
                     <p className="text-xs text-muted-foreground mt-1 md:hidden">{pub.type} • {pub.year}</p>
                   </TableCell>
-                  <TableCell className="hidden md:table-cell"><Badge variant="secondary">{pub.type}</Badge></TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    <Badge variant="secondary">{pub.type}</Badge>
+                    {pub.subcategory && <p className="text-xs text-muted-foreground mt-1">{pub.subcategory}</p>}
+                  </TableCell>
                   <TableCell className="hidden md:table-cell text-muted-foreground text-sm">{pub.year}</TableCell>
                   <TableCell className="hidden lg:table-cell text-muted-foreground text-xs max-w-[200px] truncate">{pub.authors.join(", ")}</TableCell>
                   <TableCell className="text-right">
@@ -216,16 +232,35 @@ const AdminProducao = () => {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Tipo *</Label>
-                <Input value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} placeholder="Ex: Artigo, Tese, Dissertação" list="type-list" />
-                <datalist id="type-list">
-                  {types.map((t) => <option key={t} value={t} />)}
-                </datalist>
+                <Label>Categoria *</Label>
+                <Select value={form.type} onValueChange={(val) => setForm({ ...form, type: val })}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecione a categoria" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {FIXED_CATEGORIES.map((cat) => (
+                      <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <div className="space-y-2">
                 <Label>Ano *</Label>
                 <Input value={form.year} onChange={(e) => setForm({ ...form, year: e.target.value })} placeholder="Ex: 2024" type="number" />
               </div>
+            </div>
+            <div className="space-y-2">
+              <Label>Subcategoria</Label>
+              <Input
+                value={form.subcategory}
+                onChange={(e) => setForm({ ...form, subcategory: e.target.value })}
+                placeholder="Ex: Artigo em periódico, Dissertação de mestrado..."
+                list="subcategory-list"
+              />
+              <datalist id="subcategory-list">
+                {existingSubcategories.map((s) => <option key={s as string} value={s as string} />)}
+              </datalist>
+              <p className="text-xs text-muted-foreground">Opcional. Selecione uma existente ou digite uma nova.</p>
             </div>
             <div className="space-y-2">
               <Label>Autores (separados por vírgula)</Label>
