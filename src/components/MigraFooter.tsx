@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
+import { ExternalLink } from "lucide-react";
+
+const academicLinks = [
+  { label: "Lattes", url: "http://lattes.cnpq.br/" },
+  { label: "Google Scholar", url: "https://scholar.google.com/" },
+  { label: "ResearchGate", url: "https://www.researchgate.net/" },
+  { label: "ORCID", url: "https://orcid.org/" },
+];
 
 const MigraFooter = () => {
   return (
     <footer className="py-12 bg-foreground text-white/60">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-3 gap-10">
+        <div className="grid md:grid-cols-4 gap-10">
           <div>
             <Link to="/" className="font-heading text-xl font-bold tracking-wider text-white">
               MIGRA
@@ -24,6 +32,25 @@ const MigraFooter = () => {
               <Link to="/blog" className="hover:text-primary transition-colors">Blog</Link>
               <Link to="/videografia" className="hover:text-primary transition-colors">Videografia</Link>
               <Link to="/radio" className="hover:text-primary transition-colors">Rádio MIGRA</Link>
+            </div>
+          </div>
+          <div>
+            <h4 className="font-heading text-sm font-semibold text-white uppercase tracking-wider mb-4">
+              Plataformas Acadêmicas
+            </h4>
+            <div className="flex flex-col gap-2 text-sm">
+              {academicLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary transition-colors inline-flex items-center gap-1.5"
+                >
+                  {link.label}
+                  <ExternalLink className="h-3 w-3 opacity-50" />
+                </a>
+              ))}
             </div>
           </div>
           <div>
