@@ -81,6 +81,8 @@ export type Database = {
           date: string
           description: string | null
           id: string
+          section: string | null
+          sort_order: number
           title: string
           youtube_id: string
         }
@@ -90,6 +92,8 @@ export type Database = {
           date: string
           description?: string | null
           id?: string
+          section?: string | null
+          sort_order?: number
           title: string
           youtube_id: string
         }
@@ -99,6 +103,8 @@ export type Database = {
           date?: string
           description?: string | null
           id?: string
+          section?: string | null
+          sort_order?: number
           title?: string
           youtube_id?: string
         }
