@@ -24,6 +24,13 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Table,
   TableBody,
   TableCell,
@@ -34,12 +41,22 @@ import {
 import { Plus, Pencil, Trash2, Search, Loader2, Video } from "lucide-react";
 import { toast } from "sonner";
 
+const SECTIONS = [
+  "Así Pasó",
+  "Curso de Extensão: Questão Migratória",
+  "I Encontro Nacional da Rede REUNIR",
+  "Palestras, aulas e comentários na mídia",
+  "Plenária Nacional Saúde e Migração",
+];
+
 interface VideoForm {
   title: string;
   youtube_id: string;
   description: string;
   date: string;
   category: string;
+  section: string;
+  sort_order: number;
 }
 
 const emptyForm: VideoForm = {
@@ -48,11 +65,13 @@ const emptyForm: VideoForm = {
   description: "",
   date: "",
   category: "",
+  section: SECTIONS[0],
+  sort_order: 0,
 };
 
 const AdminVideografia = () => {
   const [search, setSearch] = useState("");
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<VideoForm>(emptyForm);
@@ -66,33 +85,41 @@ const AdminVideografia = () => {
       const { data, error } = await supabase
         .from("videos")
         .select("*")
+        .order("sort_order", { ascending: true })
         .order("created_at", { ascending: false });
       if (error) throw error;
       return data;
     },
   });
 
-  const categories = [...new Set(videos.map((v) => v.category).filter(Boolean))];
-
   const filtered = videos.filter((v) => {
     const matchSearch =
       !search ||
       v.title.toLowerCase().includes(search.toLowerCase()) ||
       (v.description ?? "").toLowerCase().includes(search.toLowerCase());
-    const matchCat = !activeCategory || v.category === activeCategory;
-    return matchSearch && matchCat;
+    const matchSec = !activeSection || (v as any).section === activeSection;
+    return matchSearch && matchSec;
   });
 
   const saveMutation = useMutation({
     mutationFn: async () => {
+      const payload = {
+        title: form.title,
+        youtube_id: form.youtube_id,
+        description: form.description || null,
+        date: form.date,
+        category: form.category || null,
+        section: form.section,
+        sort_order: form.sort_order,
+      };
       if (editingId) {
         const { error } = await supabase
           .from("videos")
-          .update(form)
+          .update(payload as any)
           .eq("id", editingId);
         if (error) throw error;
       } else {
-        const { error } = await supabase.from("videos").insert(form);
+        const { error } = await supabase.from("videos").insert(payload as any);
         if (error) throw error;
       }
     },
@@ -102,9 +129,7 @@ const AdminVideografia = () => {
       toast.success(editingId ? "Vídeo atualizado!" : "Vídeo criado!");
       closeDialog();
     },
-    onError: (err: any) => {
-      toast.error("Erro: " + err.message);
-    },
+    onError: (err: any) => toast.error("Erro: " + err.message),
   });
 
   const deleteMutation = useMutation({
@@ -118,9 +143,7 @@ const AdminVideografia = () => {
       toast.success("Vídeo excluído!");
       setDeleteId(null);
     },
-    onError: (err: any) => {
-      toast.error("Erro: " + err.message);
-    },
+    onError: (err: any) => toast.error("Erro: " + err.message),
   });
 
   const openNew = () => {
@@ -137,6 +160,8 @@ const AdminVideografia = () => {
       description: video.description ?? "",
       date: video.date,
       category: video.category ?? "",
+      section: video.section ?? SECTIONS[0],
+      sort_order: video.sort_order ?? 0,
     });
     setDialogOpen(true);
   };
@@ -156,7 +181,6 @@ const AdminVideografia = () => {
     saveMutation.mutate();
   };
 
-  // Extract YouTube ID from URL or keep as-is
   const parseYoutubeId = (input: string) => {
     const match = input.match(
       /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/
@@ -189,20 +213,20 @@ const AdminVideografia = () => {
         </div>
         <div className="flex flex-wrap gap-2">
           <Badge
-            variant={activeCategory === null ? "default" : "outline"}
+            variant={activeSection === null ? "default" : "outline"}
             className="cursor-pointer"
-            onClick={() => setActiveCategory(null)}
+            onClick={() => setActiveSection(null)}
           >
             Todos ({videos.length})
           </Badge>
-          {categories.map((cat) => (
+          {SECTIONS.map((sec) => (
             <Badge
-              key={cat}
-              variant={activeCategory === cat ? "default" : "outline"}
+              key={sec}
+              variant={activeSection === sec ? "default" : "outline"}
               className="cursor-pointer"
-              onClick={() => setActiveCategory(activeCategory === cat ? null : cat!)}
+              onClick={() => setActiveSection(activeSection === sec ? null : sec)}
             >
-              {cat} ({videos.filter((v) => v.category === cat).length})
+              {sec} ({videos.filter((v) => (v as any).section === sec).length})
             </Badge>
           ))}
         </div>
@@ -225,7 +249,7 @@ const AdminVideografia = () => {
               <TableRow>
                 <TableHead>Preview</TableHead>
                 <TableHead>Título</TableHead>
-                <TableHead className="hidden md:table-cell">Categoria</TableHead>
+                <TableHead className="hidden md:table-cell">Seção</TableHead>
                 <TableHead className="hidden md:table-cell">Data</TableHead>
                 <TableHead className="text-right">Ações</TableHead>
               </TableRow>
@@ -243,11 +267,15 @@ const AdminVideografia = () => {
                   <TableCell>
                     <p className="font-medium text-sm line-clamp-2">{video.title}</p>
                     <p className="text-xs text-muted-foreground mt-1 md:hidden">
-                      {video.category} • {video.date}
+                      {(video as any).section} • {video.date}
                     </p>
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
-                    {video.category && <Badge variant="secondary">{video.category}</Badge>}
+                    {(video as any).section && (
+                      <Badge variant="secondary" className="text-xs">
+                        {(video as any).section}
+                      </Badge>
+                    )}
                   </TableCell>
                   <TableCell className="hidden md:table-cell text-muted-foreground text-sm">
                     {video.date}
@@ -319,18 +347,44 @@ const AdminVideografia = () => {
             )}
 
             <div className="space-y-2">
-              <Label>Categoria</Label>
-              <Input
-                value={form.category}
-                onChange={(e) => setForm({ ...form, category: e.target.value })}
-                placeholder="Ex: Aulas, Narrativas Migrantes"
-                list="categories-list"
-              />
-              <datalist id="categories-list">
-                {categories.map((c) => (
-                  <option key={c} value={c!} />
-                ))}
-              </datalist>
+              <Label>Seção *</Label>
+              <Select
+                value={form.section}
+                onValueChange={(val) => setForm({ ...form, section: val })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecione a seção" />
+                </SelectTrigger>
+                <SelectContent>
+                  {SECTIONS.map((sec) => (
+                    <SelectItem key={sec} value={sec}>
+                      {sec}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Subcategoria</Label>
+                <Input
+                  value={form.category}
+                  onChange={(e) => setForm({ ...form, category: e.target.value })}
+                  placeholder="Ex: Bastidores, Entrevista"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Ordem</Label>
+                <Input
+                  type="number"
+                  value={form.sort_order}
+                  onChange={(e) =>
+                    setForm({ ...form, sort_order: parseInt(e.target.value) || 0 })
+                  }
+                  placeholder="0"
+                />
+              </div>
             </div>
 
             <div className="space-y-2">
