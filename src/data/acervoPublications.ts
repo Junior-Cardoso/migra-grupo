@@ -137,4 +137,14 @@ export const publications: Publication[] = [
     tags: ["institucional", "extensao", "UFPE"],
     thematicCategories: ["Políticas públicas"],
   },
+  {
+    id: 11,
+    title: "Fronteiras da mobilidade no Brasil contemporâneo: comunicação e experiência migrante na securitização do acolhimento e da integração social no âmbito da Operação Acolhida",
+    type: "Relatório",
+    authors: ["Sofia Cavalcanti Zanforlin"],
+    year: 2021,
+    abstract: "Projeto de pesquisa financiado pelo CNPq (Chamada Universal 2021, Faixa A – Grupos Emergentes). Propõe abordar dois momentos do fluxo de migrantes venezuelanos no Brasil: o acolhimento na fronteira representada por Roraima e na fronteira da interiorização, no Nordeste, em especial Pernambuco, a partir de etnografias multi-situadas com trabalhos de campo em Pacaraima e Boa Vista, Recife e RMR. A compreensão do fenômeno migratório exige estudos interdisciplinares ancorados na Comunicação a partir do conceito de bios midiático.",
+    tags: ["fronteiras", "comunicação", "bios midiático", "securitização", "mobilidade humana", "operação acolhida", "CNPq"],
+    thematicCategories: ["Migração e fronteira", "Comunicação"],
+  },
 ];
