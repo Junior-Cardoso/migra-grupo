@@ -19,6 +19,7 @@ import AdminVideografia from "./pages/admin/AdminVideografia";
 import AdminBlog from "./pages/admin/AdminBlog";
 import AdminBlogEditor from "./pages/admin/AdminBlogEditor";
 import AdminHome from "./pages/admin/AdminHome";
+import AdminProducao from "./pages/admin/AdminProducao";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +48,7 @@ const App = () => (
             <Route path="blog/novo" element={<AdminBlogEditor />} />
             <Route path="blog/editar/:slug" element={<AdminBlogEditor />} />
             <Route path="home" element={<AdminHome />} />
+            <Route path="producao" element={<AdminProducao />} />
           </Route>
           
           <Route path="*" element={<NotFound />} />
