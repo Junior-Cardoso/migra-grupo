@@ -19,6 +19,7 @@ import AdminVideografia from "./pages/admin/AdminVideografia";
 import AdminBlog from "./pages/admin/AdminBlog";
 import AdminBlogEditor from "./pages/admin/AdminBlogEditor";
 import AdminHome from "./pages/admin/AdminHome";
+import AdminProducao from "./pages/admin/AdminProducao";
 
 const queryClient = new QueryClient();
 
