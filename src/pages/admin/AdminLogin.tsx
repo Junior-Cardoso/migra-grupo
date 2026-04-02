@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,21 +12,27 @@ const AdminLogin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const { signIn } = useAuth();
+  const { user, isAdmin, loading, signIn } = useAuth();
   const navigate = useNavigate();
+
+  // If already authenticated as admin, redirect
+  useEffect(() => {
+    if (!loading && user && isAdmin) {
+      navigate("/admin");
+    }
+  }, [user, isAdmin, loading, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setSubmitting(true);
 
-    const { error } = await signIn(email, password);
-    if (error) {
+    const { error: signInError } = await signIn(email, password);
+    if (signInError) {
       setError("Credenciais inválidas. Tente novamente.");
       setSubmitting(false);
-    } else {
-      navigate("/admin");
     }
+    // Navigation will happen via the useEffect above once auth state updates
   };
 
   return (

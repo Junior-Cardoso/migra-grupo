@@ -7,38 +7,39 @@ export function useAuth() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const checkAdmin = async (userId: string) => {
+    const { data } = await supabase.rpc("has_role", {
+      _user_id: userId,
+      _role: "admin",
+    });
+    setIsAdmin(!!data);
+  };
+
   useEffect(() => {
+    // 1. Restore session from storage first
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      const currentUser = session?.user ?? null;
+      setUser(currentUser);
+      if (currentUser) {
+        await checkAdmin(currentUser.id);
+      }
+      setLoading(false);
+    });
+
+    // 2. Listen for subsequent auth changes (no await inside!)
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (_event, session) => {
+      (_event, session) => {
         const currentUser = session?.user ?? null;
         setUser(currentUser);
 
         if (currentUser) {
-          const { data } = await supabase.rpc("has_role", {
-            _user_id: currentUser.id,
-            _role: "admin",
-          });
-          setIsAdmin(!!data);
+          // Fire and forget — no await
+          checkAdmin(currentUser.id);
         } else {
           setIsAdmin(false);
         }
-        setLoading(false);
       }
     );
-
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      const currentUser = session?.user ?? null;
-      setUser(currentUser);
-
-      if (currentUser) {
-        const { data } = await supabase.rpc("has_role", {
-          _user_id: currentUser.id,
-          _role: "admin",
-        });
-        setIsAdmin(!!data);
-      }
-      setLoading(false);
-    });
 
     return () => subscription.unsubscribe();
   }, []);
