@@ -3,6 +3,7 @@ import MigraFooter from "@/components/MigraFooter";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Card } from "@/components/ui/card";
 import { Radio, Headphones, Music2, Mic2 } from "lucide-react";
+import radioMigraLogo from "@/assets/radio-migra-logo.png";
 
 const RadioMigra = () => {
   const spotifyShowId = "PLACEHOLDER_SHOW_ID";
@@ -15,9 +16,9 @@ const RadioMigra = () => {
       <section className="pt-16">
         <div className="bg-gradient-to-b from-primary/30 via-primary/10 to-background px-6 py-20 md:py-32">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center md:items-end gap-8">
-            {/* Album-style cover */}
-            <div className="w-48 h-48 md:w-56 md:h-56 rounded-xl bg-gradient-to-br from-accent/80 to-primary shadow-2xl flex items-center justify-center shrink-0">
-              <Mic2 className="h-20 w-20 md:h-24 md:w-24 text-white/90" />
+            {/* Album-style cover with logo */}
+            <div className="w-48 h-48 md:w-56 md:h-56 rounded-xl bg-white shadow-2xl flex items-center justify-center shrink-0 p-4">
+              <img src={radioMigraLogo} alt="Rádio Migra" className="w-full h-full object-contain" />
             </div>
 
             <div className="text-center md:text-left">
