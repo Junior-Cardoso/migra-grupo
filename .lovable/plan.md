@@ -1,56 +1,48 @@
 
 
-# Plano: Categorias fixas com subcategorias livres + paginação
+# Plano: Reestruturar Videografia em Divisórias + Documentário em Destaque
 
-## Resumo
+## Contexto
 
-1. Renomear o campo `type` para representar "Categoria" (fixo) e adicionar coluna `subcategory` (livre)
-2. Atualizar dados existentes para mapear os types atuais às novas categorias fixas
-3. Adaptar admin com select fixo de categorias + input de subcategoria com sugestões
-4. Adaptar página Produção: renomear "Formato" para "Categorias", adicionar paginação no feed, mover autores para cima da sidebar
+A página Videografia precisa deixar de ser um grid plano e passar a exibir vídeos organizados em **seções temáticas (divisórias)** com títulos e descrições próprias. Além disso, o documentário "Así Pasó" precisa ficar em destaque.
 
-## Categorias fixas
+## Divisórias definidas
 
-- Projetos
-- Relatórios
-- Artigos
-- Trabalhos Completos em Eventos
-- Teses e Dissertações
-- Capítulos de Livro
-- Livros
+1. **Así Pasó** — Documentário em destaque + bastidores (entrevistas na íntegra). Vídeo principal: `VN52Uoe5m6A`
+2. **Curso de Extensão: Questão Migratória** — As 13 aulas já existentes (categoria "Aulas")
+3. **I Encontro Nacional da Rede REUNIR** — Vídeos do encontro (a adicionar futuramente)
+4. **Palestras, aulas e comentários na mídia** — Conteúdo avulso
+5. **Plenária Nacional Saúde e Migração** — Vídeos da plenária
 
 ## Alterações no banco de dados
 
-**Migração 1**: Adicionar coluna `subcategory` (text, nullable) à tabela `publications`.
+**Migração**: Adicionar coluna `section` (text) e `sort_order` (integer, default 0) à tabela `videos`.
 
-**Migração 2**: Atualizar registros existentes para mapear os `type` atuais:
-- "Artigo" → "Artigos"
-- "Tese" → "Teses e Dissertações"
-- "Dissertação" → "Teses e Dissertações"
-- "Capítulo de Livro" → "Capítulos de Livro"
-- "Livro" → "Livros"
-- "Relatório" → "Relatórios"
-- Outros → mapeamento manual conforme dados
+Atualizar dados existentes:
+- Vídeos com `category = 'Aulas'` → `section = 'Curso de Extensão: Questão Migratória'`
+- Vídeos com `category = 'Narrativas Migrantes'` → `section = 'Así Pasó'` (são bastidores do documentário)
+
+Inserir o vídeo do documentário principal (`VN52Uoe5m6A`) na seção "Así Pasó" com `sort_order = -1` para ficar em primeiro.
 
 ## Alterações no frontend
 
-### AdminProducao.tsx
-- Substituir input livre de "Tipo" por `<Select>` com as 7 categorias fixas
-- Adicionar campo "Subcategoria" com input + datalist das subcategorias já existentes no banco
-- Renomear label "Tipo" → "Categoria"
+### Videografia.tsx
+- Reorganizar layout em seções sequenciais, cada uma com:
+  - Título da divisória (h2)
+  - Descrição curta (quando aplicável)
+  - Grid de vídeos daquela seção
+- **Divisória 1 (Así Pasó)**: Layout especial — documentário em destaque (iframe grande, largura total), seguido dos bastidores em grid menor
+- Divisórias 2-5: Grid padrão 2 colunas
+- Manter busca global no topo (filtra dentro de todas as seções)
+- Ordem fixa das seções definida no código
 
-### Producao.tsx
-- Renomear seção "Formato" → "Categorias" na sidebar
-- Usar as 7 categorias fixas (mesmo que tenham 0 resultados, mostrá-las)
-- Adicionar paginação no feed de publicações (12 por página)
-- Mover seção "Autores" para antes de "Categoria Temática" na sidebar (fica mais acessível sem scroll)
-
-### types (acervoPublications.ts)
-- Adicionar `subcategory?: string` à interface Publication
+### AdminVideografia.tsx
+- Substituir campo `Categoria` por `Seção` com select fixo das 5 divisórias
+- Manter campo `category` como subcategoria livre (opcional)
+- Adicionar campo `sort_order` para ordenação dentro da seção
 
 ## Arquivos impactados
-- `supabase/migrations/` — 1 migração (add column + update data)
-- `src/pages/Producao.tsx` — categorias fixas, paginação, reordenar sidebar
-- `src/pages/admin/AdminProducao.tsx` — select fixo + subcategoria
-- `src/data/acervoPublications.ts` — interface update
+- `supabase/migrations/` — nova migração (add columns + update data + insert documentário)
+- `src/pages/Videografia.tsx` — layout por seções
+- `src/pages/admin/AdminVideografia.tsx` — select de seção
 
