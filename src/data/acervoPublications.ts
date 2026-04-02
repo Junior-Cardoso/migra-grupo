@@ -147,4 +147,14 @@ export const publications: Publication[] = [
     tags: ["fronteiras", "comunicação", "bios midiático", "securitização", "mobilidade humana", "operação acolhida", "CNPq"],
     thematicCategories: ["Migração e fronteira", "Comunicação"],
   },
+  {
+    id: 12,
+    title: "Digitalização da fronteira, migração digital e bios midiático: securitização, humanitarismo e plataformização do trabalho na Operação Acolhida (OPA)",
+    type: "Relatório",
+    authors: ["Sofia Cavalcanti Zanforlin"],
+    year: 2025,
+    abstract: "Projeto de pesquisa financiado pelo CNPq (Chamada Universal 2024, Faixa A – Grupos Emergentes). Investiga a digitalização da fronteira, a migração digital e o conceito de bios midiático no contexto da securitização, humanitarismo e plataformização do trabalho na Operação Acolhida, com foco na fronteira Brasil-Venezuela e nas estratégias de interiorização de migrantes venezuelanos.",
+    tags: ["fronteiras", "tecnologias digitais", "migração venezuelana", "interiorização", "trabalho humanitário", "fronteira Brasil-Venezuela", "CNPq"],
+    thematicCategories: ["Migração e fronteira", "Comunicação"],
+  },
 ];
