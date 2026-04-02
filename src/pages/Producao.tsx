@@ -9,13 +9,17 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { Publication } from "@/data/acervoPublications";
-import { Search, ExternalLink, BookOpen, X, SlidersHorizontal, Loader2 } from "lucide-react";
+import { FIXED_CATEGORIES } from "@/data/acervoPublications";
+import { Search, ExternalLink, BookOpen, X, SlidersHorizontal, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
+
+const ITEMS_PER_PAGE = 12;
 
 const Producao = () => {
   const [search, setSearch] = useState("");
   const [activeTypes, setActiveTypes] = useState<string[]>([]);
   const [activeAuthors, setActiveAuthors] = useState<string[]>([]);
   const [activeCategories, setActiveCategories] = useState<string[]>([]);
+  const [page, setPage] = useState(1);
 
   const { data: rawPublications = [], isLoading } = useQuery({
     queryKey: ["publications"],
@@ -28,13 +32,6 @@ const Producao = () => {
       return data as Publication[];
     },
   });
-
-  // Derive dynamic lists from DB data
-  const publicationTypes = useMemo(() => {
-    const set = new Set<string>();
-    rawPublications.forEach((p) => set.add(p.type));
-    return Array.from(set).sort();
-  }, [rawPublications]);
 
   const thematicCategories = useMemo(() => {
     const set = new Set<string>();
@@ -55,6 +52,7 @@ const Producao = () => {
     setter((prev) =>
       prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
     );
+    setPage(1);
   };
 
   const hasFilters =
@@ -65,6 +63,7 @@ const Producao = () => {
     setActiveTypes([]);
     setActiveAuthors([]);
     setActiveCategories([]);
+    setPage(1);
   };
 
   const filtered = useMemo(() => {
@@ -85,9 +84,12 @@ const Producao = () => {
     });
   }, [search, activeTypes, activeAuthors, activeCategories, rawPublications]);
 
+  const totalPages = Math.max(1, Math.ceil(filtered.length / ITEMS_PER_PAGE));
+  const paginatedItems = filtered.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
+
   const typeCounts = useMemo(() => {
     const counts: Record<string, number> = {};
-    publicationTypes.forEach((t) => {
+    FIXED_CATEGORIES.forEach((t) => {
       counts[t] = rawPublications.filter((p) => {
         const matchesSearch =
           !search ||
@@ -104,7 +106,7 @@ const Producao = () => {
       }).length;
     });
     return counts;
-  }, [search, activeAuthors, activeCategories, publicationTypes, rawPublications]);
+  }, [search, activeAuthors, activeCategories, rawPublications]);
 
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -180,32 +182,18 @@ const Producao = () => {
               <SlidersHorizontal className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
               <span className="text-xs text-muted-foreground shrink-0">Filtros ativos:</span>
               {activeFilterBadges.map((f) => (
-                <Badge
-                  key={f.label}
-                  variant="default"
-                  className="cursor-pointer text-xs gap-1"
-                  onClick={f.clear}
-                >
+                <Badge key={f.label} variant="default" className="cursor-pointer text-xs gap-1" onClick={f.clear}>
                   {f.label}
                   <X className="h-3 w-3" />
                 </Badge>
               ))}
               {search && (
-                <Badge
-                  variant="default"
-                  className="cursor-pointer text-xs gap-1"
-                  onClick={() => setSearch("")}
-                >
+                <Badge variant="default" className="cursor-pointer text-xs gap-1" onClick={() => setSearch("")}>
                   "{search}"
                   <X className="h-3 w-3" />
                 </Badge>
               )}
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={clearFilters}
-                className="text-muted-foreground text-xs h-6 px-2 ml-auto"
-              >
+              <Button variant="ghost" size="sm" onClick={clearFilters} className="text-muted-foreground text-xs h-6 px-2 ml-auto">
                 Limpar tudo
               </Button>
             </div>
@@ -228,29 +216,17 @@ const Producao = () => {
                   <h4 className="font-heading text-sm font-semibold text-foreground uppercase tracking-wider mb-3">Buscar</h4>
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input placeholder="Buscar publicações..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
+                    <Input placeholder="Buscar publicações..." value={search} onChange={(e) => { setSearch(e.target.value); setPage(1); }} className="pl-9" />
                   </div>
                 </div>
 
                 <div>
-                  <h4 className="font-heading text-sm font-semibold text-foreground uppercase tracking-wider mb-3">Formato</h4>
+                  <h4 className="font-heading text-sm font-semibold text-foreground uppercase tracking-wider mb-3">Categorias</h4>
                   <div className="space-y-1">
-                    {publicationTypes.map((type) => (
+                    {FIXED_CATEGORIES.map((type) => (
                       <button key={type} onClick={() => toggleItem(type, setActiveTypes)} className={`w-full flex items-center justify-between text-sm py-2 px-3 rounded-md transition-colors ${activeTypes.includes(type) ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground hover:bg-muted"}`}>
                         <span>{type}</span>
-                        <span className="text-xs tabular-nums">{typeCounts[type]}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <h4 className="font-heading text-sm font-semibold text-foreground uppercase tracking-wider mb-3">Categoria Temática</h4>
-                  <div className="space-y-1">
-                    {thematicCategories.map((cat) => (
-                      <button key={cat} onClick={() => toggleItem(cat, setActiveCategories)} className={`w-full flex items-center justify-between text-sm py-2 px-3 rounded-md transition-colors ${activeCategories.includes(cat) ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground hover:bg-muted"}`}>
-                        <span>{cat}</span>
-                        <span className="text-xs tabular-nums">{categoryCounts[cat]}</span>
+                        <span className="text-xs tabular-nums">{typeCounts[type] ?? 0}</span>
                       </button>
                     ))}
                   </div>
@@ -264,6 +240,18 @@ const Producao = () => {
                         {author}
                         <span className="ml-1 opacity-60">{authorCounts[author]}</span>
                       </Badge>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-heading text-sm font-semibold text-foreground uppercase tracking-wider mb-3">Categoria Temática</h4>
+                  <div className="space-y-1">
+                    {thematicCategories.map((cat) => (
+                      <button key={cat} onClick={() => toggleItem(cat, setActiveCategories)} className={`w-full flex items-center justify-between text-sm py-2 px-3 rounded-md transition-colors ${activeCategories.includes(cat) ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground hover:bg-muted"}`}>
+                        <span>{cat}</span>
+                        <span className="text-xs tabular-nums">{categoryCounts[cat]}</span>
+                      </button>
                     ))}
                   </div>
                 </div>
@@ -287,43 +275,62 @@ const Producao = () => {
                     )}
                   </div>
                 ) : (
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    {filtered.map((pub, i) => (
-                      <ScrollReveal key={pub.id} delay={(i % 4) * 80}>
-                        <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors h-full flex flex-col">
-                          <div className="flex items-center justify-between mb-4">
-                            <Badge variant="secondary" className="text-xs">{pub.type}</Badge>
-                            <span className="text-muted-foreground text-xs">{pub.year}</span>
-                          </div>
-                          <h3 className="font-semibold text-foreground mb-3 leading-snug">{pub.title}</h3>
-                          <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">{pub.abstract}</p>
-                          <div className="mt-auto">
-                            <p className="text-muted-foreground text-xs mb-3">{pub.authors.join(", ")}</p>
-                            <div className="flex flex-wrap gap-1.5 mb-3">
-                              {pub.thematic_categories.map((cat) => (
-                                <span key={cat} className="text-xs px-2 py-0.5 bg-primary/10 text-primary rounded-full cursor-pointer hover:bg-primary/20 transition-colors" onClick={() => { if (!activeCategories.includes(cat)) toggleItem(cat, setActiveCategories); }}>
-                                  {cat}
-                                </span>
-                              ))}
+                  <>
+                    <div className="grid sm:grid-cols-2 gap-6">
+                      {paginatedItems.map((pub, i) => (
+                        <ScrollReveal key={pub.id} delay={(i % 4) * 80}>
+                          <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors h-full flex flex-col">
+                            <div className="flex items-center justify-between mb-4">
+                              <Badge variant="secondary" className="text-xs">{pub.type}</Badge>
+                              <span className="text-muted-foreground text-xs">{pub.year}</span>
                             </div>
-                            <div className="flex flex-wrap gap-1.5 mb-4">
-                              {pub.tags.map((tag) => (
-                                <span key={tag} className="text-xs px-2 py-0.5 bg-muted rounded-full text-muted-foreground">{tag}</span>
-                              ))}
+                            <h3 className="font-semibold text-foreground mb-3 leading-snug">{pub.title}</h3>
+                            <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">{pub.abstract}</p>
+                            <div className="mt-auto">
+                              <p className="text-muted-foreground text-xs mb-3">{pub.authors.join(", ")}</p>
+                              <div className="flex flex-wrap gap-1.5 mb-3">
+                                {pub.thematic_categories.map((cat) => (
+                                  <span key={cat} className="text-xs px-2 py-0.5 bg-primary/10 text-primary rounded-full cursor-pointer hover:bg-primary/20 transition-colors" onClick={() => { if (!activeCategories.includes(cat)) toggleItem(cat, setActiveCategories); }}>
+                                    {cat}
+                                  </span>
+                                ))}
+                              </div>
+                              <div className="flex flex-wrap gap-1.5 mb-4">
+                                {pub.tags.map((tag) => (
+                                  <span key={tag} className="text-xs px-2 py-0.5 bg-muted rounded-full text-muted-foreground">{tag}</span>
+                                ))}
+                              </div>
+                              {pub.external_url && (
+                                <Button variant="outline" size="sm" className="w-full" asChild>
+                                  <a href={pub.external_url} target="_blank" rel="noopener noreferrer">
+                                    Acessar publicação
+                                    <ExternalLink className="ml-2 h-3.5 w-3.5" />
+                                  </a>
+                                </Button>
+                              )}
                             </div>
-                            {pub.external_url && (
-                              <Button variant="outline" size="sm" className="w-full" asChild>
-                                <a href={pub.external_url} target="_blank" rel="noopener noreferrer">
-                                  Acessar publicação
-                                  <ExternalLink className="ml-2 h-3.5 w-3.5" />
-                                </a>
-                              </Button>
-                            )}
-                          </div>
-                        </Card>
-                      </ScrollReveal>
-                    ))}
-                  </div>
+                          </Card>
+                        </ScrollReveal>
+                      ))}
+                    </div>
+
+                    {/* Pagination */}
+                    {totalPages > 1 && (
+                      <div className="flex items-center justify-center gap-2 mt-10">
+                        <Button variant="outline" size="icon" disabled={page === 1} onClick={() => setPage(page - 1)}>
+                          <ChevronLeft className="h-4 w-4" />
+                        </Button>
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                          <Button key={p} variant={p === page ? "default" : "outline"} size="icon" onClick={() => setPage(p)} className="w-9 h-9">
+                            {p}
+                          </Button>
+                        ))}
+                        <Button variant="outline" size="icon" disabled={page === totalPages} onClick={() => setPage(page + 1)}>
+                          <ChevronRight className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
             </div>
