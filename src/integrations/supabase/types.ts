@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      publications: {
+        Row: {
+          abstract: string
+          authors: string[]
+          created_at: string
+          external_url: string | null
+          id: string
+          tags: string[]
+          thematic_categories: string[]
+          title: string
+          type: string
+          year: number
+        }
+        Insert: {
+          abstract?: string
+          authors?: string[]
+          created_at?: string
+          external_url?: string | null
+          id?: string
+          tags?: string[]
+          thematic_categories?: string[]
+          title: string
+          type: string
+          year: number
+        }
+        Update: {
+          abstract?: string
+          authors?: string[]
+          created_at?: string
+          external_url?: string | null
+          id?: string
+          tags?: string[]
+          thematic_categories?: string[]
+          title?: string
+          type?: string
+          year?: number
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
