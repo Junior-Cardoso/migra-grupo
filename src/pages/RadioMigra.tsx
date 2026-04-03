@@ -29,10 +29,10 @@ const RadioMigra = () => {
                 Rádio MIGRA
               </h1>
               <p className="text-muted-foreground text-base md:text-lg mt-3 max-w-xl">
-                Conversas, entrevistas e reflexões sobre migrações, mobilidades e comunicação.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.
               </p>
               <p className="text-muted-foreground/60 text-sm mt-2">
-                MIGRA – UFPE · Grupo de Pesquisa e Extensão
+                Lorem ipsum · Dolor sit amet
               </p>
             </div>
           </div>
@@ -75,22 +75,22 @@ const RadioMigra = () => {
               {[
                 {
                   num: 1,
-                  title: "O que é o MIGRA?",
-                  description: "Apresentação do grupo, sua história e seus objetivos de pesquisa e extensão.",
+                  title: "Lorem ipsum dolor sit",
+                  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.",
                   date: "Jan 2026",
                   duration: "32 min",
                 },
                 {
                   num: 2,
-                  title: "Migrações venezuelanas no Nordeste",
-                  description: "Entrevista sobre os desafios do acolhimento de migrantes venezuelanos em Pernambuco.",
+                  title: "Consectetur adipiscing elit",
+                  description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
                   date: "Fev 2026",
                   duration: "45 min",
                 },
                 {
                   num: 3,
-                  title: "Comunicação e mobilidade",
-                  description: "Como a comunicação se articula com os processos migratórios contemporâneos.",
+                  title: "Sed do eiusmod tempor",
+                  description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
                   date: "Mar 2026",
                   duration: "38 min",
                 },
