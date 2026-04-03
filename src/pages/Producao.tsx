@@ -241,13 +241,49 @@ const Producao = () => {
 
                 <div>
                   <h4 className="font-heading text-sm font-semibold text-foreground uppercase tracking-wider mb-3">Categorias</h4>
-                  <div className="space-y-1">
-                    {FIXED_CATEGORIES.map((type) => (
-                      <button key={type} onClick={() => toggleItem(type, setActiveTypes)} className={`w-full flex items-center justify-between text-sm py-2 px-3 rounded-md transition-colors ${activeTypes.includes(type) ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground hover:bg-muted"}`}>
-                        <span>{type}</span>
-                        <span className="text-xs tabular-nums">{typeCounts[type] ?? 0}</span>
-                      </button>
-                    ))}
+                  <div className="space-y-0.5">
+                    {FIXED_CATEGORIES.map((type) => {
+                      const subs = subcategoriesByType[type] ?? [];
+                      const isExpanded = expandedTypes.includes(type);
+                      const hasSubs = subs.length > 0;
+                      return (
+                        <div key={type}>
+                          <div className="flex items-center gap-1">
+                            <button
+                              onClick={() => toggleItem(type, setActiveTypes)}
+                              className={`flex-1 flex items-center justify-between text-sm py-2 px-3 rounded-md transition-colors ${activeTypes.includes(type) ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground hover:bg-muted"}`}
+                            >
+                              <span>{type}</span>
+                              <span className="text-xs tabular-nums">{typeCounts[type] ?? 0}</span>
+                            </button>
+                            {hasSubs && (
+                              <button
+                                onClick={() => setExpandedTypes((prev) => prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type])}
+                                className="p-1.5 rounded-md text-muted-foreground hover:bg-muted transition-colors"
+                              >
+                                {isExpanded ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
+                              </button>
+                            )}
+                          </div>
+                          {hasSubs && isExpanded && (
+                            <div className="ml-4 pl-3 border-l border-border space-y-0.5 mt-0.5 mb-1">
+                              {subs.map((sub) => (
+                                <button
+                                  key={sub}
+                                  onClick={() => toggleItem(sub, setActiveSubcategories)}
+                                  className={`w-full flex items-center justify-between text-xs py-1.5 px-2.5 rounded-md transition-colors ${activeSubcategories.includes(sub) ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground hover:bg-muted"}`}
+                                >
+                                  <span>{sub}</span>
+                                  <span className="text-[10px] tabular-nums opacity-70">
+                                    {rawPublications.filter((p) => p.type === type && p.subcategory === sub).length}
+                                  </span>
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
 
