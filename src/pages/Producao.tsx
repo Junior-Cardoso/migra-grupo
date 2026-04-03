@@ -89,15 +89,18 @@ const Producao = () => {
         pub.abstract.toLowerCase().includes(search.toLowerCase()) ||
         pub.authors.some((a) => a.toLowerCase().includes(search.toLowerCase()));
       const matchesType = activeTypes.length === 0 || activeTypes.includes(pub.type);
+      const matchesSubcategory =
+        activeSubcategories.length === 0 ||
+        (pub.subcategory && activeSubcategories.includes(pub.subcategory));
       const matchesAuthor =
         activeAuthors.length === 0 ||
         pub.authors.some((a) => activeAuthors.includes(a));
       const matchesCategory =
         activeCategories.length === 0 ||
         pub.thematic_categories.some((c) => activeCategories.includes(c));
-      return matchesSearch && matchesType && matchesAuthor && matchesCategory;
+      return matchesSearch && matchesType && matchesSubcategory && matchesAuthor && matchesCategory;
     });
-  }, [search, activeTypes, activeAuthors, activeCategories, rawPublications]);
+  }, [search, activeTypes, activeSubcategories, activeAuthors, activeCategories, rawPublications]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / ITEMS_PER_PAGE));
   const paginatedItems = filtered.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
