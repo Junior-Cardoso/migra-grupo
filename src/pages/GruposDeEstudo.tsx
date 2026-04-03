@@ -3,7 +3,7 @@ import MigraFooter from "@/components/MigraFooter";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Globe, Scale, Users, Mail, BookOpen, Calendar } from "lucide-react";
+import { Mail, BookOpen, Calendar, Users } from "lucide-react";
 
 const groups = [
   {
