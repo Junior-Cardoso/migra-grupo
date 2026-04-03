@@ -70,11 +70,12 @@ const Producao = () => {
   };
 
   const hasFilters =
-    !!search || activeTypes.length > 0 || activeAuthors.length > 0 || activeCategories.length > 0;
+    !!search || activeTypes.length > 0 || activeSubcategories.length > 0 || activeAuthors.length > 0 || activeCategories.length > 0;
 
   const clearFilters = () => {
     setSearch("");
     setActiveTypes([]);
+    setActiveSubcategories([]);
     setActiveAuthors([]);
     setActiveCategories([]);
     setPage(1);
