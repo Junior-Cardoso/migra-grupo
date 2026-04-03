@@ -44,7 +44,7 @@ import { toast } from "sonner";
 const SECTIONS = [
   "Así Pasó",
   "Curso de Extensão: Questão Migratória",
-  "I Encontro Nacional da Rede REUNIR",
+  "I Encontro Nacional de Extensão Universitária com Imigrantes e Refugiados",
   "Palestras, aulas e comentários na mídia",
   "Plenária Nacional Saúde e Migração",
 ];

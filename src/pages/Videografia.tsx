@@ -13,7 +13,7 @@ import { Search, Video, Loader2 } from "lucide-react";
 const SECTIONS_ORDER = [
   "Así Pasó",
   "Curso de Extensão: Questão Migratória",
-  "I Encontro Nacional da Rede REUNIR",
+  "I Encontro Nacional de Extensão Universitária com Imigrantes e Refugiados",
   "Palestras, aulas e comentários na mídia",
   "Plenária Nacional Saúde e Migração",
 ];
@@ -21,7 +21,7 @@ const SECTIONS_ORDER = [
 const SECTION_SHORT_LABELS: Record<string, string> = {
   "Así Pasó": "Así Pasó",
   "Curso de Extensão: Questão Migratória": "Curso de Extensão",
-  "I Encontro Nacional da Rede REUNIR": "Rede REUNIR",
+  "I Encontro Nacional de Extensão Universitária com Imigrantes e Refugiados": "Encontro REUNIR",
   "Palestras, aulas e comentários na mídia": "Palestras e Mídia",
   "Plenária Nacional Saúde e Migração": "Plenária Saúde",
 };
@@ -29,7 +29,7 @@ const SECTION_SHORT_LABELS: Record<string, string> = {
 const SECTION_DESCRIPTIONS: Record<string, string> = {
   "Así Pasó": "Documentário e bastidores — entrevistas na íntegra com os participantes.",
   "Curso de Extensão: Questão Migratória": "Aspectos jurídicos, culturais e integração social dos migrantes (2021).",
-  "I Encontro Nacional da Rede REUNIR": "Extensão universitária com imigrantes e refugiados.",
+  "I Encontro Nacional de Extensão Universitária com Imigrantes e Refugiados": "Extensão universitária com imigrantes e refugiados.",
   "Palestras, aulas e comentários na mídia": "Participações em eventos, mídia e debates públicos.",
   "Plenária Nacional Saúde e Migração": "Discussões sobre saúde e políticas migratórias.",
 };
