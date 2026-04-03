@@ -17,8 +17,10 @@ const ITEMS_PER_PAGE = 12;
 const Producao = () => {
   const [search, setSearch] = useState("");
   const [activeTypes, setActiveTypes] = useState<string[]>([]);
+  const [activeSubcategories, setActiveSubcategories] = useState<string[]>([]);
   const [activeAuthors, setActiveAuthors] = useState<string[]>([]);
   const [activeCategories, setActiveCategories] = useState<string[]>([]);
+  const [expandedTypes, setExpandedTypes] = useState<string[]>([]);
   const [page, setPage] = useState(1);
 
   const { data: rawPublications = [], isLoading } = useQuery({
