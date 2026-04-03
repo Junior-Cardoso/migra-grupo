@@ -47,6 +47,18 @@ const Producao = () => {
     return Array.from(set).sort();
   }, [rawPublications]);
 
+  const subcategoriesByType = useMemo(() => {
+    const map: Record<string, string[]> = {};
+    FIXED_CATEGORIES.forEach((t) => {
+      const subs = new Set<string>();
+      rawPublications.forEach((p) => {
+        if (p.type === t && p.subcategory) subs.add(p.subcategory);
+      });
+      map[t] = Array.from(subs).sort();
+    });
+    return map;
+  }, [rawPublications]);
+
   const toggleItem = (
     value: string,
     setter: React.Dispatch<React.SetStateAction<string[]>>
