@@ -24,31 +24,35 @@ const Sobre = () => {
 
       {/* Breve História */}
       <section className="py-20 md:py-28">
-        <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-5xl mx-auto px-6">
           <ScrollReveal>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground uppercase tracking-wide mb-2">
-              Breve História do MIGRA
-            </h2>
-            <div className="w-12 h-1 bg-accent mt-3 mb-8 rounded-full" />
-            <div className="space-y-6 text-muted-foreground leading-relaxed">
-              <p>
-                O MIGRA – Grupo de Pesquisa e Extensão em Migrações, Mobilidades e Gestão Contemporânea 
-                de Populações foi fundado na Universidade Federal de Pernambuco com o objetivo de 
-                produzir conhecimento acadêmico e promover ações de extensão voltadas para as temáticas 
-                migratórias no Brasil e no mundo.
-              </p>
-              <p>
-                Desde sua criação, o grupo reúne pesquisadores de diferentes áreas do conhecimento — 
-                Direito, Ciências Sociais, Geografia, Comunicação — em torno de um compromisso comum: 
-                compreender as dinâmicas migratórias contemporâneas e contribuir para políticas 
-                públicas mais humanas e inclusivas.
-              </p>
-              <p>
-                Ao longo dos anos, o MIGRA consolidou-se como referência no Nordeste brasileiro na 
-                pesquisa sobre migrações, com publicações em periódicos nacionais e internacionais, 
-                participação em eventos acadêmicos e parcerias com instituições governamentais e da 
-                sociedade civil.
-              </p>
+            <div className="grid md:grid-cols-2 gap-10 items-center">
+              <div>
+                <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground uppercase tracking-wide mb-2">
+                  Breve História do MIGRA
+                </h2>
+                <div className="w-12 h-1 bg-accent mt-3 mb-8 rounded-full" />
+                <div className="space-y-6 text-muted-foreground leading-relaxed">
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  </p>
+                  <p>
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
+                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
+                    culpa qui officia deserunt mollit anim id est laborum.
+                  </p>
+                  <p>
+                    Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio 
+                    dui. Nulla vitae elit libero, a pharetra augue. Cras mattis consectetur purus sit 
+                    amet fermentum.
+                  </p>
+                </div>
+              </div>
+              <div className="aspect-[4/3] rounded-lg bg-muted flex items-center justify-center border border-border overflow-hidden">
+                <img src="/placeholder.svg" alt="Imagem ilustrativa do MIGRA" className="w-full h-full object-cover opacity-50" />
+              </div>
             </div>
           </ScrollReveal>
         </div>
