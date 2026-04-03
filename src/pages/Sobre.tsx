@@ -78,7 +78,7 @@ const Sobre = () => {
                 name: "Profª Drª Sofia",
                 role: "Vice-Coordenadora",
                 area: "Ciências Sociais e Mobilidade",
-                bio: "Professora do Departamento de Ciências Sociais da UFPE, com pesquisa focada em mobilidade humana, interculturalidade e processos de integração social de comunidades migrantes no Nordeste.",
+                bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui nulla vitae elit libero.",
                 lattes: "#",
                 orcid: "#",
               },
