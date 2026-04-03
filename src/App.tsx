@@ -30,6 +30,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<MigraHome />} />
           <Route path="/blog" element={<Blog />} />
