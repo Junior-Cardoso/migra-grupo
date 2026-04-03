@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { Publication } from "@/data/acervoPublications";
 import { FIXED_CATEGORIES } from "@/data/acervoPublications";
-import { Search, ExternalLink, BookOpen, X, SlidersHorizontal, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, ExternalLink, BookOpen, X, SlidersHorizontal, Loader2, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
 
 const ITEMS_PER_PAGE = 12;
 
