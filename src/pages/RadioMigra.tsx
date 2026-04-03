@@ -29,10 +29,10 @@ const RadioMigra = () => {
                 Rádio MIGRA
               </h1>
               <p className="text-muted-foreground text-base md:text-lg mt-3 max-w-xl">
-                Conversas, entrevistas e reflexões sobre migrações, mobilidades e comunicação.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.
               </p>
               <p className="text-muted-foreground/60 text-sm mt-2">
-                MIGRA – UFPE · Grupo de Pesquisa e Extensão
+                Lorem ipsum · Dolor sit amet
               </p>
             </div>
           </div>
