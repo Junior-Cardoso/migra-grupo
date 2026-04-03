@@ -166,6 +166,7 @@ const Producao = () => {
 
   const activeFilterBadges = [
     ...activeTypes.map((t) => ({ label: t, clear: () => toggleItem(t, setActiveTypes) })),
+    ...activeSubcategories.map((s) => ({ label: s, clear: () => toggleItem(s, setActiveSubcategories) })),
     ...activeCategories.map((c) => ({ label: c, clear: () => toggleItem(c, setActiveCategories) })),
     ...activeAuthors.map((a) => ({ label: a, clear: () => toggleItem(a, setActiveAuthors) })),
   ];
