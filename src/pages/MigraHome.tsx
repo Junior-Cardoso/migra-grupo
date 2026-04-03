@@ -10,6 +10,8 @@ import {
   BookOpen,
   Scale,
   FileText,
+  Headphones,
+  Music2,
   MapPin,
   ArrowRight,
   Mail,
