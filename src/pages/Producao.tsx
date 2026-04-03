@@ -10,15 +10,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { Publication } from "@/data/acervoPublications";
 import { FIXED_CATEGORIES } from "@/data/acervoPublications";
-import { Search, ExternalLink, BookOpen, X, SlidersHorizontal, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, ExternalLink, BookOpen, X, SlidersHorizontal, Loader2, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
 
 const ITEMS_PER_PAGE = 12;
 
 const Producao = () => {
   const [search, setSearch] = useState("");
   const [activeTypes, setActiveTypes] = useState<string[]>([]);
+  const [activeSubcategories, setActiveSubcategories] = useState<string[]>([]);
   const [activeAuthors, setActiveAuthors] = useState<string[]>([]);
   const [activeCategories, setActiveCategories] = useState<string[]>([]);
+  const [expandedTypes, setExpandedTypes] = useState<string[]>([]);
   const [page, setPage] = useState(1);
 
   const { data: rawPublications = [], isLoading } = useQuery({
@@ -45,6 +47,18 @@ const Producao = () => {
     return Array.from(set).sort();
   }, [rawPublications]);
 
+  const subcategoriesByType = useMemo(() => {
+    const map: Record<string, string[]> = {};
+    FIXED_CATEGORIES.forEach((t) => {
+      const subs = new Set<string>();
+      rawPublications.forEach((p) => {
+        if (p.type === t && p.subcategory) subs.add(p.subcategory);
+      });
+      map[t] = Array.from(subs).sort();
+    });
+    return map;
+  }, [rawPublications]);
+
   const toggleItem = (
     value: string,
     setter: React.Dispatch<React.SetStateAction<string[]>>
@@ -56,11 +70,12 @@ const Producao = () => {
   };
 
   const hasFilters =
-    !!search || activeTypes.length > 0 || activeAuthors.length > 0 || activeCategories.length > 0;
+    !!search || activeTypes.length > 0 || activeSubcategories.length > 0 || activeAuthors.length > 0 || activeCategories.length > 0;
 
   const clearFilters = () => {
     setSearch("");
     setActiveTypes([]);
+    setActiveSubcategories([]);
     setActiveAuthors([]);
     setActiveCategories([]);
     setPage(1);
@@ -74,15 +89,18 @@ const Producao = () => {
         pub.abstract.toLowerCase().includes(search.toLowerCase()) ||
         pub.authors.some((a) => a.toLowerCase().includes(search.toLowerCase()));
       const matchesType = activeTypes.length === 0 || activeTypes.includes(pub.type);
+      const matchesSubcategory =
+        activeSubcategories.length === 0 ||
+        (pub.subcategory && activeSubcategories.includes(pub.subcategory));
       const matchesAuthor =
         activeAuthors.length === 0 ||
         pub.authors.some((a) => activeAuthors.includes(a));
       const matchesCategory =
         activeCategories.length === 0 ||
         pub.thematic_categories.some((c) => activeCategories.includes(c));
-      return matchesSearch && matchesType && matchesAuthor && matchesCategory;
+      return matchesSearch && matchesType && matchesSubcategory && matchesAuthor && matchesCategory;
     });
-  }, [search, activeTypes, activeAuthors, activeCategories, rawPublications]);
+  }, [search, activeTypes, activeSubcategories, activeAuthors, activeCategories, rawPublications]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / ITEMS_PER_PAGE));
   const paginatedItems = filtered.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
@@ -148,6 +166,7 @@ const Producao = () => {
 
   const activeFilterBadges = [
     ...activeTypes.map((t) => ({ label: t, clear: () => toggleItem(t, setActiveTypes) })),
+    ...activeSubcategories.map((s) => ({ label: s, clear: () => toggleItem(s, setActiveSubcategories) })),
     ...activeCategories.map((c) => ({ label: c, clear: () => toggleItem(c, setActiveCategories) })),
     ...activeAuthors.map((a) => ({ label: a, clear: () => toggleItem(a, setActiveAuthors) })),
   ];
@@ -222,13 +241,49 @@ const Producao = () => {
 
                 <div>
                   <h4 className="font-heading text-sm font-semibold text-foreground uppercase tracking-wider mb-3">Categorias</h4>
-                  <div className="space-y-1">
-                    {FIXED_CATEGORIES.map((type) => (
-                      <button key={type} onClick={() => toggleItem(type, setActiveTypes)} className={`w-full flex items-center justify-between text-sm py-2 px-3 rounded-md transition-colors ${activeTypes.includes(type) ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground hover:bg-muted"}`}>
-                        <span>{type}</span>
-                        <span className="text-xs tabular-nums">{typeCounts[type] ?? 0}</span>
-                      </button>
-                    ))}
+                  <div className="space-y-0.5">
+                    {FIXED_CATEGORIES.map((type) => {
+                      const subs = subcategoriesByType[type] ?? [];
+                      const isExpanded = expandedTypes.includes(type);
+                      const hasSubs = subs.length > 0;
+                      return (
+                        <div key={type}>
+                          <div className="flex items-center gap-1">
+                            <button
+                              onClick={() => toggleItem(type, setActiveTypes)}
+                              className={`flex-1 flex items-center justify-between text-sm py-2 px-3 rounded-md transition-colors ${activeTypes.includes(type) ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground hover:bg-muted"}`}
+                            >
+                              <span>{type}</span>
+                              <span className="text-xs tabular-nums">{typeCounts[type] ?? 0}</span>
+                            </button>
+                            {hasSubs && (
+                              <button
+                                onClick={() => setExpandedTypes((prev) => prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type])}
+                                className="p-1.5 rounded-md text-muted-foreground hover:bg-muted transition-colors"
+                              >
+                                {isExpanded ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
+                              </button>
+                            )}
+                          </div>
+                          {hasSubs && isExpanded && (
+                            <div className="ml-4 pl-3 border-l border-border space-y-0.5 mt-0.5 mb-1">
+                              {subs.map((sub) => (
+                                <button
+                                  key={sub}
+                                  onClick={() => toggleItem(sub, setActiveSubcategories)}
+                                  className={`w-full flex items-center justify-between text-xs py-1.5 px-2.5 rounded-md transition-colors ${activeSubcategories.includes(sub) ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground hover:bg-muted"}`}
+                                >
+                                  <span>{sub}</span>
+                                  <span className="text-[10px] tabular-nums opacity-70">
+                                    {rawPublications.filter((p) => p.type === type && p.subcategory === sub).length}
+                                  </span>
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
 
