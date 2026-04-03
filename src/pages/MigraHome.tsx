@@ -2,6 +2,7 @@ import MigraNavigation from "@/components/MigraNavigation";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import heroMigraBg from "@/assets/hero-migra-bg.jpg";
+import radioMigraLogo from "@/assets/radio-migra-logo.png";
 import sobreMigraImg from "@/assets/sobre-migra.jpg";
 import { Card } from "@/components/ui/card";
 import {
@@ -9,6 +10,8 @@ import {
   BookOpen,
   Scale,
   FileText,
+  Headphones,
+  Music2,
   MapPin,
   ArrowRight,
   Mail,
@@ -401,6 +404,72 @@ const MigraHome = () => {
               </Button>
             </div>
           </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Rádio MIGRA */}
+      <section id="radio" className="py-20 md:py-28">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <ScrollReveal>
+              <div className="flex items-center gap-5 mb-6">
+                <div className="w-24 h-24 rounded-xl bg-white shadow-lg flex items-center justify-center p-3 shrink-0">
+                  <img src={radioMigraLogo} alt="Rádio Migra" className="w-full h-full object-contain" />
+                </div>
+                <div>
+                  <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                    Podcast
+                  </span>
+                  <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide mt-1">
+                    Rádio MIGRA
+                  </h2>
+                </div>
+              </div>
+              <div className="w-12 h-1 bg-accent mb-6 rounded-full" />
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Conversas, entrevistas e reflexões sobre migrações, mobilidades e comunicação. 
+                Ouça nossos episódios e acompanhe os debates mais recentes.
+              </p>
+              <Button
+                size="lg"
+                className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
+                asChild
+              >
+                <Link to="/radio">
+                  <Headphones className="mr-2 h-4 w-4" />
+                  Ouvir episódios
+                </Link>
+              </Button>
+            </ScrollReveal>
+
+            <ScrollReveal delay={150}>
+              <div className="space-y-3">
+                {[
+                  { num: 1, title: "Lorem ipsum dolor sit", duration: "32 min" },
+                  { num: 2, title: "Consectetur adipiscing elit", duration: "45 min" },
+                  { num: 3, title: "Sed do eiusmod tempor", duration: "38 min" },
+                ].map((ep) => (
+                  <div
+                    key={ep.num}
+                    className="flex items-center gap-4 px-4 py-3 rounded-lg bg-muted/50 border border-border hover:border-primary/30 transition-colors"
+                  >
+                    <span className="text-muted-foreground/50 text-sm font-medium w-6 text-right shrink-0">
+                      {ep.num}
+                    </span>
+                    <div className="w-10 h-10 rounded bg-primary/10 flex items-center justify-center shrink-0">
+                      <Music2 className="h-4 w-4 text-primary" />
+                    </div>
+                    <h3 className="font-semibold text-foreground text-sm flex-1 truncate">
+                      {ep.title}
+                    </h3>
+                    <span className="text-muted-foreground/50 text-xs shrink-0">
+                      {ep.duration}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
