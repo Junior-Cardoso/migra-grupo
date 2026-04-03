@@ -9,8 +9,6 @@ const MigraNavigation = () => {
 
   const navLinks = [
     { name: "Sobre", href: "/sobre", isRoute: true },
-    { name: "Áreas de Atuação", href: "/#pesquisa" },
-    { name: "Equipe", href: "/#equipe" },
     { name: "Grupos de Estudo", href: "/grupos-de-estudo", isRoute: true },
     { name: "Produção", href: "/producao", isRoute: true },
     { name: "Blog", href: "/blog", isRoute: true },
