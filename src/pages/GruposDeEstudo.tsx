@@ -60,20 +60,15 @@ const GruposDeEstudo = () => {
       <section className="py-16 md:py-24">
         <div className="max-w-5xl mx-auto px-6 space-y-12">
           {groups.map((group, i) => (
-            <ScrollReveal key={i} delay={i * 100}>
+             <ScrollReveal key={i} delay={i * 100}>
               <Card className="p-8 bg-background border-border">
-                <div className="flex items-start gap-5 mb-6">
-                  <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                    <group.icon className="h-7 w-7 text-primary" />
-                  </div>
-                  <div>
-                    <h2 className="font-heading text-xl md:text-2xl font-bold text-foreground uppercase tracking-wide">
-                      {group.title}
-                    </h2>
-                    <p className="text-muted-foreground text-sm leading-relaxed mt-2">
-                      {group.description}
-                    </p>
-                  </div>
+                <div className="mb-6">
+                  <h2 className="font-heading text-xl md:text-2xl font-bold text-foreground uppercase tracking-wide">
+                    {group.title}
+                  </h2>
+                  <p className="text-muted-foreground text-sm leading-relaxed mt-2">
+                    {group.description}
+                  </p>
                 </div>
 
                 <div className="grid md:grid-cols-3 gap-6">
