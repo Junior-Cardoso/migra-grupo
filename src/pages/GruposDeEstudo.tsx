@@ -3,12 +3,11 @@ import MigraFooter from "@/components/MigraFooter";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Globe, Scale, Users, Mail, BookOpen, Calendar } from "lucide-react";
+import { Mail, BookOpen, Calendar, Users } from "lucide-react";
 
 const groups = [
   {
-    icon: Globe,
-    title: "Migração e Direitos Humanos",
+    title: "Título grupo de estudo 01",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
     objectives: [
       "Lorem ipsum dolor sit amet consectetur adipiscing",
@@ -23,8 +22,7 @@ const groups = [
     email: "migra.direitos@ufpe.br",
   },
   {
-    icon: Users,
-    title: "Interculturalidade e Pertencimentos",
+    title: "Título grupo de estudo 02",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Nulla vitae elit libero, a pharetra augue.",
     objectives: [
       "Lorem ipsum dolor sit amet consectetur",
@@ -37,21 +35,6 @@ const groups = [
       { name: "Ciclo 2 — Praesent commodo cursus", period: "Set–Dez 2026" },
     ],
     email: "migra.intercultural@ufpe.br",
-  },
-  {
-    icon: Scale,
-    title: "Políticas Migratórias Comparadas",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum. Maecenas faucibus mollis interdum. Integer posuere erat a ante venenatis.",
-    objectives: [
-      "Lorem ipsum dolor sit amet consectetur adipiscing",
-      "Cras mattis consectetur purus sit amet",
-      "Maecenas faucibus mollis interdum integer posuere",
-    ],
-    participants: ["Lorem ipsum (coord.)", "2 pesquisadores", "4 estudantes"],
-    cycles: [
-      { name: "Ciclo 1 — Lorem ipsum dolor sit amet", period: "Mai–Ago 2026" },
-    ],
-    email: "migra.politicas@ufpe.br",
   },
 ];
 
@@ -77,20 +60,15 @@ const GruposDeEstudo = () => {
       <section className="py-16 md:py-24">
         <div className="max-w-5xl mx-auto px-6 space-y-12">
           {groups.map((group, i) => (
-            <ScrollReveal key={i} delay={i * 100}>
+             <ScrollReveal key={i} delay={i * 100}>
               <Card className="p-8 bg-background border-border">
-                <div className="flex items-start gap-5 mb-6">
-                  <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                    <group.icon className="h-7 w-7 text-primary" />
-                  </div>
-                  <div>
-                    <h2 className="font-heading text-xl md:text-2xl font-bold text-foreground uppercase tracking-wide">
-                      {group.title}
-                    </h2>
-                    <p className="text-muted-foreground text-sm leading-relaxed mt-2">
-                      {group.description}
-                    </p>
-                  </div>
+                <div className="mb-6">
+                  <h2 className="font-heading text-xl md:text-2xl font-bold text-foreground uppercase tracking-wide">
+                    {group.title}
+                  </h2>
+                  <p className="text-muted-foreground text-sm leading-relaxed mt-2">
+                    {group.description}
+                  </p>
                 </div>
 
                 <div className="grid md:grid-cols-3 gap-6">
