@@ -70,7 +70,7 @@ const Sobre = () => {
                 name: "Profª Drª Carolina",
                 role: "Coordenadora",
                 area: "Direito Internacional e Migrações",
-                bio: "Professora do Centro de Ciências Jurídicas da UFPE, pesquisadora dedicada ao estudo do Direito Internacional dos Refugiados e das políticas migratórias brasileiras. Coordena o MIGRA desde sua fundação.",
+                bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
                 lattes: "#",
                 orcid: "#",
               },
