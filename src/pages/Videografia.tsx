@@ -221,6 +221,17 @@ const Videografia = () => {
                 })}
               </TabsList>
 
+              {/* Search inside tabs */}
+              <div className="relative w-full sm:max-w-sm mb-8">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Buscar vídeos..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+
               {SECTIONS_ORDER.map((sectionName) => (
                 <TabsContent key={sectionName} value={sectionName}>
                   <ScrollReveal>
