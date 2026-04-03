@@ -140,14 +140,14 @@ const Sobre = () => {
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {[
-              { name: "Ana Beatriz Souza", period: "2019–2023", contribution: "Pesquisadora" },
-              { name: "Carlos Drummond", period: "2018–2024", contribution: "Doutorando" },
-              { name: "Elena Ferreira", period: "2020–2023", contribution: "Mestranda" },
-              { name: "Gabriel Henrique", period: "2021–2024", contribution: "Pesquisador" },
-              { name: "Isabela Jardim", period: "2022–2024", contribution: "Mestranda" },
-              { name: "Karen Lima", period: "2019–2022", contribution: "Graduanda" },
-              { name: "Marcos Oliveira", period: "2020–2023", contribution: "Pesquisador" },
-              { name: "Patrícia Rocha", period: "2021–2023", contribution: "Extensionista" },
+              { name: "Lorem Ipsum", period: "2019–2023", contribution: "Lorem ipsum" },
+              { name: "Dolor Sit Amet", period: "2018–2024", contribution: "Lorem ipsum" },
+              { name: "Consectetur Elit", period: "2020–2023", contribution: "Lorem ipsum" },
+              { name: "Sed Eiusmod", period: "2021–2024", contribution: "Lorem ipsum" },
+              { name: "Tempor Incididunt", period: "2022–2024", contribution: "Lorem ipsum" },
+              { name: "Labore Dolore", period: "2019–2022", contribution: "Lorem ipsum" },
+              { name: "Magna Aliqua", period: "2020–2023", contribution: "Lorem ipsum" },
+              { name: "Veniam Nostrud", period: "2021–2023", contribution: "Lorem ipsum" },
             ].map((person, i) => (
               <ScrollReveal key={i} delay={(i % 4) * 80}>
                 <div className="p-4 rounded-lg border border-border hover:border-primary/30 transition-colors">
