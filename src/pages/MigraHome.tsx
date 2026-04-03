@@ -203,20 +203,6 @@ const MigraHome = () => {
             ))}
           </div>
 
-          <ScrollReveal>
-            <div className="text-center mt-10">
-              <Button
-                size="lg"
-                className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
-                asChild
-              >
-                <Link to="/sobre">
-                  Conheça toda a equipe
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 
