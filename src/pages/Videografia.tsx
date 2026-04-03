@@ -188,20 +188,6 @@ const Videografia = () => {
         </div>
       </section>
 
-      {/* Search */}
-      <section className="py-8 border-b border-border">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="relative w-full sm:max-w-sm">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Buscar vídeos..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="pl-10"
-            />
-          </div>
-        </div>
-      </section>
 
       {/* Tabs Content */}
       <section className="py-12 md:py-16">
