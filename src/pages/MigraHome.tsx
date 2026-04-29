@@ -2,6 +2,7 @@ import MigraNavigation from "@/components/MigraNavigation";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import heroMigraBg from "@/assets/hero-migra-bg.jpg";
+import migraLogoHero from "@/assets/migra-logo-hero.webp";
 import heroPattern from "@/assets/hero-pattern.webp";
 import radioMigraLogo from "@/assets/radio-migra-logo.png";
 import sobreMigraImg from "@/assets/sobre-migra.jpg";
@@ -64,8 +65,13 @@ const MigraHome = () => {
             <p className="text-accent font-medium text-sm tracking-widest uppercase mb-4">
               {content.hero.eyebrow}
             </p>
-            <h1 className="font-heading text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 tracking-wide uppercase">
-              {content.hero.title}
+            <h1 className="mb-6">
+              <span className="sr-only">{content.hero.title}</span>
+              <img
+                src={migraLogoHero}
+                alt={content.hero.title}
+                className="w-full max-w-md md:max-w-lg lg:max-w-xl h-auto"
+              />
             </h1>
             <p className="text-white/70 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
               {content.hero.description}
