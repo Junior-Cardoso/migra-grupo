@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      page_content: {
+        Row: {
+          content: Json
+          id: string
+          page: string
+          section_key: string
+          updated_at: string
+        }
+        Insert: {
+          content?: Json
+          id?: string
+          page: string
+          section_key: string
+          updated_at?: string
+        }
+        Update: {
+          content?: Json
+          id?: string
+          page?: string
+          section_key?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       publications: {
         Row: {
           abstract: string
@@ -53,6 +77,78 @@ export type Database = {
           title?: string
           type?: string
           year?: number
+        }
+        Relationships: []
+      }
+      radio_episodes: {
+        Row: {
+          created_at: string
+          date_label: string
+          description: string
+          duration_label: string
+          episode_number: number
+          id: string
+          sort_order: number
+          spotify_url: string | null
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          date_label?: string
+          description?: string
+          duration_label?: string
+          episode_number?: number
+          id?: string
+          sort_order?: number
+          spotify_url?: string | null
+          title: string
+        }
+        Update: {
+          created_at?: string
+          date_label?: string
+          description?: string
+          duration_label?: string
+          episode_number?: number
+          id?: string
+          sort_order?: number
+          spotify_url?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
+      study_groups: {
+        Row: {
+          created_at: string
+          cycles: Json
+          description: string
+          email: string | null
+          id: string
+          objectives: string[]
+          participants: string[]
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          cycles?: Json
+          description?: string
+          email?: string | null
+          id?: string
+          objectives?: string[]
+          participants?: string[]
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          created_at?: string
+          cycles?: Json
+          description?: string
+          email?: string | null
+          id?: string
+          objectives?: string[]
+          participants?: string[]
+          sort_order?: number
+          title?: string
         }
         Relationships: []
       }
