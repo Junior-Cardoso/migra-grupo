@@ -14,6 +14,20 @@ import { Search, ExternalLink, BookOpen, X, SlidersHorizontal, Loader2, ChevronL
 
 const ITEMS_PER_PAGE = 12;
 
+// MIGRA palette-based color per fixed category
+const CATEGORY_BADGE_CLASSES: Record<string, string> = {
+  "Projetos": "bg-[hsl(180_100%_22%)] text-white",            // teal
+  "Relatórios": "bg-[hsl(210_100%_18%)] text-white",          // navy
+  "Artigos": "bg-[hsl(35_30%_55%)] text-white",               // tan/sand
+  "Trabalhos Completos em Eventos": "bg-[hsl(40_45%_75%)] text-[hsl(210_100%_15%)]", // light sand
+  "Teses e Dissertações": "bg-[hsl(0_0%_10%)] text-white",    // black
+  "Capítulos de Livro": "bg-[hsl(180_60%_35%)] text-white",   // teal variation
+  "Livros": "bg-[hsl(210_70%_30%)] text-white",               // navy variation
+};
+
+const categoryBadgeClass = (type: string) =>
+  CATEGORY_BADGE_CLASSES[type] ?? "bg-muted text-foreground";
+
 const Producao = () => {
   const [search, setSearch] = useState("");
   const [activeTypes, setActiveTypes] = useState<string[]>([]);
@@ -336,7 +350,7 @@ const Producao = () => {
                         <ScrollReveal key={pub.id} delay={(i % 4) * 80}>
                           <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors h-full flex flex-col">
                             <div className="flex items-center justify-between mb-4">
-                              <Badge variant="secondary" className="text-xs">{pub.type}</Badge>
+                              <Badge className={`text-xs border-transparent hover:opacity-90 ${categoryBadgeClass(pub.type)}`}>{pub.type}</Badge>
                               <span className="text-muted-foreground text-xs">{pub.year}</span>
                             </div>
                             <h3 className="font-semibold text-foreground mb-3 leading-snug">{pub.title}</h3>
