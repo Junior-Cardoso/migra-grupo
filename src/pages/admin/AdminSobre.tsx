@@ -10,6 +10,8 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 import { EditField } from "@/components/admin/EditField";
+import { RichTextEditor } from "@/components/admin/RichTextEditor";
+import { LinkHelp } from "@/components/admin/LinkHelp";
 import { defaultSobreContent, type SobreContent } from "@/data/defaultContent";
 import { savePageSection } from "@/hooks/usePageContent";
 
@@ -101,10 +103,10 @@ const AdminSobre = () => {
                   {content.historia.paragraphs.map((p, i) => (
                     <div key={i} className="flex gap-2 items-start">
                       <div className="flex-1">
-                        <EditField label={`Parágrafo ${i + 1}`} value={p} onChange={(v) => {
+                        <RichTextEditor label={`Parágrafo ${i + 1}`} value={p} onChange={(v) => {
                           const paragraphs = [...content.historia.paragraphs]; paragraphs[i] = v;
                           update("historia", { paragraphs });
-                        }} multiline maxLen={500} />
+                        }} maxLen={600} />
                       </div>
                       <Button variant="ghost" size="icon" className="mt-6" onClick={() => {
                         const paragraphs = content.historia.paragraphs.filter((_, k) => k !== i);
@@ -137,7 +139,8 @@ const AdminSobre = () => {
                         <EditField key={field} label={field.charAt(0).toUpperCase() + field.slice(1)} value={(m as any)[field] ?? ""} onChange={(v) => {
                           const members = [...content.coordenacao.members]; members[i] = { ...m, [field]: v };
                           update("coordenacao", { members });
-                        }} multiline={field === "bio"} maxLen={field === "bio" ? 500 : 100} />
+                        }} multiline={field === "bio"} maxLen={field === "bio" ? 500 : 100}
+                          labelExtra={field === "lattes" || field === "orcid" ? <LinkHelp /> : undefined} />
                       ))}
                     </div>
                   ))}
