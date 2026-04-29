@@ -4,7 +4,8 @@ import PageHero from "@/components/PageHero";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Card } from "@/components/ui/card";
 import { Radio, Headphones, Music2, Mic2 } from "lucide-react";
-import character from "@/assets/characters/char-7.webp";
+import characterLeft from "@/assets/characters/char-6.webp";
+import characterRight from "@/assets/characters/char-1.webp";
 
 
 const RadioMigra = () => {
