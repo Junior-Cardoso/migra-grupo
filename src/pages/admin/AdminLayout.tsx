@@ -14,15 +14,18 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { LayoutDashboard, Video, FileText, Home, LogOut, Loader2, BookOpen } from "lucide-react";
+import { LayoutDashboard, Video, FileText, Home, LogOut, Loader2, BookOpen, Users, Radio, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const menuItems = [
   { title: "Dashboard", url: "/admin", icon: LayoutDashboard },
-  { title: "Videografia", url: "/admin/videografia", icon: Video },
+  { title: "Início", url: "/admin/inicio", icon: Home },
+  { title: "Sobre", url: "/admin/sobre", icon: Info },
+  { title: "Grupos de Estudo", url: "/admin/grupos", icon: Users },
   { title: "Produção", url: "/admin/producao", icon: BookOpen },
   { title: "Blog", url: "/admin/blog", icon: FileText },
-  { title: "Home", url: "/admin/home", icon: Home },
+  { title: "Videografia", url: "/admin/videografia", icon: Video },
+  { title: "Rádio MIGRA", url: "/admin/radio", icon: Radio },
 ];
 
 function AdminSidebar() {

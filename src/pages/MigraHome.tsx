@@ -7,25 +7,24 @@ import sobreMigraImg from "@/assets/sobre-migra.jpg";
 import sofiaZanforlin from "@/assets/team/sofia-zanforlin.png";
 import { Card } from "@/components/ui/card";
 import {
-  Globe,
   BookOpen,
-  Scale,
   FileText,
   Headphones,
   Music2,
-  MapPin,
   ArrowRight,
   Mail,
   GraduationCap,
-  Compass,
-  Radio,
-  Map,
-  Users,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import MigraFooter from "@/components/MigraFooter";
+import { usePageContent } from "@/hooks/usePageContent";
+import { resolveIcon } from "@/lib/iconMap";
+
+const PHOTO_MAP: Record<string, string> = { sofia: sofiaZanforlin };
 
 const MigraHome = () => {
+  const { data: content } = usePageContent("inicio");
+  if (!content) return null;
   return (
     <div className="min-h-screen bg-background">
       <MigraNavigation />
@@ -51,13 +50,13 @@ const MigraHome = () => {
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-16 md:py-24 lg:py-36">
           <div className="max-w-3xl">
             <p className="text-accent font-medium text-sm tracking-widest uppercase mb-4">
-              Universidade Federal de Pernambuco
+              {content.hero.eyebrow}
             </p>
             <h1 className="font-heading text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 tracking-wide uppercase">
-              MIGRA
+              {content.hero.title}
             </h1>
             <p className="text-white/70 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
-              Grupo de Pesquisa e Extensão em Migrações, Mobilidades e Gestão Contemporânea de Populações — UFPE.
+              {content.hero.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
@@ -65,8 +64,8 @@ const MigraHome = () => {
                 className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
                 asChild
               >
-                <Link to="/sobre">
-                  Conheça o grupo
+                <Link to={content.hero.btn1.link}>
+                  {content.hero.btn1.label}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -76,7 +75,7 @@ const MigraHome = () => {
                 className="border-white text-white bg-transparent hover:bg-white/10 hover:text-white font-heading font-normal text-base px-8 uppercase tracking-wider"
                 asChild
               >
-                <a href="#contato">Contato</a>
+                <a href={content.hero.btn2.link}>{content.hero.btn2.label}</a>
               </Button>
             </div>
           </div>
@@ -89,18 +88,11 @@ const MigraHome = () => {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <ScrollReveal>
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-2 uppercase tracking-wide">
-                Sobre o MIGRA
+                {content.sobre.title}
               </h2>
               <div className="w-12 h-1 bg-accent mt-3 mb-6 rounded-full" />
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                O <strong className="text-foreground font-semibold">MIGRA</strong> é um <strong className="text-foreground font-semibold">grupo de pesquisa e extensão</strong> vinculado à <strong className="text-foreground font-semibold">Universidade Federal de Pernambuco</strong>,
-                dedicado ao estudo das <strong className="text-primary font-semibold">migrações</strong>, <strong className="text-primary font-semibold">mobilidades</strong> e <strong className="text-primary font-semibold">gestão contemporânea de populações</strong>.
-                Nosso trabalho combina <strong className="text-foreground font-semibold">rigor acadêmico</strong> com <strong className="text-foreground font-semibold">impacto social</strong>.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Atuamos na <strong className="text-foreground font-semibold">produção de conhecimento</strong>, <strong className="text-foreground font-semibold">formação de pesquisadores</strong> e <strong className="text-foreground font-semibold">apoio à comunidade migrante</strong>,
-                contribuindo para <strong className="text-primary font-semibold">políticas públicas mais justas e inclusivas</strong>.
-              </p>
+              <p className="text-muted-foreground leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: content.sobre.paragraph1Html }} />
+              <p className="text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: content.sobre.paragraph2Html }} />
             </ScrollReveal>
             <ScrollReveal delay={200}>
               <div className="relative">
@@ -120,38 +112,34 @@ const MigraHome = () => {
           <ScrollReveal>
             <div className="text-center mb-16">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-                Áreas de Atuação
+                {content.areas.title}
               </h2>
               <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Conheça as linhas de pesquisa que orientam nossos estudos e publicações.
+                {content.areas.description}
               </p>
             </div>
           </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: Globe, title: "Migrações Internacionais", desc: "Estudo dos fluxos migratórios contemporâneos e seus impactos sociais, econômicos e culturais." },
-              { icon: Scale, title: "Direito dos Refugiados", desc: "Análise das normativas internacionais e nacionais de proteção a refugiados e solicitantes de refúgio." },
-              { icon: Radio, title: "Comunicação e Migração", desc: "Estudos sobre narrativas midiáticas, representação e comunicação intercultural no contexto migratório." },
-              { icon: MapPin, title: "Políticas Migratórias", desc: "Avaliação de políticas públicas de acolhimento e integração de migrantes no Brasil." },
-              { icon: Map, title: "Geografia das Migrações", desc: "Análise espacial dos fluxos migratórios, territorialidades e dinâmicas socioespaciais." },
-              { icon: Compass, title: "Fronteiras e Mobilidade", desc: "Análise das dinâmicas fronteiriças e seus efeitos na mobilidade humana contemporânea." },
-            ].map((item, i) => (
-              <ScrollReveal key={i} delay={i * 100}>
-                <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors group h-full">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <item.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <h3 className="font-heading text-lg font-semibold text-foreground mb-2 uppercase tracking-wide">
-                    {item.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {item.desc}
-                  </p>
-                </Card>
-              </ScrollReveal>
-            ))}
+            {content.areas.items.map((item, i) => {
+              const Icon = resolveIcon(item.icon);
+              return (
+                <ScrollReveal key={i} delay={i * 100}>
+                  <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors group h-full">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                      <Icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-heading text-lg font-semibold text-foreground mb-2 uppercase tracking-wide">
+                      {item.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </Card>
+                </ScrollReveal>
+              );
+            })}
           </div>
 
           <ScrollReveal>
@@ -174,41 +162,36 @@ const MigraHome = () => {
           <ScrollReveal>
             <div className="text-center mb-16">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-                Nossa Equipe
+                {content.equipe.title}
               </h2>
               <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Pesquisadores dedicados ao estudo das migrações, mobilidades e gestão de populações.
+                {content.equipe.description}
               </p>
             </div>
           </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 gap-12 max-w-3xl mx-auto">
-            {[
-              { name: "Profa. Sofia Cavalcanti Zanforlin", role: "Coordenadora", photo: sofiaZanforlin },
-              { name: "Profa. Carolina Gonçalves Leite", role: "Coordenadora", photo: null },
-            ].map((member, i) => (
-              <ScrollReveal key={i} delay={i * 100}>
-                <div className="text-center group">
-                  <div className="w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto rounded-full bg-muted mb-6 overflow-hidden flex items-center justify-center ring-4 ring-accent/20">
-                    {member.photo ? (
-                      <img
-                        src={member.photo}
-                        alt={member.name}
-                        loading="lazy"
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <GraduationCap className="h-20 w-20 text-muted-foreground/40" />
-                    )}
+            {content.equipe.members.map((member, i) => {
+              const photo = member.photoKey ? PHOTO_MAP[member.photoKey] : null;
+              return (
+                <ScrollReveal key={i} delay={i * 100}>
+                  <div className="text-center group">
+                    <div className="w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto rounded-full bg-muted mb-6 overflow-hidden flex items-center justify-center ring-4 ring-accent/20">
+                      {photo ? (
+                        <img src={photo} alt={member.name} loading="lazy" className="w-full h-full object-cover" />
+                      ) : (
+                        <GraduationCap className="h-20 w-20 text-muted-foreground/40" />
+                      )}
+                    </div>
+                    <h3 className="font-heading text-lg font-semibold text-foreground uppercase tracking-wide">
+                      {member.name}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mt-1">{member.role}</p>
                   </div>
-                  <h3 className="font-heading text-lg font-semibold text-foreground uppercase tracking-wide">
-                    {member.name}
-                  </h3>
-                  <p className="text-muted-foreground text-sm mt-1">{member.role}</p>
-                </div>
-              </ScrollReveal>
-            ))}
+                </ScrollReveal>
+              );
+            })}
           </div>
 
         </div>
@@ -220,35 +203,34 @@ const MigraHome = () => {
           <ScrollReveal>
             <div className="text-center mb-16">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-                Grupos de Estudo
+                {content.grupos.title}
               </h2>
               <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Espaços de aprendizado colaborativo sobre temas centrais das migrações contemporâneas.
+                {content.grupos.description}
               </p>
             </div>
           </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: Globe, title: "Migração e Direitos Humanos", desc: "Estudo aprofundado sobre a proteção jurídica dos migrantes e refugiados no cenário internacional." },
-              { icon: Users, title: "Interculturalidade e Pertencimentos", desc: "Reflexões sobre identidade, diversidade cultural e processos de integração de comunidades migrantes." },
-              { icon: Scale, title: "Políticas Migratórias Comparadas", desc: "Análise comparativa de legislações e políticas públicas de diferentes países sobre migração." },
-            ].map((group, i) => (
-              <ScrollReveal key={i} delay={i * 100}>
-                <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors group h-full">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <group.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <h3 className="font-heading text-lg font-semibold text-foreground mb-2 uppercase tracking-wide">
-                    {group.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {group.desc}
-                  </p>
-                </Card>
-              </ScrollReveal>
-            ))}
+            {content.grupos.items.map((group, i) => {
+              const Icon = resolveIcon(group.icon);
+              return (
+                <ScrollReveal key={i} delay={i * 100}>
+                  <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors group h-full">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                      <Icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-heading text-lg font-semibold text-foreground mb-2 uppercase tracking-wide">
+                      {group.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {group.desc}
+                    </p>
+                  </Card>
+                </ScrollReveal>
+              );
+            })}
           </div>
 
           <ScrollReveal>
@@ -259,7 +241,7 @@ const MigraHome = () => {
                 asChild
               >
                 <Link to="/grupos-de-estudo">
-                  Conheça nossos grupos
+                  {content.grupos.btnLabel}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -274,11 +256,11 @@ const MigraHome = () => {
           <ScrollReveal>
             <div className="text-center mb-16">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-                Produção
+                {content.producao.title}
               </h2>
               <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Publicações recentes do nosso grupo de pesquisa.
+                {content.producao.description}
               </p>
             </div>
           </ScrollReveal>
@@ -322,7 +304,7 @@ const MigraHome = () => {
                 asChild
               >
                 <Link to="/producao">
-                  Ver toda a produção
+                  {content.producao.btnLabel}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -337,11 +319,11 @@ const MigraHome = () => {
           <ScrollReveal>
             <div className="text-center mb-16">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-                Nosso Blog
+                {content.blog.title}
               </h2>
               <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Acompanhe nossas publicações, novidades e reflexões sobre migração.
+                {content.blog.description}
               </p>
             </div>
           </ScrollReveal>
@@ -392,7 +374,7 @@ const MigraHome = () => {
                 asChild
               >
                 <Link to="/blog">
-                  Ver todos os posts
+                  {content.blog.btnLabel}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -473,11 +455,10 @@ const MigraHome = () => {
           <ScrollReveal>
             <Mail className="h-10 w-10 text-accent mx-auto mb-6" />
             <h2 className="font-heading text-3xl md:text-4xl font-bold uppercase tracking-wide mb-4">
-              Entre em Contato
+              {content.cta.title}
             </h2>
             <p className="text-white/70 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
-              Tem interesse em estudar migrações, mobilidades e gestão contemporânea de populações? 
-              Entre em contato e faça parte do nosso grupo de pesquisa e extensão.
+              {content.cta.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a
