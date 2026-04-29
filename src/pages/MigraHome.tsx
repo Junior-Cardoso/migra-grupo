@@ -73,6 +73,9 @@ const MigraHome = () => {
                 className="w-full max-w-[140px] md:max-w-[170px] lg:max-w-[200px] h-auto"
               />
             </h1>
+            <p className="text-white/80 font-heading uppercase tracking-[0.2em] text-xs md:text-sm mb-6">
+              Universidade Federal de Pernambuco
+            </p>
             <p className="text-white/70 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
               {content.hero.description}
             </p>
