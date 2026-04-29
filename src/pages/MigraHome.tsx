@@ -62,9 +62,6 @@ const MigraHome = () => {
         </div>
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-16 md:py-24 lg:py-36">
           <div className="max-w-3xl">
-            <p className="text-accent font-medium text-sm tracking-widest uppercase mb-4">
-              {content.hero.eyebrow}
-            </p>
             <h1 className="mb-6">
               <span className="sr-only">{content.hero.title}</span>
               <img
@@ -73,7 +70,7 @@ const MigraHome = () => {
                 className="w-full max-w-[140px] md:max-w-[170px] lg:max-w-[200px] h-auto"
               />
             </h1>
-            <p className="text-white/80 font-heading uppercase tracking-[0.2em] text-xs md:text-sm mb-6">
+            <p className="text-accent font-heading uppercase tracking-[0.2em] text-xs md:text-sm mb-6">
               Universidade Federal de Pernambuco
             </p>
             <p className="text-white/70 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
