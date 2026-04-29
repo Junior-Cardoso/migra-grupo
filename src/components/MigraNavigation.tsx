@@ -3,6 +3,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import migraLogo from "@/assets/migra-logo.webp";
 
 const MigraNavigation = () => {
   const [open, setOpen] = useState(false);
@@ -22,9 +23,7 @@ const MigraNavigation = () => {
       <div className="bg-background/95 backdrop-blur-md border-b border-border">
         <div className="flex items-center justify-between h-16 px-6 mx-auto max-w-6xl">
           <Link to="/" className="flex items-center gap-2">
-            <span className="font-heading text-2xl font-bold tracking-wider text-secondary">
-              MIGRA
-            </span>
+            <img src={migraLogo} alt="MIGRA" className="h-10 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -60,9 +59,7 @@ const MigraNavigation = () => {
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] bg-background">
                 <div className="flex flex-col gap-2 mt-8">
-                  <span className="font-heading text-xl font-bold tracking-wider text-secondary mb-4">
-                    MIGRA
-                  </span>
+                  <img src={migraLogo} alt="MIGRA" className="h-10 w-auto mb-4" />
                   {navLinks.map((link) =>
                     link.isRoute ? (
                       <Link

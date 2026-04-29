@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
+import migraLogoWhite from "@/assets/migra-logo-white.png";
 
 const academicLinks = [
   { label: "Lattes", url: "http://lattes.cnpq.br/" },
@@ -14,8 +15,8 @@ const MigraFooter = () => {
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-10">
           <div>
-            <Link to="/" className="font-heading text-xl font-bold tracking-wider text-white">
-              MIGRA
+            <Link to="/" className="inline-block">
+              <img src={migraLogoWhite} alt="MIGRA" className="h-12 w-auto" />
             </Link>
             <p className="text-sm mt-3 leading-relaxed">
               Grupo de Pesquisa e Extensão em Migrações, Mobilidades e Gestão Contemporânea de Populações – UFPE
