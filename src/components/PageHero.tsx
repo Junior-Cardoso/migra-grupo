@@ -17,15 +17,19 @@ interface PageHeroProps {
   eyebrow?: string;
   title: string;
   description?: string;
-  /** Character on the left (will be mirrored). */
+  /** Character on the left (mirrored by default). */
   character: string;
-  /** Character on the right (normal orientation). Should differ from `character`. */
+  /** Character on the right (normal orientation by default). Should differ from `character`. */
   characterRight?: string;
+  /** Invert mirroring: left becomes normal, right becomes mirrored. */
+  flipCharacters?: boolean;
   tint?: Tint;
 }
 
-const PageHero = ({ eyebrow, title, description, character, characterRight, tint = "neutral" }: PageHeroProps) => {
+const PageHero = ({ eyebrow, title, description, character, characterRight, flipCharacters = false, tint = "neutral" }: PageHeroProps) => {
   const rightChar = characterRight ?? character;
+  const leftClass = flipCharacters ? "" : "scale-x-[-1]";
+  const rightClass = flipCharacters ? "scale-x-[-1]" : "";
   return (
     <section className={`pt-16 ${TINT_STYLES[tint]} relative overflow-hidden`}>
       {/* Pattern overlay */}
@@ -37,12 +41,12 @@ const PageHero = ({ eyebrow, title, description, character, characterRight, tint
 
       {/* Standard fixed height container */}
       <div className="max-w-6xl mx-auto px-6 relative h-[320px] md:h-[360px] flex items-center">
-        {/* Left character (mirrored) */}
+        {/* Left character */}
         <img
           src={character}
           alt=""
           aria-hidden="true"
-          className="hidden lg:block absolute left-0 bottom-0 h-[280px] xl:h-[320px] w-auto object-contain pointer-events-none select-none scale-x-[-1] opacity-90"
+          className={`hidden lg:block absolute left-0 bottom-0 h-[280px] xl:h-[320px] w-auto object-contain pointer-events-none select-none opacity-90 ${leftClass}`}
         />
 
         {/* Centered text */}
@@ -65,12 +69,12 @@ const PageHero = ({ eyebrow, title, description, character, characterRight, tint
           </ScrollReveal>
         </div>
 
-        {/* Right character (normal orientation) */}
+        {/* Right character */}
         <img
           src={rightChar}
           alt=""
           aria-hidden="true"
-          className="hidden lg:block absolute right-0 bottom-0 h-[280px] xl:h-[320px] w-auto object-contain pointer-events-none select-none opacity-90"
+          className={`hidden lg:block absolute right-0 bottom-0 h-[280px] xl:h-[320px] w-auto object-contain pointer-events-none select-none opacity-90 ${rightClass}`}
         />
 
         {/* Mobile/tablet: single character on the right */}
