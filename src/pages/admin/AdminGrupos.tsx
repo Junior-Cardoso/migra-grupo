@@ -41,7 +41,7 @@ const AdminGrupos = () => {
     queryFn: async () => {
       const { data, error } = await supabase.from("study_groups").select("*").order("sort_order");
       if (error) throw error;
-      return data as StudyGroup[];
+      return (data ?? []) as unknown as StudyGroup[];
     },
   });
 
