@@ -70,7 +70,7 @@ const MigraHome = () => {
               <img
                 src={migraLogoHero}
                 alt={content.hero.title}
-                className="w-full max-w-md md:max-w-lg lg:max-w-xl h-auto"
+                className="w-full max-w-[200px] md:max-w-[240px] lg:max-w-[280px] h-auto"
               />
             </h1>
             <p className="text-white/70 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
@@ -115,7 +115,7 @@ const MigraHome = () => {
             <ScrollReveal delay={200}>
               <div className="relative">
                 <div className="aspect-[4/3] rounded-lg bg-muted overflow-hidden">
-                  <img src={sobreMigraImg} alt="Pessoas caminhando em pátio universitário" className="w-full h-full object-cover" />
+                  <img src={sobreMigraImg} alt="Multidão em movimento" className="w-full h-full object-cover object-left" />
                 </div>
                 <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-accent/20 rounded-lg -z-10" />
               </div>
