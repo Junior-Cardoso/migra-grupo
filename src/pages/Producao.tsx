@@ -12,6 +12,7 @@ import type { Publication } from "@/data/acervoPublications";
 import { FIXED_CATEGORIES } from "@/data/acervoPublications";
 import { Search, ExternalLink, BookOpen, X, SlidersHorizontal, Loader2, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
 import character from "@/assets/characters/char-2.webp";
+import heroPattern from "@/assets/hero-pattern.webp";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -191,17 +192,22 @@ const Producao = () => {
       <MigraNavigation />
 
       {/* Header */}
-      <section className="pt-16 bg-secondary relative overflow-hidden">
+      <section className="pt-16 bg-gradient-to-b from-white to-muted relative overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 opacity-[0.08] bg-no-repeat bg-cover bg-center pointer-events-none"
+          style={{ backgroundImage: `url(${heroPattern})` }}
+        />
         <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 relative">
           <ScrollReveal>
-            <p className="text-accent font-medium text-sm tracking-widest uppercase mb-3">
+            <p className="text-primary font-medium text-sm tracking-widest uppercase mb-3">
               MIGRA – UFPE
             </p>
-            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-white uppercase tracking-wide mb-3">
+            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-secondary uppercase tracking-wide mb-3">
               Produção
             </h1>
             <div className="w-12 h-1 bg-accent rounded-full mb-4" />
-            <p className="text-white/70 text-lg max-w-2xl">
+            <p className="text-foreground/70 text-lg max-w-2xl">
               Repositório de publicações do grupo de pesquisa MIGRA – UFPE.
             </p>
           </ScrollReveal>
