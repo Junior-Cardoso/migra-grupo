@@ -2,6 +2,7 @@ import MigraNavigation from "@/components/MigraNavigation";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import heroMigraBg from "@/assets/hero-migra-bg.jpg";
+import heroPattern from "@/assets/hero-pattern.webp";
 import radioMigraLogo from "@/assets/radio-migra-logo.png";
 import sobreMigraImg from "@/assets/sobre-migra.jpg";
 import sofiaZanforlin from "@/assets/team/sofia-zanforlin.png";
@@ -43,6 +44,16 @@ const MigraHome = () => {
           }}
         />
         <div className="absolute inset-0 bg-secondary/20" />
+        {/* Pattern overlay (same as secondary pages) — centered on the left, faded */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-y-0 left-0 w-full md:w-2/3 lg:w-1/2 bg-no-repeat pointer-events-none opacity-25 mix-blend-screen"
+          style={{
+            backgroundImage: `url(${heroPattern})`,
+            backgroundSize: "auto 90%",
+            backgroundPosition: "center left",
+          }}
+        />
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-primary/30 blur-3xl" />
           <div className="absolute bottom-10 right-20 w-96 h-96 rounded-full bg-accent/20 blur-3xl" />
