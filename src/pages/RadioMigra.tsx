@@ -19,12 +19,13 @@ const RadioMigra = () => {
         eyebrow="MIGRA – UFPE"
         title="Rádio MIGRA"
         description="Podcast do grupo MIGRA – UFPE: conversas sobre migrações, mobilidades e gestão contemporânea de populações."
-        character={character}
+        character={characterLeft}
+        characterRight={characterRight}
         tint="teal"
       />
 
       {/* Player / Embed area */}
-      <section className="pb-8">
+      <section className="pt-12 md:pt-16 pb-8">
         <div className="max-w-5xl mx-auto px-6">
           <ScrollReveal>
             <div className="rounded-xl overflow-hidden bg-muted/50 border border-border">
