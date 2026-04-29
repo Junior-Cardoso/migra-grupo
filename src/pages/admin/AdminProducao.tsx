@@ -275,7 +275,7 @@ const AdminProducao = () => {
               <Input value={form.external_url} onChange={(e) => setForm({ ...form, external_url: e.target.value })} placeholder="https://..." />
             </div>
             <div className="space-y-2">
-              <Label>Categorias temáticas (separadas por vírgula)</Label>
+              <Label>Palavras-chave (separadas por vírgula)</Label>
               <Input value={form.thematic_categories} onChange={(e) => setForm({ ...form, thematic_categories: e.target.value })} placeholder="Ex: Comunicação, Interculturalidade" />
             </div>
             <div className="flex justify-end gap-2">
