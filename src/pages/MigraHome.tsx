@@ -7,25 +7,24 @@ import sobreMigraImg from "@/assets/sobre-migra.jpg";
 import sofiaZanforlin from "@/assets/team/sofia-zanforlin.png";
 import { Card } from "@/components/ui/card";
 import {
-  Globe,
   BookOpen,
-  Scale,
   FileText,
   Headphones,
   Music2,
-  MapPin,
   ArrowRight,
   Mail,
   GraduationCap,
-  Compass,
-  Radio,
-  Map,
-  Users,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import MigraFooter from "@/components/MigraFooter";
+import { usePageContent } from "@/hooks/usePageContent";
+import { resolveIcon } from "@/lib/iconMap";
+
+const PHOTO_MAP: Record<string, string> = { sofia: sofiaZanforlin };
 
 const MigraHome = () => {
+  const { data: content } = usePageContent("inicio");
+  if (!content) return null;
   return (
     <div className="min-h-screen bg-background">
       <MigraNavigation />
