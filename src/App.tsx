@@ -19,8 +19,11 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminVideografia from "./pages/admin/AdminVideografia";
 import AdminBlog from "./pages/admin/AdminBlog";
 import AdminBlogEditor from "./pages/admin/AdminBlogEditor";
-import AdminHome from "./pages/admin/AdminHome";
+import AdminInicio from "./pages/admin/AdminInicio";
 import AdminProducao from "./pages/admin/AdminProducao";
+import AdminSobre from "./pages/admin/AdminSobre";
+import AdminGrupos from "./pages/admin/AdminGrupos";
+import AdminRadio from "./pages/admin/AdminRadio";
 
 const queryClient = new QueryClient();
 
@@ -49,7 +52,11 @@ const App = () => (
             <Route path="blog" element={<AdminBlog />} />
             <Route path="blog/novo" element={<AdminBlogEditor />} />
             <Route path="blog/editar/:slug" element={<AdminBlogEditor />} />
-            <Route path="home" element={<AdminHome />} />
+            <Route path="inicio" element={<AdminInicio />} />
+            <Route path="home" element={<AdminInicio />} />
+            <Route path="sobre" element={<AdminSobre />} />
+            <Route path="grupos" element={<AdminGrupos />} />
+            <Route path="radio" element={<AdminRadio />} />
             <Route path="producao" element={<AdminProducao />} />
           </Route>
           
