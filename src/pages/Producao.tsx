@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import type { Publication } from "@/data/acervoPublications";
 import { FIXED_CATEGORIES } from "@/data/acervoPublications";
 import { Search, ExternalLink, BookOpen, X, SlidersHorizontal, Loader2, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
+import character from "@/assets/characters/char-2.webp";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -190,8 +191,8 @@ const Producao = () => {
       <MigraNavigation />
 
       {/* Header */}
-      <section className="pt-16 bg-secondary">
-        <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+      <section className="pt-16 bg-secondary relative overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 relative">
           <ScrollReveal>
             <p className="text-accent font-medium text-sm tracking-widest uppercase mb-3">
               MIGRA – UFPE
@@ -204,6 +205,12 @@ const Producao = () => {
               Repositório de publicações do grupo de pesquisa MIGRA – UFPE.
             </p>
           </ScrollReveal>
+          <img
+            src={character}
+            alt=""
+            aria-hidden="true"
+            className="hidden md:block absolute right-4 lg:right-12 bottom-0 h-56 lg:h-72 w-auto object-contain pointer-events-none select-none"
+          />
         </div>
       </section>
 
