@@ -17,6 +17,7 @@ const Sobre = () => {
         description="História, equipe e trajetória do MIGRA – UFPE."
         character={characterLeft}
         characterRight={characterRight}
+        flipCharacters
         tint="navy"
       />
 
