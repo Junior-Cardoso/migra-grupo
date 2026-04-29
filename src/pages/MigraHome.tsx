@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import heroMigraBg from "@/assets/hero-migra-bg.jpg";
 import radioMigraLogo from "@/assets/radio-migra-logo.png";
 import sobreMigraImg from "@/assets/sobre-migra.jpg";
+import sofiaZanforlin from "@/assets/team/sofia-zanforlin.png";
 import { Card } from "@/components/ui/card";
 import {
   Globe,
@@ -182,17 +183,24 @@ const MigraHome = () => {
             </div>
           </ScrollReveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 gap-10 max-w-2xl mx-auto">
             {[
-              { name: "Prof. Dr. Coordenador", role: "Coordenador" },
-              { name: "Pesquisador(a) 1", role: "Doutorando(a)" },
-              { name: "Pesquisador(a) 2", role: "Mestrando(a)" },
-              { name: "Pesquisador(a) 3", role: "Graduando(a)" },
+              { name: "Profa. Sofia Cavalcanti Zanforlin", role: "Coordenadora", photo: sofiaZanforlin },
+              { name: "Profa. Carolina Gonçalves Leite", role: "Coordenadora", photo: null },
             ].map((member, i) => (
               <ScrollReveal key={i} delay={i * 100}>
                 <div className="text-center group">
-                  <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto rounded-full bg-muted mb-4 overflow-hidden flex items-center justify-center">
-                    <GraduationCap className="h-12 w-12 text-muted-foreground/40" />
+                  <div className="w-32 h-32 sm:w-40 sm:h-40 mx-auto rounded-full bg-muted mb-4 overflow-hidden flex items-center justify-center ring-4 ring-accent/20">
+                    {member.photo ? (
+                      <img
+                        src={member.photo}
+                        alt={member.name}
+                        loading="lazy"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <GraduationCap className="h-12 w-12 text-muted-foreground/40" />
+                    )}
                   </div>
                   <h3 className="font-heading text-base font-semibold text-foreground uppercase tracking-wide">
                     {member.name}
