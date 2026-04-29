@@ -308,7 +308,7 @@ const Producao = () => {
                 </div>
 
                 <div>
-                  <h4 className="font-heading text-sm font-semibold text-foreground uppercase tracking-wider mb-3">Categoria Temática</h4>
+                  <h4 className="font-heading text-sm font-semibold text-foreground uppercase tracking-wider mb-3">Palavras-chave</h4>
                   <div className="space-y-1">
                     {thematicCategories.map((cat) => (
                       <button key={cat} onClick={() => toggleItem(cat, setActiveCategories)} className={`w-full flex items-center justify-between text-sm py-2 px-3 rounded-md transition-colors ${activeCategories.includes(cat) ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground hover:bg-muted"}`}>
