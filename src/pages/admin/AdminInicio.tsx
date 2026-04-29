@@ -10,6 +10,8 @@ import {
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { EditField } from "@/components/admin/EditField";
+import { RichTextEditor } from "@/components/admin/RichTextEditor";
+import { LinkHelp } from "@/components/admin/LinkHelp";
 import { defaultHomeContent, type HomeContent } from "@/data/defaultContent";
 import { savePageSection } from "@/hooks/usePageContent";
 
@@ -108,9 +110,9 @@ const AdminInicio = () => {
                   <EditField label="Descrição" value={content.hero.description} onChange={(v) => update("hero", { description: v })} multiline maxLen={250} />
                   <div className="grid grid-cols-2 gap-3 pt-2 border-t">
                     <EditField label="Botão 1 — texto" value={content.hero.btn1.label} onChange={(v) => update("hero", { btn1: { ...content.hero.btn1, label: v } })} maxLen={30} />
-                    <EditField label="Botão 1 — link" value={content.hero.btn1.link} onChange={(v) => update("hero", { btn1: { ...content.hero.btn1, link: v } })} />
+                    <EditField label="Botão 1 — link" value={content.hero.btn1.link} onChange={(v) => update("hero", { btn1: { ...content.hero.btn1, link: v } })} labelExtra={<LinkHelp />} />
                     <EditField label="Botão 2 — texto" value={content.hero.btn2.label} onChange={(v) => update("hero", { btn2: { ...content.hero.btn2, label: v } })} maxLen={30} />
-                    <EditField label="Botão 2 — link" value={content.hero.btn2.link} onChange={(v) => update("hero", { btn2: { ...content.hero.btn2, link: v } })} />
+                    <EditField label="Botão 2 — link" value={content.hero.btn2.link} onChange={(v) => update("hero", { btn2: { ...content.hero.btn2, link: v } })} labelExtra={<LinkHelp />} />
                   </div>
                 </AccordionContent>
               </Card>
@@ -123,8 +125,8 @@ const AdminInicio = () => {
                 </AccordionTrigger>
                 <AccordionContent className="px-4 pb-4 space-y-3">
                   <EditField label="Título" value={content.sobre.title} onChange={(v) => update("sobre", { title: v })} maxLen={40} />
-                  <EditField label="Parágrafo 1 (HTML)" value={content.sobre.paragraph1Html} onChange={(v) => update("sobre", { paragraph1Html: v })} multiline rows={5} hint="Aceita tags HTML como <strong>" />
-                  <EditField label="Parágrafo 2 (HTML)" value={content.sobre.paragraph2Html} onChange={(v) => update("sobre", { paragraph2Html: v })} multiline rows={4} hint="Aceita tags HTML como <strong>" />
+                  <RichTextEditor label="Parágrafo 1" value={content.sobre.paragraph1Html} onChange={(v) => update("sobre", { paragraph1Html: v })} maxLen={600} />
+                  <RichTextEditor label="Parágrafo 2" value={content.sobre.paragraph2Html} onChange={(v) => update("sobre", { paragraph2Html: v })} maxLen={400} />
                 </AccordionContent>
               </Card>
             </AccordionItem>
