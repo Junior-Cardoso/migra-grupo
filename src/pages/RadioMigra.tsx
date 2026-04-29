@@ -1,5 +1,6 @@
 import MigraNavigation from "@/components/MigraNavigation";
 import MigraFooter from "@/components/MigraFooter";
+import PageHero from "@/components/PageHero";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Card } from "@/components/ui/card";
 import { Radio, Headphones, Music2, Mic2 } from "lucide-react";
