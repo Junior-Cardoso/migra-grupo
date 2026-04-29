@@ -11,14 +11,18 @@ interface FieldProps {
   maxLen?: number;
   placeholder?: string;
   hint?: string;
+  labelExtra?: React.ReactNode;
 }
 
 export const EditField = ({
-  label, value, onChange, multiline, rows = 3, maxLen, placeholder, hint,
+  label, value, onChange, multiline, rows = 3, maxLen, placeholder, hint, labelExtra,
 }: FieldProps) => (
   <div className="space-y-1.5">
     <div className="flex items-center justify-between">
-      <Label className="text-xs font-medium text-foreground">{label}</Label>
+      <div className="flex items-center gap-1">
+        <Label className="text-xs font-medium text-foreground">{label}</Label>
+        {labelExtra}
+      </div>
       {maxLen && (
         <span className={`text-[10px] ${value.length > maxLen ? "text-destructive" : "text-muted-foreground"}`}>
           {value.length}/{maxLen}
