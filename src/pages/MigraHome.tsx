@@ -162,41 +162,36 @@ const MigraHome = () => {
           <ScrollReveal>
             <div className="text-center mb-16">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-                Nossa Equipe
+                {content.equipe.title}
               </h2>
               <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Pesquisadores dedicados ao estudo das migrações, mobilidades e gestão de populações.
+                {content.equipe.description}
               </p>
             </div>
           </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 gap-12 max-w-3xl mx-auto">
-            {[
-              { name: "Profa. Sofia Cavalcanti Zanforlin", role: "Coordenadora", photo: sofiaZanforlin },
-              { name: "Profa. Carolina Gonçalves Leite", role: "Coordenadora", photo: null },
-            ].map((member, i) => (
-              <ScrollReveal key={i} delay={i * 100}>
-                <div className="text-center group">
-                  <div className="w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto rounded-full bg-muted mb-6 overflow-hidden flex items-center justify-center ring-4 ring-accent/20">
-                    {member.photo ? (
-                      <img
-                        src={member.photo}
-                        alt={member.name}
-                        loading="lazy"
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <GraduationCap className="h-20 w-20 text-muted-foreground/40" />
-                    )}
+            {content.equipe.members.map((member, i) => {
+              const photo = member.photoKey ? PHOTO_MAP[member.photoKey] : null;
+              return (
+                <ScrollReveal key={i} delay={i * 100}>
+                  <div className="text-center group">
+                    <div className="w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto rounded-full bg-muted mb-6 overflow-hidden flex items-center justify-center ring-4 ring-accent/20">
+                      {photo ? (
+                        <img src={photo} alt={member.name} loading="lazy" className="w-full h-full object-cover" />
+                      ) : (
+                        <GraduationCap className="h-20 w-20 text-muted-foreground/40" />
+                      )}
+                    </div>
+                    <h3 className="font-heading text-lg font-semibold text-foreground uppercase tracking-wide">
+                      {member.name}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mt-1">{member.role}</p>
                   </div>
-                  <h3 className="font-heading text-lg font-semibold text-foreground uppercase tracking-wide">
-                    {member.name}
-                  </h3>
-                  <p className="text-muted-foreground text-sm mt-1">{member.role}</p>
-                </div>
-              </ScrollReveal>
-            ))}
+                </ScrollReveal>
+              );
+            })}
           </div>
 
         </div>
@@ -208,35 +203,34 @@ const MigraHome = () => {
           <ScrollReveal>
             <div className="text-center mb-16">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-                Grupos de Estudo
+                {content.grupos.title}
               </h2>
               <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Espaços de aprendizado colaborativo sobre temas centrais das migrações contemporâneas.
+                {content.grupos.description}
               </p>
             </div>
           </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: Globe, title: "Migração e Direitos Humanos", desc: "Estudo aprofundado sobre a proteção jurídica dos migrantes e refugiados no cenário internacional." },
-              { icon: Users, title: "Interculturalidade e Pertencimentos", desc: "Reflexões sobre identidade, diversidade cultural e processos de integração de comunidades migrantes." },
-              { icon: Scale, title: "Políticas Migratórias Comparadas", desc: "Análise comparativa de legislações e políticas públicas de diferentes países sobre migração." },
-            ].map((group, i) => (
-              <ScrollReveal key={i} delay={i * 100}>
-                <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors group h-full">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <group.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <h3 className="font-heading text-lg font-semibold text-foreground mb-2 uppercase tracking-wide">
-                    {group.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {group.desc}
-                  </p>
-                </Card>
-              </ScrollReveal>
-            ))}
+            {content.grupos.items.map((group, i) => {
+              const Icon = resolveIcon(group.icon);
+              return (
+                <ScrollReveal key={i} delay={i * 100}>
+                  <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors group h-full">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                      <Icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-heading text-lg font-semibold text-foreground mb-2 uppercase tracking-wide">
+                      {group.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {group.desc}
+                    </p>
+                  </Card>
+                </ScrollReveal>
+              );
+            })}
           </div>
 
           <ScrollReveal>
@@ -247,7 +241,7 @@ const MigraHome = () => {
                 asChild
               >
                 <Link to="/grupos-de-estudo">
-                  Conheça nossos grupos
+                  {content.grupos.btnLabel}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
