@@ -10,6 +10,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { Search, Video, Loader2 } from "lucide-react";
 import character from "@/assets/characters/char-5.webp";
+import heroPattern from "@/assets/hero-pattern.webp";
 
 const SECTIONS_ORDER = [
   "Así Pasó",
@@ -177,13 +178,18 @@ const Videografia = () => {
       <MigraNavigation />
 
       {/* Header */}
-      <section className="pt-16 bg-secondary relative overflow-hidden">
+      <section className="pt-16 bg-gradient-to-b from-white to-muted relative overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 opacity-[0.08] bg-no-repeat bg-cover bg-center pointer-events-none"
+          style={{ backgroundImage: `url(${heroPattern})` }}
+        />
         <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 relative">
-          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-white uppercase tracking-wide">
+          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-secondary uppercase tracking-wide">
             Videografia
           </h1>
           <div className="w-12 h-1 bg-accent mt-4 mb-4 rounded-full" />
-          <p className="text-white/70 text-lg max-w-2xl">
+          <p className="text-foreground/70 text-lg max-w-2xl">
             Vídeos, palestras e documentários produzidos pelo MIGRA.
           </p>
           <img
