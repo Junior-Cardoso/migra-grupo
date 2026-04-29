@@ -88,18 +88,11 @@ const MigraHome = () => {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <ScrollReveal>
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-2 uppercase tracking-wide">
-                Sobre o MIGRA
+                {content.sobre.title}
               </h2>
               <div className="w-12 h-1 bg-accent mt-3 mb-6 rounded-full" />
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                O <strong className="text-foreground font-semibold">MIGRA</strong> é um <strong className="text-foreground font-semibold">grupo de pesquisa e extensão</strong> vinculado à <strong className="text-foreground font-semibold">Universidade Federal de Pernambuco</strong>,
-                dedicado ao estudo das <strong className="text-primary font-semibold">migrações</strong>, <strong className="text-primary font-semibold">mobilidades</strong> e <strong className="text-primary font-semibold">gestão contemporânea de populações</strong>.
-                Nosso trabalho combina <strong className="text-foreground font-semibold">rigor acadêmico</strong> com <strong className="text-foreground font-semibold">impacto social</strong>.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Atuamos na <strong className="text-foreground font-semibold">produção de conhecimento</strong>, <strong className="text-foreground font-semibold">formação de pesquisadores</strong> e <strong className="text-foreground font-semibold">apoio à comunidade migrante</strong>,
-                contribuindo para <strong className="text-primary font-semibold">políticas públicas mais justas e inclusivas</strong>.
-              </p>
+              <p className="text-muted-foreground leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: content.sobre.paragraph1Html }} />
+              <p className="text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: content.sobre.paragraph2Html }} />
             </ScrollReveal>
             <ScrollReveal delay={200}>
               <div className="relative">
