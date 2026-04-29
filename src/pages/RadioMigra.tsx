@@ -3,7 +3,7 @@ import MigraFooter from "@/components/MigraFooter";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Card } from "@/components/ui/card";
 import { Radio, Headphones, Music2, Mic2 } from "lucide-react";
-import radioMigraLogo from "@/assets/radio-migra-logo.png";
+import character from "@/assets/characters/char-7.webp";
 
 const RadioMigra = () => {
   const spotifyShowId = "PLACEHOLDER_SHOW_ID";
@@ -12,30 +12,27 @@ const RadioMigra = () => {
     <div className="min-h-screen bg-background">
       <MigraNavigation />
 
-      {/* Spotify-style full-width hero with gradient */}
-      <section className="pt-16">
-        <div className="bg-gradient-to-b from-primary/30 via-primary/10 to-background px-6 py-20 md:py-32">
-          <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center md:items-end gap-8">
-            {/* Album-style cover with logo */}
-            <div className="w-48 h-48 md:w-56 md:h-56 rounded-xl bg-white shadow-2xl flex items-center justify-center shrink-0 p-4">
-              <img src={radioMigraLogo} alt="Rádio Migra" className="w-full h-full object-contain" />
-            </div>
-
-            <div className="text-center md:text-left">
-              <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                Podcast
-              </span>
-              <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-foreground uppercase tracking-wide mt-2">
-                Rádio MIGRA
-              </h1>
-              <p className="text-muted-foreground text-base md:text-lg mt-3 max-w-xl">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.
-              </p>
-              <p className="text-muted-foreground/60 text-sm mt-2">
-                Lorem ipsum · Dolor sit amet
-              </p>
-            </div>
-          </div>
+      {/* Header */}
+      <section className="pt-16 bg-secondary relative overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 relative">
+          <ScrollReveal>
+            <p className="text-accent font-medium text-sm tracking-widest uppercase mb-3">
+              MIGRA – UFPE
+            </p>
+            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-white uppercase tracking-wide mb-3">
+              Rádio MIGRA
+            </h1>
+            <div className="w-12 h-1 bg-accent rounded-full mb-4" />
+            <p className="text-white/70 text-lg max-w-2xl">
+              Podcast do grupo MIGRA – UFPE: conversas sobre migrações, mobilidades e gestão contemporânea de populações.
+            </p>
+          </ScrollReveal>
+          <img
+            src={character}
+            alt=""
+            aria-hidden="true"
+            className="hidden md:block absolute right-4 lg:right-12 bottom-0 h-56 lg:h-72 w-auto object-contain pointer-events-none select-none"
+          />
         </div>
       </section>
 
