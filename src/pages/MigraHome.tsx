@@ -112,38 +112,34 @@ const MigraHome = () => {
           <ScrollReveal>
             <div className="text-center mb-16">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-                Áreas de Atuação
+                {content.areas.title}
               </h2>
               <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Conheça as linhas de pesquisa que orientam nossos estudos e publicações.
+                {content.areas.description}
               </p>
             </div>
           </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: Globe, title: "Migrações Internacionais", desc: "Estudo dos fluxos migratórios contemporâneos e seus impactos sociais, econômicos e culturais." },
-              { icon: Scale, title: "Direito dos Refugiados", desc: "Análise das normativas internacionais e nacionais de proteção a refugiados e solicitantes de refúgio." },
-              { icon: Radio, title: "Comunicação e Migração", desc: "Estudos sobre narrativas midiáticas, representação e comunicação intercultural no contexto migratório." },
-              { icon: MapPin, title: "Políticas Migratórias", desc: "Avaliação de políticas públicas de acolhimento e integração de migrantes no Brasil." },
-              { icon: Map, title: "Geografia das Migrações", desc: "Análise espacial dos fluxos migratórios, territorialidades e dinâmicas socioespaciais." },
-              { icon: Compass, title: "Fronteiras e Mobilidade", desc: "Análise das dinâmicas fronteiriças e seus efeitos na mobilidade humana contemporânea." },
-            ].map((item, i) => (
-              <ScrollReveal key={i} delay={i * 100}>
-                <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors group h-full">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <item.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <h3 className="font-heading text-lg font-semibold text-foreground mb-2 uppercase tracking-wide">
-                    {item.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {item.desc}
-                  </p>
-                </Card>
-              </ScrollReveal>
-            ))}
+            {content.areas.items.map((item, i) => {
+              const Icon = resolveIcon(item.icon);
+              return (
+                <ScrollReveal key={i} delay={i * 100}>
+                  <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors group h-full">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                      <Icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-heading text-lg font-semibold text-foreground mb-2 uppercase tracking-wide">
+                      {item.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </Card>
+                </ScrollReveal>
+              );
+            })}
           </div>
 
           <ScrollReveal>
