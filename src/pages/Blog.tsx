@@ -4,6 +4,7 @@ import MigraNavigation from "@/components/MigraNavigation";
 import MigraFooter from "@/components/MigraFooter";
 import BlogCard from "@/components/BlogCard";
 import BlogSidebar from "@/components/BlogSidebar";
+import PageHero from "@/components/PageHero";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -11,7 +12,6 @@ import { Button } from "@/components/ui/button";
 import { Search, ChevronLeft, ChevronRight } from "lucide-react";
 import { blogPosts, categories } from "@/data/blogPosts";
 import character from "@/assets/characters/char-3.webp";
-import heroPattern from "@/assets/hero-pattern.webp";
 
 const POSTS_PER_PAGE = 6;
 
@@ -69,31 +69,12 @@ const Blog = () => {
     <div className="min-h-screen bg-background">
       <MigraNavigation />
 
-      {/* Hero Banner */}
-      <section className="pt-16 bg-gradient-to-b from-white to-muted relative overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 opacity-[0.08] bg-no-repeat bg-cover bg-center pointer-events-none"
-          style={{ backgroundImage: `url(${heroPattern})` }}
-        />
-        <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 relative">
-          <ScrollReveal>
-            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-secondary uppercase tracking-wide mb-3">
-              Blog
-            </h1>
-            <div className="w-12 h-1 bg-accent rounded-full mb-4" />
-            <p className="text-foreground/70 text-lg max-w-2xl">
-              Acompanhe nossas publicações, novidades e reflexões sobre migrações e gestão contemporânea de populações.
-            </p>
-          </ScrollReveal>
-          <img
-            src={character}
-            alt=""
-            aria-hidden="true"
-            className="hidden md:block absolute right-4 lg:right-12 bottom-0 h-56 lg:h-72 w-auto object-contain pointer-events-none select-none"
-          />
-        </div>
-      </section>
+      <PageHero
+        title="Blog"
+        description="Acompanhe nossas publicações, novidades e reflexões sobre migrações e gestão contemporânea de populações."
+        character={character}
+        tint="teal"
+      />
 
       {/* Filters */}
       <section className="border-b border-border bg-background sticky top-16 z-30">

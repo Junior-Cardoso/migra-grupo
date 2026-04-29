@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import MigraNavigation from "@/components/MigraNavigation";
 import MigraFooter from "@/components/MigraFooter";
+import PageHero from "@/components/PageHero";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,7 +11,6 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { Search, Video, Loader2 } from "lucide-react";
 import character from "@/assets/characters/char-5.webp";
-import heroPattern from "@/assets/hero-pattern.webp";
 
 const SECTIONS_ORDER = [
   "Así Pasó",
@@ -177,29 +177,12 @@ const Videografia = () => {
     <div className="min-h-screen bg-background">
       <MigraNavigation />
 
-      {/* Header */}
-      <section className="pt-16 bg-gradient-to-b from-white to-muted relative overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 opacity-[0.08] bg-no-repeat bg-cover bg-center pointer-events-none"
-          style={{ backgroundImage: `url(${heroPattern})` }}
-        />
-        <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 relative">
-          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-secondary uppercase tracking-wide">
-            Videografia
-          </h1>
-          <div className="w-12 h-1 bg-accent mt-4 mb-4 rounded-full" />
-          <p className="text-foreground/70 text-lg max-w-2xl">
-            Vídeos, palestras e documentários produzidos pelo MIGRA.
-          </p>
-          <img
-            src={character}
-            alt=""
-            aria-hidden="true"
-            className="hidden md:block absolute right-4 lg:right-12 bottom-0 h-56 lg:h-72 w-auto object-contain pointer-events-none select-none"
-          />
-        </div>
-      </section>
+      <PageHero
+        title="Videografia"
+        description="Vídeos, palestras e documentários produzidos pelo MIGRA."
+        character={character}
+        tint="gold"
+      />
 
 
       {/* Tabs Content */}
