@@ -50,13 +50,13 @@ const MigraHome = () => {
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-16 md:py-24 lg:py-36">
           <div className="max-w-3xl">
             <p className="text-accent font-medium text-sm tracking-widest uppercase mb-4">
-              Universidade Federal de Pernambuco
+              {content.hero.eyebrow}
             </p>
             <h1 className="font-heading text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 tracking-wide uppercase">
-              MIGRA
+              {content.hero.title}
             </h1>
             <p className="text-white/70 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
-              Grupo de Pesquisa e Extensão em Migrações, Mobilidades e Gestão Contemporânea de Populações — UFPE.
+              {content.hero.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
@@ -64,8 +64,8 @@ const MigraHome = () => {
                 className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-base px-8 uppercase tracking-wider"
                 asChild
               >
-                <Link to="/sobre">
-                  Conheça o grupo
+                <Link to={content.hero.btn1.link}>
+                  {content.hero.btn1.label}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -75,7 +75,7 @@ const MigraHome = () => {
                 className="border-white text-white bg-transparent hover:bg-white/10 hover:text-white font-heading font-normal text-base px-8 uppercase tracking-wider"
                 asChild
               >
-                <a href="#contato">Contato</a>
+                <a href={content.hero.btn2.link}>{content.hero.btn2.label}</a>
               </Button>
             </div>
           </div>
