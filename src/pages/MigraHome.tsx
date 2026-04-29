@@ -93,13 +93,13 @@ const MigraHome = () => {
               </h2>
               <div className="w-12 h-1 bg-accent mt-3 mb-6 rounded-full" />
               <p className="text-muted-foreground leading-relaxed mb-4">
-                O MIGRA é um grupo de pesquisa e extensão vinculado à Universidade Federal de Pernambuco, 
-                dedicado ao estudo das migrações, mobilidades e gestão contemporânea de populações. 
-                Nosso trabalho combina rigor acadêmico com impacto social.
+                O <strong className="text-foreground font-semibold">MIGRA</strong> é um <strong className="text-foreground font-semibold">grupo de pesquisa e extensão</strong> vinculado à <strong className="text-foreground font-semibold">Universidade Federal de Pernambuco</strong>,
+                dedicado ao estudo das <strong className="text-primary font-semibold">migrações</strong>, <strong className="text-primary font-semibold">mobilidades</strong> e <strong className="text-primary font-semibold">gestão contemporânea de populações</strong>.
+                Nosso trabalho combina <strong className="text-foreground font-semibold">rigor acadêmico</strong> com <strong className="text-foreground font-semibold">impacto social</strong>.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Atuamos na produção de conhecimento, formação de pesquisadores e apoio 
-                à comunidade migrante, contribuindo para políticas públicas mais justas e inclusivas.
+                Atuamos na <strong className="text-foreground font-semibold">produção de conhecimento</strong>, <strong className="text-foreground font-semibold">formação de pesquisadores</strong> e <strong className="text-foreground font-semibold">apoio à comunidade migrante</strong>,
+                contribuindo para <strong className="text-primary font-semibold">políticas públicas mais justas e inclusivas</strong>.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={200}>
