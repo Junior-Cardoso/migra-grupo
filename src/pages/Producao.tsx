@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import MigraNavigation from "@/components/MigraNavigation";
 import MigraFooter from "@/components/MigraFooter";
+import PageHero from "@/components/PageHero";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,7 +13,6 @@ import type { Publication } from "@/data/acervoPublications";
 import { FIXED_CATEGORIES } from "@/data/acervoPublications";
 import { Search, ExternalLink, BookOpen, X, SlidersHorizontal, Loader2, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
 import character from "@/assets/characters/char-2.webp";
-import heroPattern from "@/assets/hero-pattern.webp";
 
 const ITEMS_PER_PAGE = 12;
 
