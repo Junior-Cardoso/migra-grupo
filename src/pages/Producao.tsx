@@ -336,7 +336,7 @@ const Producao = () => {
                         <ScrollReveal key={pub.id} delay={(i % 4) * 80}>
                           <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors h-full flex flex-col">
                             <div className="flex items-center justify-between mb-4">
-                              <Badge variant="secondary" className="text-xs">{pub.type}</Badge>
+                              <Badge className={`text-xs border-transparent hover:opacity-90 ${categoryBadgeClass(pub.type)}`}>{pub.type}</Badge>
                               <span className="text-muted-foreground text-xs">{pub.year}</span>
                             </div>
                             <h3 className="font-semibold text-foreground mb-3 leading-snug">{pub.title}</h3>
