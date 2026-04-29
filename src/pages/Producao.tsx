@@ -14,6 +14,20 @@ import { Search, ExternalLink, BookOpen, X, SlidersHorizontal, Loader2, ChevronL
 
 const ITEMS_PER_PAGE = 12;
 
+// MIGRA palette-based color per fixed category
+const CATEGORY_BADGE_CLASSES: Record<string, string> = {
+  "Projetos": "bg-[hsl(180_100%_22%)] text-white",            // teal
+  "Relatórios": "bg-[hsl(210_100%_18%)] text-white",          // navy
+  "Artigos": "bg-[hsl(35_30%_55%)] text-white",               // tan/sand
+  "Trabalhos Completos em Eventos": "bg-[hsl(40_45%_75%)] text-[hsl(210_100%_15%)]", // light sand
+  "Teses e Dissertações": "bg-[hsl(0_0%_10%)] text-white",    // black
+  "Capítulos de Livro": "bg-[hsl(180_60%_35%)] text-white",   // teal variation
+  "Livros": "bg-[hsl(210_70%_30%)] text-white",               // navy variation
+};
+
+const categoryBadgeClass = (type: string) =>
+  CATEGORY_BADGE_CLASSES[type] ?? "bg-muted text-foreground";
+
 const Producao = () => {
   const [search, setSearch] = useState("");
   const [activeTypes, setActiveTypes] = useState<string[]>([]);
