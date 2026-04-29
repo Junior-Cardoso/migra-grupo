@@ -5,7 +5,7 @@ import heroMigraBg from "@/assets/hero-migra-bg.jpg";
 import heroPattern from "@/assets/hero-pattern.webp";
 import radioMigraLogo from "@/assets/radio-migra-logo.png";
 import sobreMigraImg from "@/assets/sobre-migra.jpg";
-import migraLogoWhite from "@/assets/migra-logo-white.png";
+
 import sofiaZanforlin from "@/assets/team/sofia-zanforlin.png";
 import { Card } from "@/components/ui/card";
 import {
@@ -64,13 +64,8 @@ const MigraHome = () => {
             <p className="text-accent font-medium text-sm tracking-widest uppercase mb-4">
               {content.hero.eyebrow}
             </p>
-            <h1 className="mb-6">
-              <span className="sr-only">{content.hero.title}</span>
-              <img
-                src={migraLogoWhite}
-                alt="MIGRA"
-                className="w-full max-w-md md:max-w-xl lg:max-w-2xl h-auto"
-              />
+            <h1 className="font-heading text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 tracking-wide uppercase">
+              {content.hero.title}
             </h1>
             <p className="text-white/70 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
               {content.hero.description}
