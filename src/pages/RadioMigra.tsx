@@ -4,7 +4,8 @@ import PageHero from "@/components/PageHero";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Card } from "@/components/ui/card";
 import { Radio, Headphones, Music2, Mic2 } from "lucide-react";
-import character from "@/assets/characters/char-7.webp";
+import characterLeft from "@/assets/characters/char-6.webp";
+import characterRight from "@/assets/characters/char-1.webp";
 
 
 const RadioMigra = () => {
@@ -18,12 +19,13 @@ const RadioMigra = () => {
         eyebrow="MIGRA – UFPE"
         title="Rádio MIGRA"
         description="Podcast do grupo MIGRA – UFPE: conversas sobre migrações, mobilidades e gestão contemporânea de populações."
-        character={character}
+        character={characterLeft}
+        characterRight={characterRight}
         tint="teal"
       />
 
       {/* Player / Embed area */}
-      <section className="pb-8">
+      <section className="pt-12 md:pt-16 pb-8">
         <div className="max-w-5xl mx-auto px-6">
           <ScrollReveal>
             <div className="rounded-xl overflow-hidden bg-muted/50 border border-border">

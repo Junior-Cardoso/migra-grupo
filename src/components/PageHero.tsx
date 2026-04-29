@@ -17,11 +17,15 @@ interface PageHeroProps {
   eyebrow?: string;
   title: string;
   description?: string;
+  /** Character on the left (will be mirrored). */
   character: string;
+  /** Character on the right (normal orientation). Should differ from `character`. */
+  characterRight?: string;
   tint?: Tint;
 }
 
-const PageHero = ({ eyebrow, title, description, character, tint = "neutral" }: PageHeroProps) => {
+const PageHero = ({ eyebrow, title, description, character, characterRight, tint = "neutral" }: PageHeroProps) => {
+  const rightChar = characterRight ?? character;
   return (
     <section className={`pt-16 ${TINT_STYLES[tint]} relative overflow-hidden`}>
       {/* Pattern overlay */}
@@ -63,7 +67,7 @@ const PageHero = ({ eyebrow, title, description, character, tint = "neutral" }: 
 
         {/* Right character (normal orientation) */}
         <img
-          src={character}
+          src={rightChar}
           alt=""
           aria-hidden="true"
           className="hidden lg:block absolute right-0 bottom-0 h-[280px] xl:h-[320px] w-auto object-contain pointer-events-none select-none opacity-90"
@@ -71,7 +75,7 @@ const PageHero = ({ eyebrow, title, description, character, tint = "neutral" }: 
 
         {/* Mobile/tablet: single character on the right */}
         <img
-          src={character}
+          src={rightChar}
           alt=""
           aria-hidden="true"
           className="lg:hidden absolute right-0 bottom-0 h-44 md:h-56 w-auto object-contain pointer-events-none select-none opacity-60"

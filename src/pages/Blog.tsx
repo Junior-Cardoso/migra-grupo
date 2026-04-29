@@ -11,7 +11,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Search, ChevronLeft, ChevronRight } from "lucide-react";
 import { blogPosts, categories } from "@/data/blogPosts";
-import character from "@/assets/characters/char-3.webp";
+import characterLeft from "@/assets/characters/char-3.webp";
+import characterRight from "@/assets/characters/char-8.webp";
 
 const POSTS_PER_PAGE = 6;
 
@@ -72,7 +73,8 @@ const Blog = () => {
       <PageHero
         title="Blog"
         description="Acompanhe nossas publicações, novidades e reflexões sobre migrações e gestão contemporânea de populações."
-        character={character}
+        character={characterLeft}
+        characterRight={characterRight}
         tint="teal"
       />
 

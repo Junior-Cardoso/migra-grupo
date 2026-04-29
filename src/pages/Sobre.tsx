@@ -4,7 +4,8 @@ import PageHero from "@/components/PageHero";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Card } from "@/components/ui/card";
 import { GraduationCap, ExternalLink } from "lucide-react";
-import character from "@/assets/characters/char-1.webp";
+import characterLeft from "@/assets/characters/char-1.webp";
+import characterRight from "@/assets/characters/char-4.webp";
 
 const Sobre = () => {
   return (
@@ -14,7 +15,8 @@ const Sobre = () => {
       <PageHero
         title="Conheça o Grupo"
         description="História, equipe e trajetória do MIGRA – UFPE."
-        character={character}
+        character={characterLeft}
+        characterRight={characterRight}
         tint="navy"
       />
 

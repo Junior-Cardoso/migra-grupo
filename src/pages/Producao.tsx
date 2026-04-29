@@ -12,7 +12,8 @@ import { Input } from "@/components/ui/input";
 import type { Publication } from "@/data/acervoPublications";
 import { FIXED_CATEGORIES } from "@/data/acervoPublications";
 import { Search, ExternalLink, BookOpen, X, SlidersHorizontal, Loader2, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
-import character from "@/assets/characters/char-2.webp";
+import characterLeft from "@/assets/characters/char-2.webp";
+import characterRight from "@/assets/characters/char-6.webp";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -195,7 +196,8 @@ const Producao = () => {
         eyebrow="MIGRA – UFPE"
         title="Produção"
         description="Repositório de publicações do grupo de pesquisa MIGRA – UFPE."
-        character={character}
+        character={characterLeft}
+        characterRight={characterRight}
         tint="muted"
       />
 

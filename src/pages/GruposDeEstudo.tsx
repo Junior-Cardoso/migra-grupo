@@ -5,7 +5,8 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Mail, BookOpen, Calendar, Users } from "lucide-react";
-import character from "@/assets/characters/char-9.webp";
+import characterLeft from "@/assets/characters/char-9.webp";
+import characterRight from "@/assets/characters/char-7.webp";
 
 const groups = [
   {
@@ -48,7 +49,8 @@ const GruposDeEstudo = () => {
       <PageHero
         title="Grupos de Estudo"
         description="Espaços de aprendizado colaborativo sobre temas centrais das migrações contemporâneas."
-        character={character}
+        character={characterLeft}
+        characterRight={characterRight}
         tint="sand"
       />
 

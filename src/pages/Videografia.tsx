@@ -10,7 +10,8 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { Search, Video, Loader2 } from "lucide-react";
-import character from "@/assets/characters/char-5.webp";
+import characterLeft from "@/assets/characters/char-5.webp";
+import characterRight from "@/assets/characters/char-10.webp";
 
 const SECTIONS_ORDER = [
   "Así Pasó",
@@ -180,7 +181,8 @@ const Videografia = () => {
       <PageHero
         title="Videografia"
         description="Vídeos, palestras e documentários produzidos pelo MIGRA."
-        character={character}
+        character={characterLeft}
+        characterRight={characterRight}
         tint="gold"
       />
 
