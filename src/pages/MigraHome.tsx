@@ -256,11 +256,11 @@ const MigraHome = () => {
           <ScrollReveal>
             <div className="text-center mb-16">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-                Produção
+                {content.producao.title}
               </h2>
               <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Publicações recentes do nosso grupo de pesquisa.
+                {content.producao.description}
               </p>
             </div>
           </ScrollReveal>
@@ -304,7 +304,7 @@ const MigraHome = () => {
                 asChild
               >
                 <Link to="/producao">
-                  Ver toda a produção
+                  {content.producao.btnLabel}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -319,11 +319,11 @@ const MigraHome = () => {
           <ScrollReveal>
             <div className="text-center mb-16">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-                Nosso Blog
+                {content.blog.title}
               </h2>
               <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Acompanhe nossas publicações, novidades e reflexões sobre migração.
+                {content.blog.description}
               </p>
             </div>
           </ScrollReveal>
@@ -374,7 +374,7 @@ const MigraHome = () => {
                 asChild
               >
                 <Link to="/blog">
-                  Ver todos os posts
+                  {content.blog.btnLabel}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -455,11 +455,10 @@ const MigraHome = () => {
           <ScrollReveal>
             <Mail className="h-10 w-10 text-accent mx-auto mb-6" />
             <h2 className="font-heading text-3xl md:text-4xl font-bold uppercase tracking-wide mb-4">
-              Entre em Contato
+              {content.cta.title}
             </h2>
             <p className="text-white/70 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
-              Tem interesse em estudar migrações, mobilidades e gestão contemporânea de populações? 
-              Entre em contato e faça parte do nosso grupo de pesquisa e extensão.
+              {content.cta.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a
