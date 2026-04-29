@@ -278,10 +278,6 @@ const AdminProducao = () => {
               <Label>Categorias temáticas (separadas por vírgula)</Label>
               <Input value={form.thematic_categories} onChange={(e) => setForm({ ...form, thematic_categories: e.target.value })} placeholder="Ex: Comunicação, Interculturalidade" />
             </div>
-            <div className="space-y-2">
-              <Label>Tags (separadas por vírgula)</Label>
-              <Input value={form.tags} onChange={(e) => setForm({ ...form, tags: e.target.value })} placeholder="Ex: diáspora, mídia, pandemia" />
-            </div>
             <div className="flex justify-end gap-2">
               <Button type="button" variant="outline" onClick={closeDialog}>Cancelar</Button>
               <Button type="submit" disabled={saveMutation.isPending}>
