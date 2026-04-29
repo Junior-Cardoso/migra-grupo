@@ -183,14 +183,14 @@ const MigraHome = () => {
             </div>
           </ScrollReveal>
 
-          <div className="grid sm:grid-cols-2 gap-10 max-w-2xl mx-auto">
+          <div className="grid sm:grid-cols-2 gap-12 max-w-3xl mx-auto">
             {[
               { name: "Profa. Sofia Cavalcanti Zanforlin", role: "Coordenadora", photo: sofiaZanforlin },
               { name: "Profa. Carolina Gonçalves Leite", role: "Coordenadora", photo: null },
             ].map((member, i) => (
               <ScrollReveal key={i} delay={i * 100}>
                 <div className="text-center group">
-                  <div className="w-32 h-32 sm:w-40 sm:h-40 mx-auto rounded-full bg-muted mb-4 overflow-hidden flex items-center justify-center ring-4 ring-accent/20">
+                  <div className="w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto rounded-full bg-muted mb-6 overflow-hidden flex items-center justify-center ring-4 ring-accent/20">
                     {member.photo ? (
                       <img
                         src={member.photo}
@@ -199,10 +199,10 @@ const MigraHome = () => {
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <GraduationCap className="h-12 w-12 text-muted-foreground/40" />
+                      <GraduationCap className="h-20 w-20 text-muted-foreground/40" />
                     )}
                   </div>
-                  <h3 className="font-heading text-base font-semibold text-foreground uppercase tracking-wide">
+                  <h3 className="font-heading text-lg font-semibold text-foreground uppercase tracking-wide">
                     {member.name}
                   </h3>
                   <p className="text-muted-foreground text-sm mt-1">{member.role}</p>
