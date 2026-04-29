@@ -35,8 +35,8 @@ const PageHero = ({ eyebrow, title, description, character, characterRight, flip
       {/* Pattern background */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-no-repeat bg-cover bg-center pointer-events-none"
-        style={{ backgroundImage: `url(${heroPattern})` }}
+        className="absolute inset-0 bg-no-repeat bg-center pointer-events-none"
+        style={{ backgroundImage: `url(${heroPattern})`, backgroundSize: "85% auto" }}
       />
 
       {/* Standard fixed height container */}
