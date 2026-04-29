@@ -32,10 +32,10 @@ const PageHero = ({ eyebrow, title, description, character, characterRight, flip
   const rightClass = flipCharacters ? "scale-x-[-1]" : "";
   return (
     <section className={`pt-16 ${TINT_STYLES[tint]} relative overflow-hidden`}>
-      {/* Pattern overlay */}
+      {/* Pattern background */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 opacity-[0.07] bg-no-repeat bg-cover bg-center pointer-events-none"
+        className="absolute inset-0 bg-no-repeat bg-cover bg-center pointer-events-none"
         style={{ backgroundImage: `url(${heroPattern})` }}
       />
 
