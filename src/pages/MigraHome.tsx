@@ -70,7 +70,7 @@ const MigraHome = () => {
               <img
                 src={migraLogoHero}
                 alt={content.hero.title}
-                className="w-full max-w-[200px] md:max-w-[240px] lg:max-w-[280px] h-auto"
+                className="w-full max-w-[140px] md:max-w-[170px] lg:max-w-[200px] h-auto"
               />
             </h1>
             <p className="text-white/70 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
