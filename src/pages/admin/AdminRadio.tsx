@@ -32,6 +32,9 @@ const AdminRadio = () => {
   const [form, setForm] = useState<Omit<Episode, "id">>(empty);
   const [saving, setSaving] = useState(false);
   const [showId, setShowId] = useState("");
+  const [aboutTitle, setAboutTitle] = useState("Sobre o projeto");
+  const [aboutParagraphs, setAboutParagraphs] = useState<string[]>([]);
+  const [savingAbout, setSavingAbout] = useState(false);
 
   const { data: episodes = [], isLoading } = useQuery({
     queryKey: ["radio_episodes"],
@@ -53,6 +56,17 @@ const AdminRadio = () => {
     },
   });
 
+  useQuery({
+    queryKey: ["admin_radio_about"],
+    queryFn: async () => {
+      const { data } = await supabase.from("page_content").select("content").eq("page", "radio").eq("section_key", "about").maybeSingle();
+      const c = (data?.content as any) ?? {};
+      setAboutTitle(c.title ?? "Sobre o projeto");
+      setAboutParagraphs(Array.isArray(c.paragraphs) ? c.paragraphs : []);
+      return c;
+    },
+  });
+
   const saveShowId = async () => {
     const { error } = await supabase.from("page_content").upsert(
       { page: "radio", section_key: "show", content: { spotifyShowId: showId }, updated_at: new Date().toISOString() },
@@ -60,6 +74,22 @@ const AdminRadio = () => {
     );
     if (error) return toast.error(error.message);
     toast.success("Show do Spotify salvo!");
+    qc.invalidateQueries({ queryKey: ["page_content", "radio"] });
+  };
+
+  const saveAbout = async () => {
+    setSavingAbout(true);
+    const { error } = await supabase.from("page_content").upsert(
+      {
+        page: "radio", section_key: "about",
+        content: { title: aboutTitle, paragraphs: aboutParagraphs.filter((p) => p.trim()) },
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: "page,section_key" }
+    );
+    setSavingAbout(false);
+    if (error) return toast.error(error.message);
+    toast.success("Seção “Sobre o projeto” salva!");
     qc.invalidateQueries({ queryKey: ["page_content", "radio"] });
   };
 
@@ -114,6 +144,35 @@ const AdminRadio = () => {
           <Button onClick={saveShowId}><Save className="h-4 w-4 mr-1.5" /> Salvar</Button>
         </div>
         <p className="text-[11px] text-muted-foreground mt-2">Encontre em: open.spotify.com/show/<strong>SHOW_ID</strong></p>
+      </Card>
+
+      <Card className="p-5 mb-6 space-y-3">
+        <div className="flex items-center justify-between">
+          <Label className="text-xs uppercase tracking-wider text-muted-foreground">Seção “Sobre o projeto”</Label>
+          <Button size="sm" onClick={saveAbout} disabled={savingAbout}>
+            {savingAbout ? <Loader2 className="h-4 w-4 mr-1.5 animate-spin" /> : <Save className="h-4 w-4 mr-1.5" />} Salvar
+          </Button>
+        </div>
+        <div>
+          <Label className="text-xs">Título</Label>
+          <Input value={aboutTitle} onChange={(e) => setAboutTitle(e.target.value)} maxLength={60} />
+        </div>
+        {aboutParagraphs.map((p, i) => (
+          <div key={i} className="flex gap-2 items-start">
+            <div className="flex-1">
+              <Label className="text-xs">Parágrafo {i + 1}</Label>
+              <Textarea value={p} rows={4} maxLength={800} onChange={(e) => {
+                const next = [...aboutParagraphs]; next[i] = e.target.value; setAboutParagraphs(next);
+              }} />
+            </div>
+            <Button variant="ghost" size="icon" className="mt-6" onClick={() => setAboutParagraphs(aboutParagraphs.filter((_, k) => k !== i))}>
+              <Trash2 className="h-4 w-4 text-destructive" />
+            </Button>
+          </div>
+        ))}
+        <Button variant="outline" size="sm" onClick={() => setAboutParagraphs([...aboutParagraphs, ""])}>
+          <Plus className="h-4 w-4 mr-1.5" /> Adicionar parágrafo
+        </Button>
       </Card>
 
       {isLoading ? (
