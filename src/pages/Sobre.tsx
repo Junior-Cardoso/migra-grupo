@@ -7,11 +7,12 @@ import { GraduationCap, ExternalLink } from "lucide-react";
 import characterLeft from "@/assets/characters/char-1.webp";
 import characterRight from "@/assets/characters/char-4.webp";
 import sofiaZanforlin from "@/assets/team/sofia-zanforlin.png";
+import carolinaLeiteAsset from "@/assets/team/carolina-leite.png.asset.json";
 
-const PHOTO_MAP: Record<string, string> = { sofia: sofiaZanforlin };
 const photoFor = (name: string) => {
   const n = name.toLowerCase();
-  if (n.includes("sofia")) return PHOTO_MAP.sofia;
+  if (n.includes("sofia")) return sofiaZanforlin;
+  if (n.includes("carol")) return carolinaLeiteAsset.url;
   return null;
 };
 import { usePageContent } from "@/hooks/usePageContent";

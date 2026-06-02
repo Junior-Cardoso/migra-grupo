@@ -8,6 +8,7 @@ import radioMigraLogo from "@/assets/radio-migra-logo.png";
 import sobreMigraImg from "@/assets/sobre-migra.jpg";
 
 import sofiaZanforlin from "@/assets/team/sofia-zanforlin.png";
+import carolinaLeiteAsset from "@/assets/team/carolina-leite.png.asset.json";
 import { Card } from "@/components/ui/card";
 import {
   BookOpen,
@@ -23,7 +24,7 @@ import MigraFooter from "@/components/MigraFooter";
 import { usePageContent } from "@/hooks/usePageContent";
 import { resolveIcon } from "@/lib/iconMap";
 
-const PHOTO_MAP: Record<string, string> = { sofia: sofiaZanforlin };
+const PHOTO_MAP: Record<string, string> = { sofia: sofiaZanforlin, carolina: carolinaLeiteAsset.url };
 
 const MigraHome = () => {
   const { data: content } = usePageContent("inicio");

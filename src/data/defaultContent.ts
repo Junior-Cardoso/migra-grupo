@@ -34,7 +34,7 @@ export const defaultHomeContent = {
     description: "Pesquisadores dedicados ao estudo das migrações, mobilidades e gestão de populações.",
     members: [
       { name: "Profa. Sofia Cavalcanti Zanforlin", role: "Coordenadora", photoKey: "sofia" },
-      { name: "Profa. Carolina Gonçalves Leite", role: "Coordenadora", photoKey: null },
+      { name: "Profa. Carolina Gonçalves Leite", role: "Coordenadora", photoKey: "carolina" },
     ],
   },
   grupos: {
