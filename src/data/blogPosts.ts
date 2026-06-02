@@ -38,7 +38,7 @@ const loremContent = `
   <p>Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
 `;
 
-export const blogPosts: BlogPost[] = [
+export const blogPosts: BlogPost[] = [];
   {
     id: 1,
     slug: "migracao-venezuelana-pernambuco",
