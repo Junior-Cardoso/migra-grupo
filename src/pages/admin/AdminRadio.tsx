@@ -32,6 +32,9 @@ const AdminRadio = () => {
   const [form, setForm] = useState<Omit<Episode, "id">>(empty);
   const [saving, setSaving] = useState(false);
   const [showId, setShowId] = useState("");
+  const [aboutTitle, setAboutTitle] = useState("Sobre o projeto");
+  const [aboutParagraphs, setAboutParagraphs] = useState<string[]>([]);
+  const [savingAbout, setSavingAbout] = useState(false);
 
   const { data: episodes = [], isLoading } = useQuery({
     queryKey: ["radio_episodes"],
