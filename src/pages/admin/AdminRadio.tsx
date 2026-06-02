@@ -56,6 +56,17 @@ const AdminRadio = () => {
     },
   });
 
+  useQuery({
+    queryKey: ["admin_radio_about"],
+    queryFn: async () => {
+      const { data } = await supabase.from("page_content").select("content").eq("page", "radio").eq("section_key", "about").maybeSingle();
+      const c = (data?.content as any) ?? {};
+      setAboutTitle(c.title ?? "Sobre o projeto");
+      setAboutParagraphs(Array.isArray(c.paragraphs) ? c.paragraphs : []);
+      return c;
+    },
+  });
+
   const saveShowId = async () => {
     const { error } = await supabase.from("page_content").upsert(
       { page: "radio", section_key: "show", content: { spotifyShowId: showId }, updated_at: new Date().toISOString() },
@@ -63,6 +74,22 @@ const AdminRadio = () => {
     );
     if (error) return toast.error(error.message);
     toast.success("Show do Spotify salvo!");
+    qc.invalidateQueries({ queryKey: ["page_content", "radio"] });
+  };
+
+  const saveAbout = async () => {
+    setSavingAbout(true);
+    const { error } = await supabase.from("page_content").upsert(
+      {
+        page: "radio", section_key: "about",
+        content: { title: aboutTitle, paragraphs: aboutParagraphs.filter((p) => p.trim()) },
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: "page,section_key" }
+    );
+    setSavingAbout(false);
+    if (error) return toast.error(error.message);
+    toast.success("Seção “Sobre o projeto” salva!");
     qc.invalidateQueries({ queryKey: ["page_content", "radio"] });
   };
 
