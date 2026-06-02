@@ -53,17 +53,17 @@ export default function SpotifyEpisodeRow({
   const thumb = meta?.thumbnail_url;
 
   return (
-    <div className="rounded-lg border border-transparent hover:border-border transition-colors">
+    <div className="rounded-2xl border border-border bg-muted/40 hover:bg-muted/70 hover:border-primary/30 transition-colors">
       <div
-        className="group flex items-center gap-4 px-4 py-3 rounded-lg hover:bg-muted/60 transition-colors cursor-pointer"
+        className="group flex items-center gap-4 px-4 py-3 rounded-2xl cursor-pointer"
         onClick={() => episodeId && setOpen((o) => !o)}
         role={episodeId ? "button" : undefined}
       >
-        <span className="text-muted-foreground/50 text-sm font-medium w-6 text-right shrink-0 group-hover:text-foreground transition-colors">
+        <span className="text-muted-foreground/60 text-sm font-medium w-6 text-right shrink-0 group-hover:text-foreground transition-colors">
           {episodeNumber}
         </span>
 
-        <div className="w-12 h-12 rounded overflow-hidden bg-primary/10 flex items-center justify-center shrink-0 relative">
+        <div className="w-12 h-12 rounded-lg overflow-hidden bg-primary/10 flex items-center justify-center shrink-0 relative">
           {thumb ? (
             <img src={thumb} alt="" className="w-full h-full object-cover" />
           ) : (
@@ -80,15 +80,17 @@ export default function SpotifyEpisodeRow({
           <h3 className="font-semibold text-foreground text-sm md:text-base truncate group-hover:text-primary transition-colors">
             {title}
           </h3>
-          {fallbackDescription && (
-            <p className="text-muted-foreground text-xs mt-0.5 truncate">{fallbackDescription}</p>
-          )}
+          <div className="flex items-center gap-2 mt-0.5 text-muted-foreground/70 text-xs">
+            {dateLabel && <span>{dateLabel}</span>}
+            {dateLabel && durationLabel && <span aria-hidden>·</span>}
+            {durationLabel && <span>{durationLabel}</span>}
+            {fallbackDescription && (dateLabel || durationLabel) && <span aria-hidden className="hidden md:inline">·</span>}
+            {fallbackDescription && (
+              <span className="truncate hidden md:inline">{fallbackDescription}</span>
+            )}
+          </div>
         </div>
 
-        {dateLabel && <span className="text-muted-foreground/60 text-xs shrink-0 hidden sm:block">{dateLabel}</span>}
-        {durationLabel && (
-          <span className="text-muted-foreground/60 text-xs shrink-0 hidden sm:block ml-4">{durationLabel}</span>
-        )}
         {spotifyUrl && (
           <a
             href={spotifyUrl}
@@ -102,6 +104,7 @@ export default function SpotifyEpisodeRow({
           </a>
         )}
       </div>
+
 
       {open && episodeId && (
         <div className="px-4 pb-4">
