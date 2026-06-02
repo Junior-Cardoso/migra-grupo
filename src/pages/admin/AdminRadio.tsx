@@ -146,6 +146,35 @@ const AdminRadio = () => {
         <p className="text-[11px] text-muted-foreground mt-2">Encontre em: open.spotify.com/show/<strong>SHOW_ID</strong></p>
       </Card>
 
+      <Card className="p-5 mb-6 space-y-3">
+        <div className="flex items-center justify-between">
+          <Label className="text-xs uppercase tracking-wider text-muted-foreground">Seção “Sobre o projeto”</Label>
+          <Button size="sm" onClick={saveAbout} disabled={savingAbout}>
+            {savingAbout ? <Loader2 className="h-4 w-4 mr-1.5 animate-spin" /> : <Save className="h-4 w-4 mr-1.5" />} Salvar
+          </Button>
+        </div>
+        <div>
+          <Label className="text-xs">Título</Label>
+          <Input value={aboutTitle} onChange={(e) => setAboutTitle(e.target.value)} maxLength={60} />
+        </div>
+        {aboutParagraphs.map((p, i) => (
+          <div key={i} className="flex gap-2 items-start">
+            <div className="flex-1">
+              <Label className="text-xs">Parágrafo {i + 1}</Label>
+              <Textarea value={p} rows={4} maxLength={800} onChange={(e) => {
+                const next = [...aboutParagraphs]; next[i] = e.target.value; setAboutParagraphs(next);
+              }} />
+            </div>
+            <Button variant="ghost" size="icon" className="mt-6" onClick={() => setAboutParagraphs(aboutParagraphs.filter((_, k) => k !== i))}>
+              <Trash2 className="h-4 w-4 text-destructive" />
+            </Button>
+          </div>
+        ))}
+        <Button variant="outline" size="sm" onClick={() => setAboutParagraphs([...aboutParagraphs, ""])}>
+          <Plus className="h-4 w-4 mr-1.5" /> Adicionar parágrafo
+        </Button>
+      </Card>
+
       {isLoading ? (
         <div className="flex justify-center py-16"><Loader2 className="h-8 w-8 animate-spin text-muted-foreground" /></div>
       ) : episodes.length === 0 ? (
