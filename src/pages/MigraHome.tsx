@@ -24,7 +24,7 @@ import MigraFooter from "@/components/MigraFooter";
 import { usePageContent } from "@/hooks/usePageContent";
 import { resolveIcon } from "@/lib/iconMap";
 
-const PHOTO_MAP: Record<string, string> = { sofia: sofiaZanforlin };
+const PHOTO_MAP: Record<string, string> = { sofia: sofiaZanforlin, carolina: carolinaLeiteAsset.url };
 
 const MigraHome = () => {
   const { data: content } = usePageContent("inicio");
