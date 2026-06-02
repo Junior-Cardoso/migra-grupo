@@ -8,6 +8,7 @@ import radioMigraLogo from "@/assets/radio-migra-logo.png";
 import sobreMigraImg from "@/assets/sobre-migra.jpg";
 
 import sofiaZanforlin from "@/assets/team/sofia-zanforlin.png";
+import carolinaLeiteAsset from "@/assets/team/carolina-leite.png.asset.json";
 import { Card } from "@/components/ui/card";
 import {
   BookOpen,
