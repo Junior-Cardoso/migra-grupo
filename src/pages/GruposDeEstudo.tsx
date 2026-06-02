@@ -58,7 +58,7 @@ const GruposDeEstudo = () => {
                     <p className="text-muted-foreground text-sm leading-relaxed mt-2">{group.description}</p>
                   </div>
 
-                  <div className="grid md:grid-cols-3 gap-6">
+                  <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground uppercase tracking-wider mb-3">
                         <BookOpen className="h-4 w-4 text-primary" /> Objetivos
