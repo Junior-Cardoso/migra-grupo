@@ -92,10 +92,25 @@ const RadioMigra = () => {
 
       <section className="pb-20">
         <div className="max-w-5xl mx-auto px-6">
+          {about?.paragraphs && about.paragraphs.length > 0 && (
+            <ScrollReveal>
+              <div className="mb-12">
+                <h2 className="font-heading text-lg font-bold text-foreground uppercase tracking-wide mb-2">
+                  {about.title ?? "Sobre o projeto"}
+                </h2>
+                <div className="w-12 h-1 bg-accent mt-3 mb-6 rounded-full" />
+                <div className="space-y-4 text-muted-foreground leading-relaxed text-sm md:text-base max-w-3xl">
+                  {about.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+                </div>
+              </div>
+            </ScrollReveal>
+          )}
+
           <ScrollReveal delay={100}>
             <h2 className="font-heading text-lg font-bold text-foreground uppercase tracking-wide mb-6">
               Episódios em Destaque
             </h2>
+
 
             {isLoading ? (
               <div className="flex justify-center py-10"><Loader2 className="h-6 w-6 animate-spin text-muted-foreground" /></div>
