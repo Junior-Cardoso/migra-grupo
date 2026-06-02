@@ -127,7 +127,9 @@ const RadioMigra = () => {
                 </h2>
                 <div className="w-12 h-1 bg-accent mt-3 mb-6 rounded-full" />
                 <div className="space-y-4 text-muted-foreground leading-relaxed text-sm md:text-base max-w-3xl">
-                  {about.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+                  {about.paragraphs.map((p, i) => (
+                    <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
+                  ))}
                 </div>
               </div>
             </ScrollReveal>
