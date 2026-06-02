@@ -49,7 +49,7 @@ const Sobre = () => {
           <div className="space-y-6 text-muted-foreground leading-relaxed">
             {content.historia.paragraphs.map((p, i) => (
               <ScrollReveal key={i} delay={i * 60}>
-                <p>{p}</p>
+                <p dangerouslySetInnerHTML={{ __html: p }} />
                 {i === 0 && (
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 my-10">
                     <div className="aspect-[4/3] rounded-lg overflow-hidden border border-border bg-muted col-span-2 md:col-span-2 md:row-span-2">
