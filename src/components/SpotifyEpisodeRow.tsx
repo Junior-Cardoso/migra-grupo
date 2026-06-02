@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Music2, Play, Pause, ExternalLink } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Props {
   episodeNumber: number;
@@ -22,6 +23,29 @@ interface OEmbed {
   thumbnail_url?: string;
   provider_name?: string;
 }
+
+interface EpisodeMeta {
+  releaseDate?: string;
+  durationSeconds?: number;
+  title?: string;
+  thumbnail?: string;
+}
+
+const formatDate = (iso?: string) => {
+  if (!iso) return undefined;
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return undefined;
+  return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" });
+};
+
+const formatDuration = (sec?: number) => {
+  if (!sec || sec <= 0) return undefined;
+  const m = Math.round(sec / 60);
+  if (m < 60) return `${m} min`;
+  const h = Math.floor(m / 60);
+  const r = m % 60;
+  return r ? `${h} h ${r} min` : `${h} h`;
+};
 
 export default function SpotifyEpisodeRow({
   episodeNumber,
@@ -49,8 +73,31 @@ export default function SpotifyEpisodeRow({
     },
   });
 
+  const { data: extra } = useQuery({
+    queryKey: ["spotify_meta", episodeId],
+    enabled: !!episodeId,
+    staleTime: 1000 * 60 * 60 * 24,
+    queryFn: async (): Promise<EpisodeMeta | null> => {
+      try {
+        const projectId = (import.meta as any).env?.VITE_SUPABASE_PROJECT_ID;
+        if (!projectId) return null;
+        const r = await fetch(
+          `https://${projectId}.supabase.co/functions/v1/spotify-episode-meta?id=${episodeId}`,
+        );
+        if (!r.ok) return null;
+        return (await r.json()) as EpisodeMeta;
+      } catch {
+        return null;
+      }
+    },
+  });
+
+
   const title = meta?.title ?? fallbackTitle;
-  const thumb = meta?.thumbnail_url;
+  const thumb = meta?.thumbnail_url ?? extra?.thumbnail;
+  const displayDate = formatDate(extra?.releaseDate) ?? dateLabel;
+  const displayDuration = formatDuration(extra?.durationSeconds) ?? durationLabel;
+
 
   return (
     <div className="rounded-2xl border border-border bg-muted/40 hover:bg-muted/70 hover:border-primary/30 transition-colors">
@@ -81,10 +128,11 @@ export default function SpotifyEpisodeRow({
             {title}
           </h3>
           <div className="flex items-center gap-2 mt-0.5 text-muted-foreground/70 text-xs">
-            {dateLabel && <span>{dateLabel}</span>}
-            {dateLabel && durationLabel && <span aria-hidden>·</span>}
-            {durationLabel && <span>{durationLabel}</span>}
-            {fallbackDescription && (dateLabel || durationLabel) && <span aria-hidden className="hidden md:inline">·</span>}
+            {displayDate && <span>{displayDate}</span>}
+            {displayDate && displayDuration && <span aria-hidden>·</span>}
+            {displayDuration && <span>{displayDuration}</span>}
+            {fallbackDescription && (displayDate || displayDuration) && <span aria-hidden className="hidden md:inline">·</span>}
+
             {fallbackDescription && (
               <span className="truncate hidden md:inline">{fallbackDescription}</span>
             )}
