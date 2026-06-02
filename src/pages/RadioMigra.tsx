@@ -4,9 +4,10 @@ import MigraNavigation from "@/components/MigraNavigation";
 import MigraFooter from "@/components/MigraFooter";
 import PageHero from "@/components/PageHero";
 import ScrollReveal from "@/components/ScrollReveal";
-import { Music2, Loader2, ExternalLink } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import characterLeft from "@/assets/characters/char-6.webp";
 import characterRight from "@/assets/characters/char-1.webp";
+import SpotifyEpisodeRow from "@/components/SpotifyEpisodeRow";
 
 interface Episode {
   id: string;
