@@ -8,6 +8,8 @@ import characterLeft from "@/assets/characters/char-1.webp";
 import characterRight from "@/assets/characters/char-4.webp";
 import sofiaZanforlin from "@/assets/team/sofia-zanforlin.png";
 import carolinaLeiteAsset from "@/assets/team/carolina-leite.png.asset.json";
+import historiaImg1 from "@/assets/sobre-migra.jpg";
+import historiaImg2 from "@/assets/hero-migra-bg.jpg";
 
 const photoFor = (name: string) => {
   const n = name.toLowerCase();
