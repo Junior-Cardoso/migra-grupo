@@ -70,8 +70,12 @@ const Sobre = () => {
               <ScrollReveal key={i} delay={i * 150}>
                 <Card className="p-8 bg-background border-border h-full">
                   <div className="flex items-start gap-5">
-                    <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center shrink-0">
-                      <GraduationCap className="h-10 w-10 text-muted-foreground/40" />
+                    <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center shrink-0 overflow-hidden">
+                      {photoFor(prof.name) ? (
+                        <img src={photoFor(prof.name)!} alt={prof.name} className="w-full h-full object-cover" />
+                      ) : (
+                        <GraduationCap className="h-10 w-10 text-muted-foreground/40" />
+                      )}
                     </div>
                     <div>
                       <h3 className="font-heading text-lg font-bold text-foreground uppercase tracking-wide">
