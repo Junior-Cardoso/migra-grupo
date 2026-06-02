@@ -103,7 +103,7 @@ const RadioMigra = () => {
             ) : episodes.length === 0 ? (
               <p className="text-muted-foreground text-sm">Nenhum episódio cadastrado ainda.</p>
             ) : (
-              <div className="space-y-1">
+              <div className="space-y-3">
                 {episodes.map((ep) => (
                   <SpotifyEpisodeRow
                     key={ep.id}
