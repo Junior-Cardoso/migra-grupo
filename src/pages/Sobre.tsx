@@ -6,6 +6,14 @@ import { Card } from "@/components/ui/card";
 import { GraduationCap, ExternalLink } from "lucide-react";
 import characterLeft from "@/assets/characters/char-1.webp";
 import characterRight from "@/assets/characters/char-4.webp";
+import sofiaZanforlin from "@/assets/team/sofia-zanforlin.png";
+
+const PHOTO_MAP: Record<string, string> = { sofia: sofiaZanforlin };
+const photoFor = (name: string) => {
+  const n = name.toLowerCase();
+  if (n.includes("sofia")) return PHOTO_MAP.sofia;
+  return null;
+};
 import { usePageContent } from "@/hooks/usePageContent";
 
 const Sobre = () => {
