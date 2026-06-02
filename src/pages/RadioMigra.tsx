@@ -84,9 +84,6 @@ const RadioMigra = () => {
                 Configure o ID do show do Spotify na área administrativa.
               </div>
             )}
-            <p className="text-muted-foreground/50 text-xs mt-3 text-center">
-              Também disponível em outras plataformas de podcast.
-            </p>
           </ScrollReveal>
         </div>
       </section>
