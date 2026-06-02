@@ -78,13 +78,6 @@ export default function SpotifyEpisodeRow({
     enabled: !!episodeId,
     staleTime: 1000 * 60 * 60 * 24,
     queryFn: async (): Promise<EpisodeMeta | null> => {
-      const { data, error } = await supabase.functions.invoke("spotify-episode-meta", {
-        method: "GET",
-        body: undefined,
-        // pass id as query param via fetch override
-      } as any).catch(() => ({ data: null, error: true } as any));
-      if (data && !error) return data as EpisodeMeta;
-      // Fallback: direct fetch with query string
       try {
         const projectId = (import.meta as any).env?.VITE_SUPABASE_PROJECT_ID;
         if (!projectId) return null;
@@ -98,6 +91,7 @@ export default function SpotifyEpisodeRow({
       }
     },
   });
+
 
   const title = meta?.title ?? fallbackTitle;
   const thumb = meta?.thumbnail_url ?? extra?.thumbnail;
