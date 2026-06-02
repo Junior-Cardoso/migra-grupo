@@ -36,25 +36,37 @@ const Sobre = () => {
 
       {/* Breve História */}
       <section className="py-20 md:py-28">
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="max-w-4xl mx-auto px-6">
           <ScrollReveal>
-            <div className="grid md:grid-cols-2 gap-10 items-center">
-              <div>
-                <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground uppercase tracking-wide mb-2">
-                  {content.historia.title}
-                </h2>
-                <div className="w-12 h-1 bg-accent mt-3 mb-8 rounded-full" />
-                <div className="space-y-6 text-muted-foreground leading-relaxed">
-                  {content.historia.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
-                </div>
-              </div>
-              <div className="aspect-[4/3] rounded-lg bg-muted flex items-center justify-center border border-border overflow-hidden">
-                <img src="/placeholder.svg" alt="Imagem ilustrativa do MIGRA" className="w-full h-full object-cover opacity-50" />
-              </div>
-            </div>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground uppercase tracking-wide mb-2">
+              {content.historia.title}
+            </h2>
+            <div className="w-12 h-1 bg-accent mt-3 mb-10 rounded-full" />
           </ScrollReveal>
+
+          <div className="space-y-6 text-muted-foreground leading-relaxed">
+            {content.historia.paragraphs.map((p, i) => (
+              <ScrollReveal key={i} delay={i * 60}>
+                <p>{p}</p>
+                {i === 0 && (
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 my-10">
+                    <div className="aspect-[4/3] rounded-lg overflow-hidden border border-border bg-muted col-span-2 md:col-span-2 md:row-span-2">
+                      <img src="/src/assets/sobre-migra.jpg" alt="Atividade do grupo MIGRA" className="w-full h-full object-cover" />
+                    </div>
+                    <div className="aspect-square rounded-lg overflow-hidden border border-border bg-muted hidden md:block">
+                      <img src="/src/assets/hero-migra-bg.jpg" alt="Pesquisa de campo MIGRA" className="w-full h-full object-cover" />
+                    </div>
+                    <div className="aspect-square rounded-lg overflow-hidden border border-border bg-muted hidden md:block">
+                      <img src="/placeholder.svg" alt="Foto institucional MIGRA" className="w-full h-full object-cover opacity-60" />
+                    </div>
+                  </div>
+                )}
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
+
 
       {/* Coordenação */}
       <section className="py-20 md:py-28 bg-muted/50">
