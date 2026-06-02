@@ -53,10 +53,10 @@ const Sobre = () => {
                 {i === 0 && (
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 my-10">
                     <div className="aspect-[4/3] rounded-lg overflow-hidden border border-border bg-muted col-span-2 md:col-span-2 md:row-span-2">
-                      <img src="/src/assets/sobre-migra.jpg" alt="Atividade do grupo MIGRA" className="w-full h-full object-cover" />
+                      <img src={historiaImg1} alt="Atividade do grupo MIGRA" className="w-full h-full object-cover" />
                     </div>
                     <div className="aspect-square rounded-lg overflow-hidden border border-border bg-muted hidden md:block">
-                      <img src="/src/assets/hero-migra-bg.jpg" alt="Pesquisa de campo MIGRA" className="w-full h-full object-cover" />
+                      <img src={historiaImg2} alt="Pesquisa de campo MIGRA" className="w-full h-full object-cover" />
                     </div>
                     <div className="aspect-square rounded-lg overflow-hidden border border-border bg-muted hidden md:block">
                       <img src="/placeholder.svg" alt="Foto institucional MIGRA" className="w-full h-full object-cover opacity-60" />
