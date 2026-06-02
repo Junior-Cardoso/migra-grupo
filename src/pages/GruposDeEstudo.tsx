@@ -58,7 +58,7 @@ const GruposDeEstudo = () => {
                     <p className="text-muted-foreground text-sm leading-relaxed mt-2">{group.description}</p>
                   </div>
 
-                  <div className="grid md:grid-cols-3 gap-6">
+                  <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground uppercase tracking-wider mb-3">
                         <BookOpen className="h-4 w-4 text-primary" /> Objetivos
@@ -73,19 +73,6 @@ const GruposDeEstudo = () => {
                       </ul>
                     </div>
 
-                    <div>
-                      <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground uppercase tracking-wider mb-3">
-                        <Calendar className="h-4 w-4 text-primary" /> Ciclos de Estudo
-                      </h3>
-                      <div className="space-y-3">
-                        {group.cycles.map((cycle, j) => (
-                          <div key={j} className="border-l-2 border-accent pl-3">
-                            <p className="text-foreground text-sm font-medium">{cycle.name}</p>
-                            <p className="text-muted-foreground text-xs">{cycle.period}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
 
                     <div>
                       <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground uppercase tracking-wider mb-3">
