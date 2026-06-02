@@ -28,6 +28,15 @@ const RadioMigra = () => {
     },
   });
 
+  const { data: about } = useQuery({
+    queryKey: ["page_content", "radio", "about"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("page_content").select("content").eq("page", "radio").eq("section_key", "about").maybeSingle();
+      return (data?.content as any) as { title?: string; paragraphs?: string[] } | null;
+    },
+  });
+
   const { data: episodes = [], isLoading } = useQuery({
     queryKey: ["radio_episodes"],
     queryFn: async () => {
