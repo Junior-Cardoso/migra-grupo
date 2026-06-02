@@ -128,10 +128,11 @@ export default function SpotifyEpisodeRow({
             {title}
           </h3>
           <div className="flex items-center gap-2 mt-0.5 text-muted-foreground/70 text-xs">
-            {dateLabel && <span>{dateLabel}</span>}
-            {dateLabel && durationLabel && <span aria-hidden>·</span>}
-            {durationLabel && <span>{durationLabel}</span>}
-            {fallbackDescription && (dateLabel || durationLabel) && <span aria-hidden className="hidden md:inline">·</span>}
+            {displayDate && <span>{displayDate}</span>}
+            {displayDate && displayDuration && <span aria-hidden>·</span>}
+            {displayDuration && <span>{displayDuration}</span>}
+            {fallbackDescription && (displayDate || displayDuration) && <span aria-hidden className="hidden md:inline">·</span>}
+
             {fallbackDescription && (
               <span className="truncate hidden md:inline">{fallbackDescription}</span>
             )}
