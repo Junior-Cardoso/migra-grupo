@@ -1,3 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import MigraNavigation from "@/components/MigraNavigation";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
@@ -6,6 +8,7 @@ import migraLogoHero from "@/assets/migra-logo-hero.webp";
 import heroPattern from "@/assets/hero-pattern.webp";
 import radioMigraLogo from "@/assets/radio-migra-logo.png";
 import sobreMigraImg from "@/assets/sobre-migra.jpg";
+import SpotifyEpisodeRow from "@/components/SpotifyEpisodeRow";
 
 import sofiaZanforlin from "@/assets/team/sofia-zanforlin.png";
 import carolinaLeiteAsset from "@/assets/team/carolina-leite.png.asset.json";
@@ -14,10 +17,10 @@ import {
   BookOpen,
   FileText,
   Headphones,
-  Music2,
   ArrowRight,
   Mail,
   GraduationCap,
+  Users,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import MigraFooter from "@/components/MigraFooter";
@@ -28,6 +31,45 @@ const PHOTO_MAP: Record<string, string> = { sofia: sofiaZanforlin, carolina: car
 
 const MigraHome = () => {
   const { data: content } = usePageContent("inicio");
+
+  // Real data from Supabase for the home page
+  const { data: studyGroups = [] } = useQuery({
+    queryKey: ["home_study_groups"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("study_groups")
+        .select("id, title, description")
+        .order("sort_order")
+        .limit(3);
+      return data ?? [];
+    },
+  });
+
+  const { data: latestPublications = [] } = useQuery({
+    queryKey: ["home_latest_publications"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("publications")
+        .select("id, title, type, year, authors")
+        .order("year", { ascending: false })
+        .order("created_at", { ascending: false })
+        .limit(6);
+      return data ?? [];
+    },
+  });
+
+  const { data: latestEpisodes = [] } = useQuery({
+    queryKey: ["home_latest_episodes"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("radio_episodes")
+        .select("*")
+        .order("sort_order")
+        .limit(3);
+      return data ?? [];
+    },
+  });
+
   if (!content) return null;
   return (
     <div className="min-h-screen bg-background">
@@ -232,24 +274,25 @@ const MigraHome = () => {
           </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {content.grupos.items.map((group, i) => {
-              const Icon = resolveIcon(group.icon);
-              return (
-                <ScrollReveal key={i} delay={i * 100}>
+            {studyGroups.length === 0 ? (
+              <p className="text-muted-foreground text-sm col-span-full text-center">Em breve.</p>
+            ) : (
+              studyGroups.map((group, i) => (
+                <ScrollReveal key={group.id} delay={i * 100}>
                   <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors group h-full">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                      <Icon className="h-6 w-6 text-primary" />
+                      <Users className="h-6 w-6 text-primary" />
                     </div>
                     <h3 className="font-heading text-lg font-semibold text-foreground mb-2 uppercase tracking-wide">
                       {group.title}
                     </h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {group.desc}
+                    <p className="text-muted-foreground text-sm leading-relaxed line-clamp-4">
+                      {group.description}
                     </p>
                   </Card>
                 </ScrollReveal>
-              );
-            })}
+              ))
+            )}
           </div>
 
           <ScrollReveal>
@@ -285,34 +328,43 @@ const MigraHome = () => {
           </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { type: "Artigo", title: "Migrações venezuelanas no Nordeste brasileiro: desafios e perspectivas", author: "Ana Beatriz Souza", initials: "AS", year: "2024" },
-              { type: "Capítulo", title: "Apatridia e proteção internacional: uma análise do caso brasileiro", author: "Carlos Drummond", initials: "CD", year: "2024" },
-              { type: "Working Paper", title: "Políticas públicas de acolhimento: estudo comparado Brasil-Portugal", author: "Elena Ferreira", initials: "EF", year: "2023" },
-              { type: "Artigo", title: "Direito ao refúgio e a crise humanitária na fronteira norte", author: "Gabriel Henrique", initials: "GH", year: "2023" },
-              { type: "Dissertação", title: "Integração local de refugiados sírios em Recife", author: "Isabela Jardim", initials: "IJ", year: "2023" },
-              { type: "Artigo", title: "Mobilidade humana e direitos fundamentais no Mercosul", author: "Karen Lima", initials: "KL", year: "2022" },
-            ].map((pub, i) => (
-              <ScrollReveal key={i} delay={(i % 3) * 100}>
-                <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors h-full">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
-                      {pub.type}
-                    </span>
-                    <span className="text-muted-foreground text-xs">{pub.year}</span>
-                  </div>
-                  <h3 className="font-semibold text-foreground mb-4 leading-snug">
-                    {pub.title}
-                  </h3>
-                  <div className="flex items-center gap-3 mt-auto">
-                    <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center shrink-0">
-                      <span className="text-white text-xs font-semibold">{pub.initials}</span>
-                    </div>
-                    <p className="text-muted-foreground text-sm">{pub.author}</p>
-                  </div>
-                </Card>
-              </ScrollReveal>
-            ))}
+            {latestPublications.length === 0 ? (
+              <p className="text-muted-foreground text-sm col-span-full text-center">Em breve.</p>
+            ) : (
+              latestPublications.map((pub, i) => {
+                const firstAuthor = pub.authors?.[0] ?? "";
+                const initials = firstAuthor
+                  .split(" ")
+                  .map((n) => n[0])
+                  .filter(Boolean)
+                  .slice(0, 2)
+                  .join("")
+                  .toUpperCase();
+                return (
+                  <ScrollReveal key={pub.id} delay={(i % 3) * 100}>
+                    <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors h-full flex flex-col">
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
+                          {pub.type}
+                        </span>
+                        <span className="text-muted-foreground text-xs">{pub.year}</span>
+                      </div>
+                      <h3 className="font-semibold text-foreground mb-4 leading-snug line-clamp-3">
+                        {pub.title}
+                      </h3>
+                      {firstAuthor && (
+                        <div className="flex items-center gap-3 mt-auto">
+                          <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center shrink-0">
+                            <span className="text-white text-xs font-semibold">{initials || "?"}</span>
+                          </div>
+                          <p className="text-muted-foreground text-sm line-clamp-1">{firstAuthor}{pub.authors.length > 1 && " et al."}</p>
+                        </div>
+                      )}
+                    </Card>
+                  </ScrollReveal>
+                );
+              })
+            )}
           </div>
 
           <ScrollReveal>
@@ -439,29 +491,21 @@ const MigraHome = () => {
 
             <ScrollReveal delay={150}>
               <div className="space-y-3">
-                {[
-                  { num: 1, title: "Lorem ipsum dolor sit", duration: "32 min" },
-                  { num: 2, title: "Consectetur adipiscing elit", duration: "45 min" },
-                  { num: 3, title: "Sed do eiusmod tempor", duration: "38 min" },
-                ].map((ep) => (
-                  <div
-                    key={ep.num}
-                    className="flex items-center gap-4 px-4 py-3 rounded-lg bg-muted/50 border border-border hover:border-primary/30 transition-colors"
-                  >
-                    <span className="text-muted-foreground/50 text-sm font-medium w-6 text-right shrink-0">
-                      {ep.num}
-                    </span>
-                    <div className="w-10 h-10 rounded bg-primary/10 flex items-center justify-center shrink-0">
-                      <Music2 className="h-4 w-4 text-primary" />
-                    </div>
-                    <h3 className="font-semibold text-foreground text-sm flex-1 truncate">
-                      {ep.title}
-                    </h3>
-                    <span className="text-muted-foreground/50 text-xs shrink-0">
-                      {ep.duration}
-                    </span>
-                  </div>
-                ))}
+                {latestEpisodes.length === 0 ? (
+                  <p className="text-muted-foreground text-sm">Em breve novos episódios.</p>
+                ) : (
+                  latestEpisodes.map((ep: any) => (
+                    <SpotifyEpisodeRow
+                      key={ep.id}
+                      episodeNumber={ep.episode_number}
+                      fallbackTitle={ep.title}
+                      fallbackDescription={ep.description}
+                      dateLabel={ep.date_label}
+                      durationLabel={ep.duration_label}
+                      spotifyUrl={ep.spotify_url}
+                    />
+                  ))
+                )}
               </div>
             </ScrollReveal>
           </div>

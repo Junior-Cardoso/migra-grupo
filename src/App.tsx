@@ -8,6 +8,8 @@ import MigraHome from "./pages/MigraHome";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Producao from "./pages/Producao";
+import ProducaoSofia from "./pages/ProducaoSofia";
+import ProducaoCarolina from "./pages/ProducaoCarolina";
 import Sobre from "./pages/Sobre";
 import GruposDeEstudo from "./pages/GruposDeEstudo";
 import RadioMigra from "./pages/RadioMigra";
@@ -39,6 +41,8 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/producao" element={<Producao />} />
+          <Route path="/producao/sofia" element={<ProducaoSofia />} />
+          <Route path="/producao/carolina" element={<ProducaoCarolina />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/grupos-de-estudo" element={<GruposDeEstudo />} />
           <Route path="/radio" element={<RadioMigra />} />
