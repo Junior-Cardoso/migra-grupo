@@ -491,29 +491,21 @@ const MigraHome = () => {
 
             <ScrollReveal delay={150}>
               <div className="space-y-3">
-                {[
-                  { num: 1, title: "Lorem ipsum dolor sit", duration: "32 min" },
-                  { num: 2, title: "Consectetur adipiscing elit", duration: "45 min" },
-                  { num: 3, title: "Sed do eiusmod tempor", duration: "38 min" },
-                ].map((ep) => (
-                  <div
-                    key={ep.num}
-                    className="flex items-center gap-4 px-4 py-3 rounded-lg bg-muted/50 border border-border hover:border-primary/30 transition-colors"
-                  >
-                    <span className="text-muted-foreground/50 text-sm font-medium w-6 text-right shrink-0">
-                      {ep.num}
-                    </span>
-                    <div className="w-10 h-10 rounded bg-primary/10 flex items-center justify-center shrink-0">
-                      <Music2 className="h-4 w-4 text-primary" />
-                    </div>
-                    <h3 className="font-semibold text-foreground text-sm flex-1 truncate">
-                      {ep.title}
-                    </h3>
-                    <span className="text-muted-foreground/50 text-xs shrink-0">
-                      {ep.duration}
-                    </span>
-                  </div>
-                ))}
+                {latestEpisodes.length === 0 ? (
+                  <p className="text-muted-foreground text-sm">Em breve novos episódios.</p>
+                ) : (
+                  latestEpisodes.map((ep: any) => (
+                    <SpotifyEpisodeRow
+                      key={ep.id}
+                      episodeNumber={ep.episode_number}
+                      fallbackTitle={ep.title}
+                      fallbackDescription={ep.description}
+                      dateLabel={ep.date_label}
+                      durationLabel={ep.duration_label}
+                      spotifyUrl={ep.spotify_url}
+                    />
+                  ))
+                )}
               </div>
             </ScrollReveal>
           </div>
