@@ -328,34 +328,43 @@ const MigraHome = () => {
           </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { type: "Artigo", title: "Migrações venezuelanas no Nordeste brasileiro: desafios e perspectivas", author: "Ana Beatriz Souza", initials: "AS", year: "2024" },
-              { type: "Capítulo", title: "Apatridia e proteção internacional: uma análise do caso brasileiro", author: "Carlos Drummond", initials: "CD", year: "2024" },
-              { type: "Working Paper", title: "Políticas públicas de acolhimento: estudo comparado Brasil-Portugal", author: "Elena Ferreira", initials: "EF", year: "2023" },
-              { type: "Artigo", title: "Direito ao refúgio e a crise humanitária na fronteira norte", author: "Gabriel Henrique", initials: "GH", year: "2023" },
-              { type: "Dissertação", title: "Integração local de refugiados sírios em Recife", author: "Isabela Jardim", initials: "IJ", year: "2023" },
-              { type: "Artigo", title: "Mobilidade humana e direitos fundamentais no Mercosul", author: "Karen Lima", initials: "KL", year: "2022" },
-            ].map((pub, i) => (
-              <ScrollReveal key={i} delay={(i % 3) * 100}>
-                <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors h-full">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
-                      {pub.type}
-                    </span>
-                    <span className="text-muted-foreground text-xs">{pub.year}</span>
-                  </div>
-                  <h3 className="font-semibold text-foreground mb-4 leading-snug">
-                    {pub.title}
-                  </h3>
-                  <div className="flex items-center gap-3 mt-auto">
-                    <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center shrink-0">
-                      <span className="text-white text-xs font-semibold">{pub.initials}</span>
-                    </div>
-                    <p className="text-muted-foreground text-sm">{pub.author}</p>
-                  </div>
-                </Card>
-              </ScrollReveal>
-            ))}
+            {latestPublications.length === 0 ? (
+              <p className="text-muted-foreground text-sm col-span-full text-center">Em breve.</p>
+            ) : (
+              latestPublications.map((pub, i) => {
+                const firstAuthor = pub.authors?.[0] ?? "";
+                const initials = firstAuthor
+                  .split(" ")
+                  .map((n) => n[0])
+                  .filter(Boolean)
+                  .slice(0, 2)
+                  .join("")
+                  .toUpperCase();
+                return (
+                  <ScrollReveal key={pub.id} delay={(i % 3) * 100}>
+                    <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors h-full flex flex-col">
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
+                          {pub.type}
+                        </span>
+                        <span className="text-muted-foreground text-xs">{pub.year}</span>
+                      </div>
+                      <h3 className="font-semibold text-foreground mb-4 leading-snug line-clamp-3">
+                        {pub.title}
+                      </h3>
+                      {firstAuthor && (
+                        <div className="flex items-center gap-3 mt-auto">
+                          <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center shrink-0">
+                            <span className="text-white text-xs font-semibold">{initials || "?"}</span>
+                          </div>
+                          <p className="text-muted-foreground text-sm line-clamp-1">{firstAuthor}{pub.authors.length > 1 && " et al."}</p>
+                        </div>
+                      )}
+                    </Card>
+                  </ScrollReveal>
+                );
+              })
+            )}
           </div>
 
           <ScrollReveal>
