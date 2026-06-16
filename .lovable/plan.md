@@ -1,48 +1,64 @@
+## 1. Home — dados reais do banco
 
+Hoje as seções Grupos de Estudo, Produção e Rádio no `MigraHome.tsx` mostram cards/textos genéricos. Vou substituir por dados reais consultando o Supabase:
 
-# Plano: Reestruturar Videografia em Divisórias + Documentário em Destaque
+- **Grupos de Estudo**: listar os grupos ativos da tabela `study_groups` (mesmos que aparecem em `/grupos-de-estudo`).
+- **Produção**: mostrar as 3 publicações mais recentes (`publications` ordenado por `year` desc / `created_at`), com título, autores e tipo. Botão "ver todas" leva a `/producao`.
+- **Rádio**: puxar os 3 episódios mais recentes de `radio_episodes` usando o mesmo `SpotifyEpisodeRow` da página Rádio (com data/duração via edge function).
 
-## Contexto
+## 2. Limpeza no banco de publicações
 
-A página Videografia precisa deixar de ser um grid plano e passar a exibir vídeos organizados em **seções temáticas (divisórias)** com títulos e descrições próprias. Além disso, o documentário "Así Pasó" precisa ficar em destaque.
+- **Remover "F. M. Dravet"** de todos os arrays `authors` em `publications` (UPDATE com `array_remove`). Também removo qualquer ocorrência da string "F. M. Dravet" das opções de filtro do frontend (se existir hard-coded).
+- **Renomear categoria `Projetos` → `Pesquisas`** (UPDATE publications SET type='Pesquisas' WHERE type='Projetos') + atualizar labels e cores em `Producao.tsx`/admin.
+- **Renomear categoria `Relatórios` → `Extensão`** (mesmo padrão).
 
-## Divisórias definidas
+## 3. Páginas por professora (MIGRA / Sofia / Carolina)
 
-1. **Así Pasó** — Documentário em destaque + bastidores (entrevistas na íntegra). Vídeo principal: `VN52Uoe5m6A`
-2. **Curso de Extensão: Questão Migratória** — As 13 aulas já existentes (categoria "Aulas")
-3. **I Encontro Nacional da Rede REUNIR** — Vídeos do encontro (a adicionar futuramente)
-4. **Palestras, aulas e comentários na mídia** — Conteúdo avulso
-5. **Plenária Nacional Saúde e Migração** — Vídeos da plenária
+### Banco
+- Migration: adicionar coluna `page` (text, default `'migra'`, com CHECK em `'migra' | 'sofia' | 'carolina'`) na tabela `publications`.
+- Backfill: todas as publicações existentes ficam em `'migra'`.
 
-## Alterações no banco de dados
+### Frontend público
+- Renomear página atual `Producao.tsx` para usar `page='migra'` como filtro. Manter rota `/producao` como página MIGRA (principal).
+- Criar 2 novas páginas réplicas:
+  - `/producao/carolina` — "Profª Carolina Gonçalves" — foto da Carolina (`carolina-leite.png.asset.json`) na capa hero.
+  - `/producao/sofia` — "Profª Sofia Cavalcanti" — foto da Sofia (`sofia-zanforlin.png`) na capa.
+- Componentizar a página atual em `ProducaoPage` recebendo `page`, `title`, `heroImage` para evitar duplicação.
 
-**Migração**: Adicionar coluna `section` (text) e `sort_order` (integer, default 0) à tabela `videos`.
+### Navegação
+- Atualizar `MigraNavigation.tsx`: o item "Produção" vira um dropdown com 3 sub-itens nesta ordem:
+  1. **MIGRA** (destaque visual, item maior) → `/producao`
+  2. Profª Carolina Gonçalves → `/producao/carolina`
+  3. Profª Sofia Cavalcanti → `/producao/sofia`
 
-Atualizar dados existentes:
-- Vídeos com `category = 'Aulas'` → `section = 'Curso de Extensão: Questão Migratória'`
-- Vídeos com `category = 'Narrativas Migrantes'` → `section = 'Así Pasó'` (são bastidores do documentário)
+### Admin
+- No `AdminProducao.tsx`:
+  - Dropdown "Página" (MIGRA / Carolina / Sofia) no formulário de criar/editar publicação.
+  - Na listagem: filtro por página + ação rápida "Mover para…" em cada linha (dropdown inline) para redistribuir publicações entre as 3 páginas sem abrir o editor.
 
-Inserir o vídeo do documentário principal (`VN52Uoe5m6A`) na seção "Así Pasó" com `sort_order = -1` para ficar em primeiro.
+## 4. Editor WYSIWYG no admin (TipTap)
 
-## Alterações no frontend
+- Substituir `RichTextEditor.tsx` (que hoje mostra HTML cru) por um TipTap com toolbar: negrito, itálico, sublinhado, lista, link, título, citação.
+- Aplicar em todos os admins que aceitam texto formatado: `AdminBlogEditor`, `AdminSobre`, `AdminInicio`, `AdminGrupos`, `AdminProducao`, `AdminRadio`, `AdminVideografia` (onde houver textarea de descrição/resumo).
+- Output continua sendo HTML (já é o que `BlogPost.tsx` espera via `dangerouslySetInnerHTML`).
 
-### Videografia.tsx
-- Reorganizar layout em seções sequenciais, cada uma com:
-  - Título da divisória (h2)
-  - Descrição curta (quando aplicável)
-  - Grid de vídeos daquela seção
-- **Divisória 1 (Así Pasó)**: Layout especial — documentário em destaque (iframe grande, largura total), seguido dos bastidores em grid menor
-- Divisórias 2-5: Grid padrão 2 colunas
-- Manter busca global no topo (filtra dentro de todas as seções)
-- Ordem fixa das seções definida no código
+## 5. Capa do post de blog
 
-### AdminVideografia.tsx
-- Substituir campo `Categoria` por `Seção` com select fixo das 5 divisórias
-- Manter campo `category` como subcategoria livre (opcional)
-- Adicionar campo `sort_order` para ordenação dentro da seção
+- Tabela `blog_posts` provavelmente já tem `cover_image` — confirmo na hora; se não tiver, migration adicionando `cover_image_url text`.
+- No `AdminBlogEditor`: campo de upload (Supabase Storage bucket `blog-covers` público) com preview. A mesma imagem é usada como capa (lista do blog) e como preview Open Graph.
+- Atualizar `BlogCard` e `BlogPost` para exibir a `cover_image_url`.
 
-## Arquivos impactados
-- `supabase/migrations/` — nova migração (add columns + update data + insert documentário)
-- `src/pages/Videografia.tsx` — layout por seções
-- `src/pages/admin/AdminVideografia.tsx` — select de seção
+## 6. Atualização de fotos
 
+Você não respondeu quais fotos. Vou pular esse item agora; depois que eu terminar o resto, me envie no chat as fotos novas (arraste no chat) e diga qual substituir.
+
+## Detalhes técnicos
+
+- Migrations Supabase (3): coluna `page` em publications + backfill; rename de tipos `Projetos`→`Pesquisas` e `Relatórios`→`Extensão`; cleanup do autor Dravet; (talvez) `cover_image_url` em blog_posts; bucket `blog-covers`.
+- Dependências novas: `@tiptap/react`, `@tiptap/starter-kit`, `@tiptap/extension-link`, `@tiptap/extension-underline`.
+- Componentização: extrair `ProducaoPage` de `Producao.tsx` para reuso nas 3 páginas.
+- Rotas novas em `App.tsx`: `/producao/sofia`, `/producao/carolina`.
+
+## Fora do escopo desta rodada
+
+- Substituição de fotos (aguardando arquivos).
