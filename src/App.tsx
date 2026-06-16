@@ -8,6 +8,8 @@ import MigraHome from "./pages/MigraHome";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Producao from "./pages/Producao";
+import ProducaoSofia from "./pages/ProducaoSofia";
+import ProducaoCarolina from "./pages/ProducaoCarolina";
 import Sobre from "./pages/Sobre";
 import GruposDeEstudo from "./pages/GruposDeEstudo";
 import RadioMigra from "./pages/RadioMigra";
