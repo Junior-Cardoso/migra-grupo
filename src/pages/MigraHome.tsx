@@ -274,24 +274,25 @@ const MigraHome = () => {
           </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {content.grupos.items.map((group, i) => {
-              const Icon = resolveIcon(group.icon);
-              return (
-                <ScrollReveal key={i} delay={i * 100}>
+            {studyGroups.length === 0 ? (
+              <p className="text-muted-foreground text-sm col-span-full text-center">Em breve.</p>
+            ) : (
+              studyGroups.map((group, i) => (
+                <ScrollReveal key={group.id} delay={i * 100}>
                   <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors group h-full">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                      <Icon className="h-6 w-6 text-primary" />
+                      <Users className="h-6 w-6 text-primary" />
                     </div>
                     <h3 className="font-heading text-lg font-semibold text-foreground mb-2 uppercase tracking-wide">
                       {group.title}
                     </h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {group.desc}
+                    <p className="text-muted-foreground text-sm leading-relaxed line-clamp-4">
+                      {group.description}
                     </p>
                   </Card>
                 </ScrollReveal>
-              );
-            })}
+              ))
+            )}
           </div>
 
           <ScrollReveal>
