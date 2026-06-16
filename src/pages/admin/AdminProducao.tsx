@@ -20,9 +20,9 @@ import {
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
-import { Plus, Pencil, Trash2, Search, Loader2, BookOpen } from "lucide-react";
+import { Plus, Pencil, Trash2, Search, Loader2, BookOpen, MoveRight } from "lucide-react";
 import { toast } from "sonner";
-import { FIXED_CATEGORIES } from "@/data/acervoPublications";
+import { FIXED_CATEGORIES, PRODUCAO_PAGES, type ProducaoPageKey } from "@/data/acervoPublications";
 
 interface PubForm {
   title: string;
@@ -34,16 +34,18 @@ interface PubForm {
   external_url: string;
   tags: string;
   thematic_categories: string;
+  page: ProducaoPageKey;
 }
 
 const emptyForm: PubForm = {
   title: "", type: "", subcategory: "", authors: "", year: "", abstract: "",
-  external_url: "", tags: "", thematic_categories: "",
+  external_url: "", tags: "", thematic_categories: "", page: "migra",
 };
 
 const AdminProducao = () => {
   const [search, setSearch] = useState("");
   const [activeType, setActiveType] = useState<string | null>(null);
+  const [activePage, setActivePage] = useState<ProducaoPageKey | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<PubForm>(emptyForm);
@@ -62,7 +64,6 @@ const AdminProducao = () => {
     },
   });
 
-  // Existing subcategories for datalist suggestions
   const existingSubcategories = [...new Set(
     publications.map((p: any) => p.subcategory).filter(Boolean)
   )].sort();
@@ -73,7 +74,8 @@ const AdminProducao = () => {
       p.title.toLowerCase().includes(search.toLowerCase()) ||
       p.authors.some((a: string) => a.toLowerCase().includes(search.toLowerCase()));
     const matchType = !activeType || p.type === activeType;
-    return matchSearch && matchType;
+    const matchPage = !activePage || p.page === activePage;
+    return matchSearch && matchType && matchPage;
   });
 
   const saveMutation = useMutation({
@@ -88,6 +90,7 @@ const AdminProducao = () => {
         external_url: form.external_url || null,
         tags: form.tags.split(",").map((s) => s.trim()).filter(Boolean),
         thematic_categories: form.thematic_categories.split(",").map((s) => s.trim()).filter(Boolean),
+        page: form.page,
       };
       if (editingId) {
         const { error } = await supabase.from("publications").update(payload).eq("id", editingId);
@@ -102,6 +105,19 @@ const AdminProducao = () => {
       queryClient.invalidateQueries({ queryKey: ["publications"] });
       toast.success(editingId ? "Publicação atualizada!" : "Publicação criada!");
       closeDialog();
+    },
+    onError: (err: any) => toast.error("Erro: " + err.message),
+  });
+
+  const moveMutation = useMutation({
+    mutationFn: async ({ id, page }: { id: string; page: ProducaoPageKey }) => {
+      const { error } = await supabase.from("publications").update({ page }).eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-publications"] });
+      queryClient.invalidateQueries({ queryKey: ["publications"] });
+      toast.success("Publicação movida!");
     },
     onError: (err: any) => toast.error("Erro: " + err.message),
   });
@@ -134,6 +150,7 @@ const AdminProducao = () => {
       external_url: pub.external_url ?? "",
       tags: pub.tags.join(", "),
       thematic_categories: pub.thematic_categories.join(", "),
+      page: (pub.page ?? "migra") as ProducaoPageKey,
     });
     setDialogOpen(true);
   };
@@ -148,11 +165,30 @@ const AdminProducao = () => {
     saveMutation.mutate();
   };
 
+  const pageLabel = (key: string) =>
+    PRODUCAO_PAGES.find((p) => p.key === key)?.label ?? key;
+
   return (
     <div>
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <h1 className="font-heading text-2xl font-bold text-foreground uppercase tracking-wide">Produção</h1>
         <Button onClick={openNew}><Plus className="h-4 w-4 mr-2" />Nova Publicação</Button>
+      </div>
+
+      {/* Page filter */}
+      <div className="flex flex-wrap gap-2 mb-3">
+        <span className="text-xs text-muted-foreground self-center mr-1">Página:</span>
+        <Badge variant={activePage === null ? "default" : "outline"} className="cursor-pointer" onClick={() => setActivePage(null)}>
+          Todas ({publications.length})
+        </Badge>
+        {PRODUCAO_PAGES.map((p) => {
+          const count = publications.filter((x: any) => x.page === p.key).length;
+          return (
+            <Badge key={p.key} variant={activePage === p.key ? "default" : "outline"} className="cursor-pointer" onClick={() => setActivePage(activePage === p.key ? null : p.key)}>
+              {p.label} ({count})
+            </Badge>
+          );
+        })}
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4 mb-6">
@@ -162,7 +198,7 @@ const AdminProducao = () => {
         </div>
         <div className="flex flex-wrap gap-2">
           <Badge variant={activeType === null ? "default" : "outline"} className="cursor-pointer" onClick={() => setActiveType(null)}>
-            Todos ({publications.length})
+            Todas categorias
           </Badge>
           {FIXED_CATEGORIES.map((t) => {
             const count = publications.filter((p: any) => p.type === t).length;
@@ -190,7 +226,7 @@ const AdminProducao = () => {
                 <TableHead>Título</TableHead>
                 <TableHead className="hidden md:table-cell">Categoria</TableHead>
                 <TableHead className="hidden md:table-cell">Ano</TableHead>
-                <TableHead className="hidden lg:table-cell">Autores</TableHead>
+                <TableHead className="hidden lg:table-cell">Página</TableHead>
                 <TableHead className="text-right">Ações</TableHead>
               </TableRow>
             </TableHeader>
@@ -199,14 +235,34 @@ const AdminProducao = () => {
                 <TableRow key={pub.id}>
                   <TableCell>
                     <p className="font-medium text-sm line-clamp-2">{pub.title}</p>
-                    <p className="text-xs text-muted-foreground mt-1 md:hidden">{pub.type} • {pub.year}</p>
+                    <p className="text-xs text-muted-foreground mt-1 md:hidden">{pub.type} • {pub.year} • {pageLabel(pub.page)}</p>
+                    <p className="text-xs text-muted-foreground/70 mt-0.5 hidden lg:block line-clamp-1">{pub.authors.join(", ")}</p>
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
                     <Badge variant="secondary">{pub.type}</Badge>
                     {pub.subcategory && <p className="text-xs text-muted-foreground mt-1">{pub.subcategory}</p>}
                   </TableCell>
                   <TableCell className="hidden md:table-cell text-muted-foreground text-sm">{pub.year}</TableCell>
-                  <TableCell className="hidden lg:table-cell text-muted-foreground text-xs max-w-[200px] truncate">{pub.authors.join(", ")}</TableCell>
+                  <TableCell className="hidden lg:table-cell">
+                    <Select
+                      value={pub.page ?? "migra"}
+                      onValueChange={(v) => moveMutation.mutate({ id: pub.id, page: v as ProducaoPageKey })}
+                    >
+                      <SelectTrigger className="h-8 text-xs w-44">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {PRODUCAO_PAGES.map((p) => (
+                          <SelectItem key={p.key} value={p.key} className="text-xs">
+                            <span className="inline-flex items-center gap-1.5">
+                              <MoveRight className="h-3 w-3 opacity-50" />
+                              {p.label}
+                            </span>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-1">
                       <Button variant="ghost" size="icon" onClick={() => openEdit(pub)}><Pencil className="h-4 w-4" /></Button>
@@ -248,6 +304,20 @@ const AdminProducao = () => {
                 <Label>Ano *</Label>
                 <Input value={form.year} onChange={(e) => setForm({ ...form, year: e.target.value })} placeholder="Ex: 2024" type="number" />
               </div>
+            </div>
+            <div className="space-y-2">
+              <Label>Página *</Label>
+              <Select value={form.page} onValueChange={(val) => setForm({ ...form, page: val as ProducaoPageKey })}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {PRODUCAO_PAGES.map((p) => (
+                    <SelectItem key={p.key} value={p.key}>{p.label}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <p className="text-xs text-muted-foreground">Em qual página esta publicação aparecerá.</p>
             </div>
             <div className="space-y-2">
               <Label>Subcategoria</Label>
