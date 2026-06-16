@@ -1,3 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import MigraNavigation from "@/components/MigraNavigation";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
@@ -6,6 +8,7 @@ import migraLogoHero from "@/assets/migra-logo-hero.webp";
 import heroPattern from "@/assets/hero-pattern.webp";
 import radioMigraLogo from "@/assets/radio-migra-logo.png";
 import sobreMigraImg from "@/assets/sobre-migra.jpg";
+import SpotifyEpisodeRow from "@/components/SpotifyEpisodeRow";
 
 import sofiaZanforlin from "@/assets/team/sofia-zanforlin.png";
 import carolinaLeiteAsset from "@/assets/team/carolina-leite.png.asset.json";
@@ -14,10 +17,10 @@ import {
   BookOpen,
   FileText,
   Headphones,
-  Music2,
   ArrowRight,
   Mail,
   GraduationCap,
+  Users,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import MigraFooter from "@/components/MigraFooter";
@@ -28,6 +31,45 @@ const PHOTO_MAP: Record<string, string> = { sofia: sofiaZanforlin, carolina: car
 
 const MigraHome = () => {
   const { data: content } = usePageContent("inicio");
+
+  // Real data from Supabase for the home page
+  const { data: studyGroups = [] } = useQuery({
+    queryKey: ["home_study_groups"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("study_groups")
+        .select("id, title, description")
+        .order("sort_order")
+        .limit(3);
+      return data ?? [];
+    },
+  });
+
+  const { data: latestPublications = [] } = useQuery({
+    queryKey: ["home_latest_publications"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("publications")
+        .select("id, title, type, year, authors")
+        .order("year", { ascending: false })
+        .order("created_at", { ascending: false })
+        .limit(6);
+      return data ?? [];
+    },
+  });
+
+  const { data: latestEpisodes = [] } = useQuery({
+    queryKey: ["home_latest_episodes"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("radio_episodes")
+        .select("*")
+        .order("sort_order")
+        .limit(3);
+      return data ?? [];
+    },
+  });
+
   if (!content) return null;
   return (
     <div className="min-h-screen bg-background">
