@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      blog_posts: {
+        Row: {
+          author_name: string
+          category: string
+          content: string
+          cover_image_url: string | null
+          created_at: string
+          excerpt: string
+          id: string
+          published_at: string | null
+          slug: string
+          tags: string[]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author_name?: string
+          category?: string
+          content?: string
+          cover_image_url?: string | null
+          created_at?: string
+          excerpt?: string
+          id?: string
+          published_at?: string | null
+          slug: string
+          tags?: string[]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author_name?: string
+          category?: string
+          content?: string
+          cover_image_url?: string | null
+          created_at?: string
+          excerpt?: string
+          id?: string
+          published_at?: string | null
+          slug?: string
+          tags?: string[]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       page_content: {
         Row: {
           content: Json
@@ -45,6 +90,7 @@ export type Database = {
           created_at: string
           external_url: string | null
           id: string
+          page: string
           subcategory: string | null
           tags: string[]
           thematic_categories: string[]
@@ -58,6 +104,7 @@ export type Database = {
           created_at?: string
           external_url?: string | null
           id?: string
+          page?: string
           subcategory?: string | null
           tags?: string[]
           thematic_categories?: string[]
@@ -71,6 +118,7 @@ export type Database = {
           created_at?: string
           external_url?: string | null
           id?: string
+          page?: string
           subcategory?: string | null
           tags?: string[]
           thematic_categories?: string[]
