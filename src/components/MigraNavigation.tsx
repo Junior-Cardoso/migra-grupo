@@ -1,16 +1,43 @@
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+import { Menu, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
+interface SubLink {
+  name: string;
+  href: string;
+  highlight?: boolean;
+}
+
+interface NavItem {
+  name: string;
+  href?: string;
+  isRoute?: boolean;
+  children?: SubLink[];
+}
 
 const MigraNavigation = () => {
   const [open, setOpen] = useState(false);
 
-  const navLinks = [
+  const navItems: NavItem[] = [
     { name: "Sobre", href: "/sobre", isRoute: true },
     { name: "Grupos de Estudo", href: "/grupos-de-estudo", isRoute: true },
-    { name: "Produção", href: "/producao", isRoute: true },
+    {
+      name: "Produção",
+      children: [
+        { name: "MIGRA", href: "/producao", highlight: true },
+        { name: "Profª Carolina Gonçalves", href: "/producao/carolina" },
+        { name: "Profª Sofia Cavalcanti", href: "/producao/sofia" },
+      ],
+    },
     { name: "Blog", href: "/blog", isRoute: true },
     { name: "Videografia", href: "/videografia", isRoute: true },
     { name: "Rádio MIGRA", href: "/radio", isRoute: true },
@@ -25,30 +52,64 @@ const MigraNavigation = () => {
             <span className="font-heading text-2xl font-bold text-foreground tracking-wider uppercase">MIGRA</span>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop */}
           <div className="hidden lg:flex items-center gap-6">
-            {navLinks.map((link) =>
-              link.isRoute ? (
+            {navItems.map((item) => {
+              if (item.children) {
+                return (
+                  <DropdownMenu key={item.name}>
+                    <DropdownMenuTrigger asChild>
+                      <button className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium flex items-center gap-1 outline-none">
+                        {item.name}
+                        <ChevronDown className="h-3.5 w-3.5" />
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="start" className="w-64">
+                      {item.children.map((sub, idx) => (
+                        <div key={sub.href}>
+                          {sub.highlight && idx === 0 ? (
+                            <>
+                              <DropdownMenuItem asChild className="py-3">
+                                <Link to={sub.href} className="w-full font-heading text-base font-bold uppercase tracking-wide text-foreground">
+                                  {sub.name}
+                                </Link>
+                              </DropdownMenuItem>
+                              <DropdownMenuSeparator />
+                            </>
+                          ) : (
+                            <DropdownMenuItem asChild>
+                              <Link to={sub.href} className="w-full text-sm">
+                                {sub.name}
+                              </Link>
+                            </DropdownMenuItem>
+                          )}
+                        </div>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                );
+              }
+              return item.isRoute ? (
                 <Link
-                  key={link.name}
-                  to={link.href}
+                  key={item.name}
+                  to={item.href!}
                   className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
                 >
-                  {link.name}
+                  {item.name}
                 </Link>
               ) : (
                 <a
-                  key={link.name}
-                  href={link.href}
+                  key={item.name}
+                  href={item.href!}
                   className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
                 >
-                  {link.name}
+                  {item.name}
                 </a>
-              )
-            )}
+              );
+            })}
           </div>
 
-          {/* Mobile Menu */}
+          {/* Mobile */}
           <div className="lg:hidden">
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
@@ -59,27 +120,50 @@ const MigraNavigation = () => {
               <SheetContent side="right" className="w-[300px] bg-background">
                 <div className="flex flex-col gap-2 mt-8">
                   <span className="font-heading text-2xl font-bold text-foreground tracking-wider uppercase mb-4">MIGRA</span>
-                  {navLinks.map((link) =>
-                    link.isRoute ? (
+                  {navItems.map((item) => {
+                    if (item.children) {
+                      return (
+                        <div key={item.name} className="border-b border-border py-2">
+                          <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1.5 px-1">
+                            {item.name}
+                          </p>
+                          {item.children.map((sub) => (
+                            <Link
+                              key={sub.href}
+                              to={sub.href}
+                              onClick={() => setOpen(false)}
+                              className={`block transition-colors py-2 px-1 ${
+                                sub.highlight
+                                  ? "font-heading text-base font-bold uppercase tracking-wide text-foreground hover:text-primary"
+                                  : "text-sm text-muted-foreground hover:text-primary"
+                              }`}
+                            >
+                              {sub.name}
+                            </Link>
+                          ))}
+                        </div>
+                      );
+                    }
+                    return item.isRoute ? (
                       <Link
-                        key={link.name}
-                        to={link.href}
+                        key={item.name}
+                        to={item.href!}
                         onClick={() => setOpen(false)}
                         className="text-muted-foreground hover:text-primary transition-colors text-base font-medium py-3 border-b border-border"
                       >
-                        {link.name}
+                        {item.name}
                       </Link>
                     ) : (
                       <a
-                        key={link.name}
-                        href={link.href}
+                        key={item.name}
+                        href={item.href!}
                         onClick={() => setOpen(false)}
                         className="text-muted-foreground hover:text-primary transition-colors text-base font-medium py-3 border-b border-border"
                       >
-                        {link.name}
+                        {item.name}
                       </a>
-                    )
-                  )}
+                    );
+                  })}
                 </div>
               </SheetContent>
             </Sheet>
