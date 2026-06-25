@@ -7,8 +7,7 @@ const ProducaoCarolina = () => (
     eyebrow="MIGRA – UFPE"
     title="Profª Carolina Gonçalves"
     description="Produção acadêmica e intelectual da Profª Ana Carolina Gonçalves Leite."
-    characterLeft={carolinaAsset.url}
-    characterRight={carolinaAsset.url}
+    portraitImage={carolinaAsset.url}
     tint="navy"
   />
 );

@@ -46,6 +46,7 @@ interface Props {
   description: string;
   characterLeft?: string;
   characterRight?: string;
+  portraitImage?: string;
   tint?: "navy" | "teal" | "muted";
 }
 
@@ -56,8 +57,10 @@ export default function ProducaoPage({
   description,
   characterLeft,
   characterRight,
+  portraitImage,
   tint = "muted",
 }: Props) {
+
   const [search, setSearch] = useState("");
   const [activeTypes, setActiveTypes] = useState<string[]>([]);
   const [activeSubcategories, setActiveSubcategories] = useState<string[]>([]);
@@ -188,14 +191,39 @@ export default function ProducaoPage({
     <div className="min-h-screen bg-background">
       <MigraNavigation />
 
-      <PageHero
-        eyebrow={eyebrow}
-        title={title}
-        description={description}
-        character={characterLeft}
-        characterRight={characterRight}
-        tint={tint}
-      />
+      {portraitImage ? (
+        <section className="pt-16 bg-[linear-gradient(180deg,hsl(0_0%_100%)_0%,hsl(205_45%_92%)_100%)] relative overflow-hidden">
+          <div className="max-w-6xl mx-auto px-6 relative py-12 md:py-16 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
+            <div className="shrink-0 h-44 w-44 md:h-56 md:w-56 rounded-full overflow-hidden ring-4 ring-accent/40 shadow-lg bg-muted">
+              <img src={portraitImage} alt={title} className="h-full w-full object-cover" />
+            </div>
+            <div className="text-center md:text-left max-w-xl">
+              <ScrollReveal>
+                {eyebrow && (
+                  <p className="text-primary font-medium text-xs sm:text-sm tracking-widest uppercase mb-3">{eyebrow}</p>
+                )}
+                <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-secondary uppercase tracking-wide mb-3">
+                  {title}
+                </h1>
+                <div className="w-12 h-1 bg-accent rounded-full mb-4 mx-auto md:mx-0" />
+                {description && (
+                  <p className="text-foreground/70 text-base md:text-lg">{description}</p>
+                )}
+              </ScrollReveal>
+            </div>
+          </div>
+        </section>
+      ) : (
+        <PageHero
+          eyebrow={eyebrow}
+          title={title}
+          description={description}
+          character={characterLeft}
+          characterRight={characterRight}
+          tint={tint}
+        />
+      )}
+
 
       {hasFilters && (
         <section className="border-b border-border bg-background">
