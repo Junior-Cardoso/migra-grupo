@@ -7,8 +7,7 @@ const ProducaoSofia = () => (
     eyebrow="MIGRA – UFPE"
     title="Profª Sofia Cavalcanti"
     description="Produção acadêmica e intelectual da Profª Sofia Cavalcanti Zanforlin."
-    characterLeft={sofia}
-    characterRight={sofia}
+    portraitImage={sofia}
     tint="teal"
   />
 );
