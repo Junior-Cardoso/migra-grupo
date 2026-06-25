@@ -46,6 +46,7 @@ interface Props {
   description: string;
   characterLeft?: string;
   characterRight?: string;
+  portraitImage?: string;
   tint?: "navy" | "teal" | "muted";
 }
 
@@ -56,8 +57,10 @@ export default function ProducaoPage({
   description,
   characterLeft,
   characterRight,
+  portraitImage,
   tint = "muted",
 }: Props) {
+
   const [search, setSearch] = useState("");
   const [activeTypes, setActiveTypes] = useState<string[]>([]);
   const [activeSubcategories, setActiveSubcategories] = useState<string[]>([]);
