@@ -1,0 +1,5 @@
+INSERT INTO public.videos (title, youtube_id, section, sort_order, category, date) VALUES
+('Aula - A guerra neoextrativista e territorial: Extermínio indígena hoje com os Profes. Anastácio Peralta Kaiowá, Camila Salles e Eduardo Carlini.', 'rEhwB6VidrM', 'Formas da guerra contemporânea e geografias da crise', 1, 'Aula', ''),
+('Aula - Estados dissolutivos da guerra civil com o Prof. Marildo Menegat.', 'K5uiVHt8atI', 'Formas da guerra contemporânea e geografias da crise', 2, 'Aula', ''),
+('Aula - Guerras da formação territorial e formação territorial como guerra com o Pof. Anderson Camargo.', 'SQgbF5pe4-Q', 'Formas da guerra contemporânea e geografias da crise', 3, 'Aula', ''),
+('Aula - Estados dissolutivos da guerra civil com o Prof. Marildo Menegat.', 'dBkmTLtws24', 'Formas da guerra contemporânea e geografias da crise', 4, 'Aula', '');
