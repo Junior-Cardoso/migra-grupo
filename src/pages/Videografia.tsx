@@ -243,7 +243,7 @@ const Videografia = () => {
                   <ScrollReveal>
                     <div>
                       <h2 className="font-heading text-xl sm:text-2xl font-bold text-foreground uppercase tracking-wide mb-2">
-                        {sectionName}
+                        {SECTION_FULL_TITLES[sectionName] ?? sectionName}
                       </h2>
                       <div className="w-10 h-0.5 bg-accent mb-6 rounded-full" />
                       {renderSection(sectionName)}
