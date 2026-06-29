@@ -37,7 +37,12 @@ const SECTION_DESCRIPTIONS: Record<string, string> = {
   "I Encontro Nacional de Extensão Universitária com Imigrantes e Refugiados": "Extensão universitária com imigrantes e refugiados.",
   "Palestras, aulas e comentários na mídia": "Participações em eventos, mídia e debates públicos.",
   "Plenária Nacional Saúde e Migração": "Discussões sobre saúde e políticas migratórias.",
-  "Formas da guerra contemporânea e geografias da crise": "Disciplina — Formas da guerra contemporânea e geografias da crise (GE-1006 Tópicos Especiais em Geografia Humana PPGEO/UFPE).",
+  "Formas da guerra contemporânea e geografias da crise": "",
+};
+
+const SECTION_FULL_TITLES: Record<string, string> = {
+  "Formas da guerra contemporânea e geografias da crise":
+    "Disciplina — Formas da guerra contemporânea e geografias da crise (GE-1006 Tópicos Especiais em Geografia Humana PPGEO/UFPE)",
 };
 
 const Videografia = () => {
