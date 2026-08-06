@@ -53,11 +53,11 @@ const PageHero = ({ eyebrow, title, description, character, characterRight, flip
         <div className="relative z-10 mx-auto text-center max-w-2xl px-4">
           <ScrollReveal>
             {eyebrow && (
-              <p className="text-primary font-medium text-xs sm:text-sm tracking-widest uppercase mb-3">
+              <p translate="no" className="text-primary font-medium text-xs sm:text-sm tracking-widest uppercase mb-3">
                 {eyebrow}
               </p>
             )}
-            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-secondary uppercase tracking-wide mb-3">
+            <h1 translate="no" className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-secondary uppercase tracking-wide mb-3">
               {title}
             </h1>
             <div className="w-12 h-1 bg-accent rounded-full mb-4 mx-auto" />
