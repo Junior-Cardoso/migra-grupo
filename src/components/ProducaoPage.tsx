@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { Publication, ProducaoPageKey } from "@/data/acervoPublications";
 import { FIXED_CATEGORIES } from "@/data/acervoPublications";
+import AuthorList from "@/components/AuthorList";
 import {
   Search,
   ExternalLink,
@@ -374,7 +375,9 @@ export default function ProducaoPage({
                             <h3 className="font-semibold text-foreground mb-3 leading-snug">{pub.title}</h3>
                             <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">{pub.abstract}</p>
                             <div className="mt-auto">
-                              <p className="text-muted-foreground text-xs mb-3">{pub.authors.join(", ")}</p>
+                              <div className="text-xs mb-3">
+                                <AuthorList authors={pub.authors} max={3} />
+                              </div>
                               <div className="flex flex-wrap gap-1.5 mb-3">
                                 {pub.thematic_categories.map((cat) => (
                                   <span key={cat} className="text-xs px-2 py-0.5 bg-primary/10 text-primary rounded-full cursor-pointer hover:bg-primary/20 transition-colors" onClick={() => { if (!activeCategories.includes(cat)) toggleItem(cat, setActiveCategories); }}>

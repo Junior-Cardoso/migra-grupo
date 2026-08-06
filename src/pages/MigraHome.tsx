@@ -26,6 +26,7 @@ import { Link } from "react-router-dom";
 import MigraFooter from "@/components/MigraFooter";
 import { usePageContent } from "@/hooks/usePageContent";
 import { resolveIcon } from "@/lib/iconMap";
+import AuthorList from "@/components/AuthorList";
 
 const PHOTO_MAP: Record<string, string> = { sofia: sofiaZanforlin, carolina: carolinaLeiteAsset.url };
 
@@ -357,7 +358,9 @@ const MigraHome = () => {
                           <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center shrink-0">
                             <span className="text-white text-xs font-semibold">{initials || "?"}</span>
                           </div>
-                          <p className="text-muted-foreground text-sm line-clamp-1">{firstAuthor}{pub.authors.length > 1 && " et al."}</p>
+                          <div className="text-sm min-w-0">
+                            <AuthorList authors={pub.authors} max={2} />
+                          </div>
                         </div>
                       )}
                     </Card>
