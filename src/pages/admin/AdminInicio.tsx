@@ -131,32 +131,8 @@ const AdminInicio = () => {
               </Card>
             </AccordionItem>
 
-            <AccordionItem value="areas" asChild>
-              <Card>
-                <AccordionTrigger className="px-4 py-3 hover:no-underline">
-                  <span className="flex items-center gap-2"><Badge variant="outline">Áreas</Badge><span className="text-sm font-medium">Áreas de Atuação</span></span>
-                </AccordionTrigger>
-                <AccordionContent className="px-4 pb-4 space-y-3">
-                  <EditField label="Título" value={content.areas.title} onChange={(v) => update("areas", { title: v })} maxLen={40} />
-                  <EditField label="Descrição" value={content.areas.description} onChange={(v) => update("areas", { description: v })} multiline maxLen={150} />
-                  <div className="space-y-3 pt-2 border-t">
-                    {content.areas.items.map((item, i) => (
-                      <div key={i} className="p-3 bg-background rounded-md border space-y-2">
-                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Card {i + 1}</p>
-                        <EditField label="Título" value={item.title} onChange={(v) => {
-                          const items = [...content.areas.items]; items[i] = { ...item, title: v };
-                          update("areas", { items });
-                        }} maxLen={40} />
-                        <EditField label="Descrição" value={item.desc} onChange={(v) => {
-                          const items = [...content.areas.items]; items[i] = { ...item, desc: v };
-                          update("areas", { items });
-                        }} multiline maxLen={180} />
-                      </div>
-                    ))}
-                  </div>
-                </AccordionContent>
-              </Card>
-            </AccordionItem>
+
+
 
             <AccordionItem value="equipe" asChild>
               <Card>
