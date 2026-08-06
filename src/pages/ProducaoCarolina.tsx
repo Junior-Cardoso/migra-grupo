@@ -5,8 +5,8 @@ const ProducaoCarolina = () => (
   <ProducaoPage
     pageKey="carolina"
     eyebrow="MIGRA – UFPE"
-    title="Profª Carolina Gonçalves"
-    description="Produção acadêmica e intelectual da Profª Ana Carolina Gonçalves Leite."
+    title="Profª Carolina Leite"
+    description="Produção acadêmica e intelectual da Profª Carolina Leite, cofundadora do MIGRA."
     portraitImage={carolinaAsset.url}
     tint="navy"
   />

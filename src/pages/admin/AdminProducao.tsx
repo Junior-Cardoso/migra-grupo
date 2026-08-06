@@ -334,7 +334,7 @@ const AdminProducao = () => {
             </div>
             <div className="space-y-2">
               <Label>Autores (separados por vírgula)</Label>
-              <Input value={form.authors} onChange={(e) => setForm({ ...form, authors: e.target.value })} placeholder="Ex: Sofia Zanforlin, Jessica Retis" />
+              <Input value={form.authors} onChange={(e) => setForm({ ...form, authors: e.target.value })} placeholder="Ex: Sofia Zanforline, Jessica Retis" />
             </div>
             <div className="space-y-2">
               <Label>Resumo</Label>

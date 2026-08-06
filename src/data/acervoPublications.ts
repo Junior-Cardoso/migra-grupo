@@ -26,6 +26,6 @@ export const FIXED_CATEGORIES = [
 
 export const PRODUCAO_PAGES: { key: ProducaoPageKey; label: string }[] = [
   { key: "migra", label: "MIGRA" },
-  { key: "carolina", label: "Profª Carolina Gonçalves" },
-  { key: "sofia", label: "Profª Sofia Cavalcanti" },
+  { key: "carolina", label: "Profª Carolina Leite" },
+  { key: "sofia", label: "Profª Sofia Zanforline" },
 ];
