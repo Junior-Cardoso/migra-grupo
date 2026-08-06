@@ -57,7 +57,7 @@ const MigraNavigation = () => {
             {navItems.map((item) => {
               if (item.children) {
                 return (
-                  <DropdownMenu key=<span translate={item.name.includes("MIGRA") ? "no" : undefined}>{item.name}</span>>
+                  <DropdownMenu key={item.name}>
                     <DropdownMenuTrigger asChild>
                       <button className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium flex items-center gap-1 outline-none">
                         <span translate={item.name.includes("MIGRA") ? "no" : undefined}>{item.name}</span>
@@ -91,7 +91,7 @@ const MigraNavigation = () => {
               }
               return item.isRoute ? (
                 <Link
-                  key=<span translate={item.name.includes("MIGRA") ? "no" : undefined}>{item.name}</span>
+                  key={item.name}
                   to={item.href!}
                   className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
                 >
@@ -99,7 +99,7 @@ const MigraNavigation = () => {
                 </Link>
               ) : (
                 <a
-                  key=<span translate={item.name.includes("MIGRA") ? "no" : undefined}>{item.name}</span>
+                  key={item.name}
                   href={item.href!}
                   className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
                 >
@@ -123,7 +123,7 @@ const MigraNavigation = () => {
                   {navItems.map((item) => {
                     if (item.children) {
                       return (
-                        <div key=<span translate={item.name.includes("MIGRA") ? "no" : undefined}>{item.name}</span> className="border-b border-border py-2">
+                        <div key={item.name} className="border-b border-border py-2">
                           <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1.5 px-1">
                             <span translate={item.name.includes("MIGRA") ? "no" : undefined}>{item.name}</span>
                           </p>
@@ -146,7 +146,7 @@ const MigraNavigation = () => {
                     }
                     return item.isRoute ? (
                       <Link
-                        key=<span translate={item.name.includes("MIGRA") ? "no" : undefined}>{item.name}</span>
+                        key={item.name}
                         to={item.href!}
                         onClick={() => setOpen(false)}
                         className="text-muted-foreground hover:text-primary transition-colors text-base font-medium py-3 border-b border-border"
@@ -155,7 +155,7 @@ const MigraNavigation = () => {
                       </Link>
                     ) : (
                       <a
-                        key=<span translate={item.name.includes("MIGRA") ? "no" : undefined}>{item.name}</span>
+                        key={item.name}
                         href={item.href!}
                         onClick={() => setOpen(false)}
                         className="text-muted-foreground hover:text-primary transition-colors text-base font-medium py-3 border-b border-border"
