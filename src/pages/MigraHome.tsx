@@ -7,7 +7,6 @@ import heroMigraBg from "@/assets/hero-migra-bg.jpg";
 import migraLogoHero from "@/assets/migra-logo-hero.webp";
 import heroPattern from "@/assets/hero-pattern.webp";
 import radioMigraLogo from "@/assets/radio-migra-logo.png";
-import sobreMigraImg from "@/assets/sobre-migra.jpg";
 import SpotifyEpisodeRow from "@/components/SpotifyEpisodeRow";
 
 import sofiaZanforlin from "@/assets/team/sofia-zanforlin.png";
