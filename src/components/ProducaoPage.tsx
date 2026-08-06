@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { Publication, ProducaoPageKey } from "@/data/acervoPublications";
 import { FIXED_CATEGORIES } from "@/data/acervoPublications";
+import AuthorList from "@/components/AuthorList";
 import {
   Search,
   ExternalLink,
