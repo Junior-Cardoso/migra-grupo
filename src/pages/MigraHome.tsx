@@ -28,6 +28,19 @@ import { usePageContent } from "@/hooks/usePageContent";
 import { resolveIcon } from "@/lib/iconMap";
 import AuthorList from "@/components/AuthorList";
 
+import m1 from "@/assets/mosaico/mosaico-1.jpeg.asset.json";
+import m2 from "@/assets/mosaico/mosaico-2.jpeg.asset.json";
+import m3 from "@/assets/mosaico/mosaico-3.jpeg.asset.json";
+import m4 from "@/assets/mosaico/mosaico-4.jpeg.asset.json";
+import m5 from "@/assets/mosaico/mosaico-5.jpeg.asset.json";
+import m6 from "@/assets/mosaico/mosaico-6.jpeg.asset.json";
+import m7 from "@/assets/mosaico/mosaico-7.jpeg.asset.json";
+import m8 from "@/assets/mosaico/mosaico-8.jpeg.asset.json";
+import m9 from "@/assets/mosaico/mosaico-9.jpeg.asset.json";
+import m10 from "@/assets/mosaico/mosaico-10.jpeg.asset.json";
+
+const mosaicoFotos = [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10].map((a) => a.url);
+
 const PHOTO_MAP: Record<string, string> = { sofia: sofiaZanforlin, carolina: carolinaLeiteAsset.url };
 
 const MigraHome = () => {
@@ -168,55 +181,31 @@ const MigraHome = () => {
         </div>
       </section>
 
-      {/* Linhas de Pesquisa */}
-      <section id="pesquisa" className="py-20 md:py-28 bg-muted/50">
+      {/* Mosaico de fotos */}
+      <section id="mosaico" className="py-16 md:py-20 bg-muted/50">
         <div className="max-w-6xl mx-auto px-6">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground uppercase tracking-wide">
-                {content.areas.title}
-              </h2>
-              <div className="w-12 h-1 bg-accent mx-auto mt-3 mb-4 rounded-full" />
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                {content.areas.description}
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {content.areas.items.map((item, i) => {
-              const Icon = resolveIcon(item.icon);
-              return (
-                <ScrollReveal key={i} delay={i * 100}>
-                  <Card className="p-6 bg-background border-border hover:border-primary/30 transition-colors group h-full">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                      <Icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="font-heading text-lg font-semibold text-foreground mb-2 uppercase tracking-wide">
-                      {item.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </Card>
-                </ScrollReveal>
-              );
-            })}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            {mosaicoFotos.map((src, i) => (
+              <ScrollReveal key={i} delay={(i % 4) * 80}>
+                <div
+                  className={`overflow-hidden rounded-lg bg-muted ${
+                    i % 5 === 0 ? "aspect-[3/4]" : "aspect-square"
+                  }`}
+                >
+                  <img
+                    src={src}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                </div>
+              </ScrollReveal>
+            ))}
           </div>
-
-          <ScrollReveal>
-            <div className="text-center mt-10">
-              <Button
-                size="lg"
-                className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-normal text-sm sm:text-base px-6 sm:px-8 uppercase tracking-wider"
-              >
-                Saiba mais sobre nossas pesquisas
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </div>
-          </ScrollReveal>
         </div>
       </section>
+
 
       {/* Equipe */}
       <section id="equipe" className="py-20 md:py-28">
