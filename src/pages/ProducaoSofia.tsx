@@ -5,8 +5,8 @@ const ProducaoSofia = () => (
   <ProducaoPage
     pageKey="sofia"
     eyebrow="MIGRA – UFPE"
-    title="Profª Sofia Zanforline"
-    description="Produção acadêmica e intelectual da Profª Sofia Zanforline, cofundadora do MIGRA."
+    title="Profª Sofia Zanforlin"
+    description="Produção acadêmica e intelectual da Profª Sofia Zanforlin, cofundadora do MIGRA."
     portraitImage={sofia}
     tint="teal"
   />

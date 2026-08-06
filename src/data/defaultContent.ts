@@ -33,7 +33,7 @@ export const defaultHomeContent = {
     title: "Nossa Equipe",
     description: "Pesquisadores dedicados ao estudo das migrações, mobilidades e gestão de populações.",
     members: [
-      { name: "Profa. Sofia Zanforline", role: "Coordenadora", photoKey: "sofia" },
+      { name: "Profa. Sofia Zanforlin", role: "Coordenadora", photoKey: "sofia" },
       { name: "Profa. Carolina Leite", role: "Coordenadora", photoKey: "carolina" },
     ],
   },
@@ -81,7 +81,7 @@ export const defaultSobreContent = {
     title: "Coordenação",
     members: [
       { name: "Profª Drª Carolina Leite", role: "Coordenadora", area: "Direito Internacional e Migrações", bio: "Bio da coordenadora.", lattes: "#", orcid: "#" },
-      { name: "Profª Drª Sofia Zanforline", role: "Vice-Coordenadora", area: "Ciências Sociais e Mobilidade", bio: "Bio da vice-coordenadora.", lattes: "#", orcid: "#" },
+      { name: "Profª Drª Sofia Zanforlin", role: "Vice-Coordenadora", area: "Ciências Sociais e Mobilidade", bio: "Bio da vice-coordenadora.", lattes: "#", orcid: "#" },
     ],
   },
   pessoas: {
