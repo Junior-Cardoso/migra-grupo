@@ -38,8 +38,28 @@ import m7 from "@/assets/mosaico/mosaico-7.jpeg.asset.json";
 import m8 from "@/assets/mosaico/mosaico-8.jpeg.asset.json";
 import m9 from "@/assets/mosaico/mosaico-9.jpeg.asset.json";
 import m10 from "@/assets/mosaico/mosaico-10.jpeg.asset.json";
+import m11 from "@/assets/mosaico/mosaico-11.jpeg.asset.json";
+import m12 from "@/assets/mosaico/mosaico-12.jpeg.asset.json";
+import m13 from "@/assets/mosaico/mosaico-13.jpeg.asset.json";
+import m14 from "@/assets/mosaico/mosaico-14.jpeg.asset.json";
+import m15 from "@/assets/mosaico/mosaico-15.jpeg.asset.json";
 
-const mosaicoFotos = [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10].map((a) => a.url);
+const mosaicoFotos = [m1, m14, m2, m11, m3, m15, m4, m12, m5, m6, m13, m7, m8, m9, m10].map((a) => a.url);
+
+// Padrão bento: alterna blocos grandes, verticais e quadrados
+const mosaicoSpans = [
+  "col-span-2 row-span-2",
+  "col-span-2 row-span-1",
+  "col-span-2 row-span-2",
+  "col-span-2 row-span-1",
+  "col-span-2 row-span-1",
+  "col-span-2 row-span-2",
+  "col-span-2 row-span-1",
+  "col-span-2 row-span-2",
+  "col-span-2 row-span-1",
+  "col-span-2 row-span-1",
+];
+
 
 const PHOTO_MAP: Record<string, string> = { sofia: sofiaZanforlin, carolina: carolinaLeiteAsset.url };
 
@@ -172,7 +192,7 @@ const MigraHome = () => {
             <ScrollReveal delay={200}>
               <div className="relative">
                 <div className="aspect-[4/3] rounded-lg bg-muted overflow-hidden">
-                  <img src={sobreMigraImg} alt="Multidão em movimento" className="w-full h-full object-cover object-left" />
+                  <img src={m14.url} alt="Grupo de migrantes e pesquisadores reunidos em campo de futebol" className="w-full h-full object-cover object-center" />
                 </div>
                 <div className="hidden md:block absolute -bottom-4 -left-4 w-24 h-24 bg-accent/20 rounded-lg -z-10" />
               </div>
