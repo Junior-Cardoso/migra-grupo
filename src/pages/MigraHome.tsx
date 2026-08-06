@@ -26,6 +26,7 @@ import { Link } from "react-router-dom";
 import MigraFooter from "@/components/MigraFooter";
 import { usePageContent } from "@/hooks/usePageContent";
 import { resolveIcon } from "@/lib/iconMap";
+import AuthorList from "@/components/AuthorList";
 
 const PHOTO_MAP: Record<string, string> = { sofia: sofiaZanforlin, carolina: carolinaLeiteAsset.url };
 
