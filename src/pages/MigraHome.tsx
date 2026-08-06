@@ -43,7 +43,7 @@ import m13 from "@/assets/mosaico/mosaico-13.jpeg.asset.json";
 import m14 from "@/assets/mosaico/mosaico-14.jpeg.asset.json";
 import m15 from "@/assets/mosaico/mosaico-15.jpeg.asset.json";
 
-const mosaicoFotos = [m1, m14, m2, m11, m3, m15, m4, m12, m5, m6, m13, m7, m8, m9, m10].map((a) => a.url);
+const mosaicoFotos = [m1, m11, m2, m15, m3, m12, m4, m13, m5, m6, m7, m8, m9, m10].map((a) => a.url);
 
 // Padrão bento: alterna blocos grandes, verticais e quadrados
 const mosaicoSpans = [
