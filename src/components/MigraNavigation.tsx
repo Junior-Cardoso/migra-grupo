@@ -34,8 +34,8 @@ const MigraNavigation = () => {
       name: "Produção",
       children: [
         { name: "MIGRA", href: "/producao", highlight: true },
-        { name: "Profª Carolina Gonçalves", href: "/producao/carolina" },
-        { name: "Profª Sofia Cavalcanti", href: "/producao/sofia" },
+        { name: "Profª Carolina Leite", href: "/producao/carolina" },
+        { name: "Profª Sofia Zanforline", href: "/producao/sofia" },
       ],
     },
     { name: "Blog", href: "/blog", isRoute: true },
