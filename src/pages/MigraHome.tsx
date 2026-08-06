@@ -88,7 +88,7 @@ const MigraHome = () => {
             WebkitMaskImage: "linear-gradient(to right, transparent 0%, transparent 15%, rgba(0,0,0,0.3) 35%, rgba(0,0,0,0.7) 60%, black 80%)",
           }}
         />
-        <div className="absolute inset-0 bg-secondary/20" />
+        <div className="absolute inset-0 bg-secondary/70 md:bg-secondary/20" />
         {/* Pattern overlay (same as secondary pages) — centered on the left, faded */}
         <div
           aria-hidden="true"
@@ -160,7 +160,7 @@ const MigraHome = () => {
                 <div className="aspect-[4/3] rounded-lg bg-muted overflow-hidden">
                   <img src={sobreMigraImg} alt="Multidão em movimento" className="w-full h-full object-cover object-left" />
                 </div>
-                <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-accent/20 rounded-lg -z-10" />
+                <div className="hidden md:block absolute -bottom-4 -left-4 w-24 h-24 bg-accent/20 rounded-lg -z-10" />
               </div>
             </ScrollReveal>
           </div>
