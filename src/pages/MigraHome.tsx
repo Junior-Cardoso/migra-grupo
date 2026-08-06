@@ -28,6 +28,19 @@ import { usePageContent } from "@/hooks/usePageContent";
 import { resolveIcon } from "@/lib/iconMap";
 import AuthorList from "@/components/AuthorList";
 
+import m1 from "@/assets/mosaico/mosaico-1.jpeg.asset.json";
+import m2 from "@/assets/mosaico/mosaico-2.jpeg.asset.json";
+import m3 from "@/assets/mosaico/mosaico-3.jpeg.asset.json";
+import m4 from "@/assets/mosaico/mosaico-4.jpeg.asset.json";
+import m5 from "@/assets/mosaico/mosaico-5.jpeg.asset.json";
+import m6 from "@/assets/mosaico/mosaico-6.jpeg.asset.json";
+import m7 from "@/assets/mosaico/mosaico-7.jpeg.asset.json";
+import m8 from "@/assets/mosaico/mosaico-8.jpeg.asset.json";
+import m9 from "@/assets/mosaico/mosaico-9.jpeg.asset.json";
+import m10 from "@/assets/mosaico/mosaico-10.jpeg.asset.json";
+
+const mosaicoFotos = [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10].map((a) => a.url);
+
 const PHOTO_MAP: Record<string, string> = { sofia: sofiaZanforlin, carolina: carolinaLeiteAsset.url };
 
 const MigraHome = () => {
