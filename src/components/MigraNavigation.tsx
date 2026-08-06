@@ -113,8 +113,9 @@ const MigraNavigation = () => {
           <div className="lg:hidden">
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-6 w-6" />
+                <Button variant="ghost" size="icon" aria-label="Abrir menu" className="text-foreground">
+                  <Menu className="h-6 w-6" aria-hidden="true" />
+                  <span className="sr-only">Menu</span>
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] bg-background">
