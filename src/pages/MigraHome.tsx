@@ -7,7 +7,6 @@ import heroMigraBg from "@/assets/hero-migra-bg.jpg";
 import migraLogoHero from "@/assets/migra-logo-hero.webp";
 import heroPattern from "@/assets/hero-pattern.webp";
 import radioMigraLogo from "@/assets/radio-migra-logo.png";
-import sobreMigraImg from "@/assets/sobre-migra.jpg";
 import SpotifyEpisodeRow from "@/components/SpotifyEpisodeRow";
 
 import sofiaZanforlin from "@/assets/team/sofia-zanforlin.png";
@@ -38,8 +37,28 @@ import m7 from "@/assets/mosaico/mosaico-7.jpeg.asset.json";
 import m8 from "@/assets/mosaico/mosaico-8.jpeg.asset.json";
 import m9 from "@/assets/mosaico/mosaico-9.jpeg.asset.json";
 import m10 from "@/assets/mosaico/mosaico-10.jpeg.asset.json";
+import m11 from "@/assets/mosaico/mosaico-11.jpeg.asset.json";
+import m12 from "@/assets/mosaico/mosaico-12.jpeg.asset.json";
+import m13 from "@/assets/mosaico/mosaico-13.jpeg.asset.json";
+import m14 from "@/assets/mosaico/mosaico-14.jpeg.asset.json";
+import m15 from "@/assets/mosaico/mosaico-15.jpeg.asset.json";
 
-const mosaicoFotos = [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10].map((a) => a.url);
+const mosaicoFotos = [m1, m11, m2, m15, m3, m12, m4, m13, m5, m6, m7, m8, m9, m10].map((a) => a.url);
+
+// Padrão bento: alterna blocos grandes, verticais e quadrados
+const mosaicoSpans = [
+  "col-span-2 row-span-2",
+  "col-span-2 row-span-1",
+  "col-span-2 row-span-2",
+  "col-span-2 row-span-1",
+  "col-span-2 row-span-1",
+  "col-span-2 row-span-2",
+  "col-span-2 row-span-1",
+  "col-span-2 row-span-2",
+  "col-span-2 row-span-1",
+  "col-span-2 row-span-1",
+];
+
 
 const PHOTO_MAP: Record<string, string> = { sofia: sofiaZanforlin, carolina: carolinaLeiteAsset.url };
 
@@ -172,7 +191,7 @@ const MigraHome = () => {
             <ScrollReveal delay={200}>
               <div className="relative">
                 <div className="aspect-[4/3] rounded-lg bg-muted overflow-hidden">
-                  <img src={sobreMigraImg} alt="Multidão em movimento" className="w-full h-full object-cover object-left" />
+                  <img src={m14.url} alt="Grupo de migrantes e pesquisadores reunidos em campo de futebol" className="w-full h-full object-cover object-center" />
                 </div>
                 <div className="hidden md:block absolute -bottom-4 -left-4 w-24 h-24 bg-accent/20 rounded-lg -z-10" />
               </div>
@@ -182,29 +201,31 @@ const MigraHome = () => {
       </section>
 
       {/* Mosaico de fotos */}
-      <section id="mosaico" className="py-16 md:py-20 bg-muted/50">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+      <section id="mosaico" className="relative py-16 md:py-24 bg-primary overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.06] bg-[radial-gradient(circle_at_20%_20%,white,transparent_60%)]" />
+        <div className="relative max-w-7xl mx-auto px-6">
+          <div className="grid grid-flow-dense grid-cols-4 md:grid-cols-6 auto-rows-[110px] md:auto-rows-[150px] gap-2 md:gap-3">
             {mosaicoFotos.map((src, i) => (
-              <ScrollReveal key={i} delay={(i % 4) * 80}>
-                <div
-                  className={`overflow-hidden rounded-lg bg-muted ${
-                    i % 5 === 0 ? "aspect-[3/4]" : "aspect-square"
-                  }`}
-                >
-                  <img
-                    src={src}
-                    alt=""
-                    aria-hidden="true"
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                  />
-                </div>
+              <ScrollReveal
+                key={i}
+                delay={(i % 5) * 70}
+                className={`group relative overflow-hidden rounded-xl ${mosaicoSpans[i % mosaicoSpans.length]}`}
+              >
+                <img
+                  src={src}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  className="w-full h-full object-cover scale-[1.02] grayscale-[35%] transition-all duration-700 ease-out group-hover:scale-110 group-hover:grayscale-0"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-20" />
+                <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-white/10 transition-all duration-500 group-hover:ring-2 group-hover:ring-accent/70" />
               </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
+
 
 
       {/* Equipe */}
