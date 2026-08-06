@@ -200,7 +200,7 @@ export default function ProducaoPage({
             <div className="text-center md:text-left max-w-xl">
               <ScrollReveal>
                 {eyebrow && (
-                  <p className="text-primary font-medium text-xs sm:text-sm tracking-widest uppercase mb-3">{eyebrow}</p>
+                  <p translate="no" className="text-primary font-medium text-xs sm:text-sm tracking-widest uppercase mb-3">{eyebrow}</p>
                 )}
                 <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-secondary uppercase tracking-wide mb-3">
                   {title}

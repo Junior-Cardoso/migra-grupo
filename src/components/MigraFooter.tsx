@@ -32,7 +32,7 @@ const MigraFooter = () => {
               <Link to="/grupos-de-estudo" className="hover:text-primary transition-colors">Grupos de Estudo</Link>
               <Link to="/blog" className="hover:text-primary transition-colors">Blog</Link>
               <Link to="/videografia" className="hover:text-primary transition-colors">Videografia</Link>
-              <Link to="/radio" className="hover:text-primary transition-colors">Rádio MIGRA</Link>
+              <Link to="/radio" translate="no" className="hover:text-primary transition-colors">Rádio MIGRA</Link>
             </div>
           </div>
           <div>
