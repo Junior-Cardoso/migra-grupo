@@ -204,7 +204,7 @@ const MigraHome = () => {
       <section id="mosaico" className="relative py-16 md:py-24 bg-primary overflow-hidden">
         <div className="absolute inset-0 opacity-[0.06] bg-[radial-gradient(circle_at_20%_20%,white,transparent_60%)]" />
         <div className="relative max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-4 md:grid-cols-6 auto-rows-[110px] md:auto-rows-[150px] gap-2 md:gap-3">
+          <div className="grid grid-flow-dense grid-cols-4 md:grid-cols-6 auto-rows-[110px] md:auto-rows-[150px] gap-2 md:gap-3">
             {mosaicoFotos.map((src, i) => (
               <ScrollReveal
                 key={i}
