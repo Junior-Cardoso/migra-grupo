@@ -81,7 +81,7 @@ export const defaultSobreContent = {
     title: "Coordenação",
     members: [
       { name: "Profª Drª Carolina Leite", role: "Coordenadora", area: "Direito Internacional e Migrações", bio: "Bio da coordenadora.", lattes: "#", orcid: "#" },
-      { name: "Profª Drª Sofia Zanforlin", role: "Vice-Coordenadora", area: "Ciências Sociais e Mobilidade", bio: "Bio da vice-coordenadora.", lattes: "#", orcid: "#" },
+      { name: "Profª Drª Sofia Zanforlin", role: "Coordenadora", area: "Ciências Sociais e Mobilidade", bio: "Bio da vice-coordenadora.", lattes: "#", orcid: "#" },
     ],
   },
   pessoas: {
