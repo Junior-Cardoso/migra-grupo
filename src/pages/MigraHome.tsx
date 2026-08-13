@@ -3,8 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import MigraNavigation from "@/components/MigraNavigation";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
-import heroMigraBgAsset from "@/assets/hero-meninas.jpg.asset.json";
-const heroMigraBg = heroMigraBgAsset.url;
+import heroMigraBg from "@/assets/hero-meninas-hd.jpg";
 import migraLogoHero from "@/assets/migra-logo-hero.webp";
 import heroPattern from "@/assets/hero-pattern.webp";
 import radioMigraLogo from "@/assets/radio-migra-logo.png";
@@ -116,8 +115,8 @@ const MigraHome = () => {
           className="absolute inset-0"
           style={{
             backgroundImage: `url(${heroMigraBg})`,
-            backgroundSize: "180% auto",
-            backgroundPosition: "60% top",
+            backgroundSize: "cover",
+            backgroundPosition: "center 20%",
             maskImage: "linear-gradient(to right, transparent 0%, transparent 15%, rgba(0,0,0,0.3) 35%, rgba(0,0,0,0.7) 60%, black 80%)",
             WebkitMaskImage: "linear-gradient(to right, transparent 0%, transparent 15%, rgba(0,0,0,0.3) 35%, rgba(0,0,0,0.7) 60%, black 80%)",
           }}
