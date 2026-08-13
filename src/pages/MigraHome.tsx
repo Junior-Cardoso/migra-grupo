@@ -116,8 +116,8 @@ const MigraHome = () => {
           className="absolute inset-0"
           style={{
             backgroundImage: `url(${heroMigraBg})`,
-            backgroundSize: "cover",
-            backgroundPosition: "top center",
+            backgroundSize: "180% auto",
+            backgroundPosition: "60% top",
             maskImage: "linear-gradient(to right, transparent 0%, transparent 15%, rgba(0,0,0,0.3) 35%, rgba(0,0,0,0.7) 60%, black 80%)",
             WebkitMaskImage: "linear-gradient(to right, transparent 0%, transparent 15%, rgba(0,0,0,0.3) 35%, rgba(0,0,0,0.7) 60%, black 80%)",
           }}
