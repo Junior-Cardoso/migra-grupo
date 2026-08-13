@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import MigraNavigation from "@/components/MigraNavigation";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
-import heroMigraBgAsset from "@/assets/hero-meninas.jpg.asset.json";
+import heroMigraBgAsset from "@/assets/hero-meninas-hd.jpg";
 const heroMigraBg = heroMigraBgAsset.url;
 import migraLogoHero from "@/assets/migra-logo-hero.webp";
 import heroPattern from "@/assets/hero-pattern.webp";
