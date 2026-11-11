@@ -538,11 +538,11 @@ const MigraHome = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a
-                href="mailto:migra@ufpe.br"
+                href="mailto:sofia.canforlin@ufpe.br"
                 className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors text-lg font-medium"
               >
                 <Mail className="h-5 w-5" />
-                migra@ufpe.br
+                sofia.canforlin@ufpe.br
               </a>
               <a
                 href="mailto:migra.extensao@ufpe.br"
