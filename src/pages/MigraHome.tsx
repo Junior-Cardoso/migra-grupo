@@ -4,6 +4,7 @@ import MigraNavigation from "@/components/MigraNavigation";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import heroMigraBg from "@/assets/hero-meninas-hd.jpg";
+import sobreMigraPhoto from "@/assets/migra-capa.jpeg.asset.json";
 import migraLogoHero from "@/assets/migra-logo-hero.webp";
 import heroPattern from "@/assets/hero-pattern.webp";
 import radioMigraLogo from "@/assets/radio-migra-logo.png";
@@ -191,7 +192,7 @@ const MigraHome = () => {
             <ScrollReveal delay={200}>
               <div className="relative">
                 <div className="aspect-[4/3] rounded-lg bg-muted overflow-hidden">
-                  <img src={m14.url} alt="Grupo de migrantes e pesquisadores reunidos em campo de futebol" className="w-full h-full object-cover object-center" />
+                  <img src={sobreMigraPhoto.url} alt="Mulheres reunidas em atividade de campo do MIGRA" className="w-full h-full object-cover object-center" />
                 </div>
                 <div className="hidden md:block absolute -bottom-4 -left-4 w-24 h-24 bg-accent/20 rounded-lg -z-10" />
               </div>
@@ -218,7 +219,6 @@ const MigraHome = () => {
                   loading="lazy"
                   className="w-full h-full object-cover scale-[1.02] grayscale-[35%] transition-all duration-700 ease-out group-hover:scale-110 group-hover:grayscale-0"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-20" />
                 <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-white/10 transition-all duration-500 group-hover:ring-2 group-hover:ring-accent/70" />
               </ScrollReveal>
             ))}
@@ -538,18 +538,18 @@ const MigraHome = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a
-                href="mailto:sofia.canforlin@ufpe.br"
+                href="mailto:sofia.zanforlin@ufpe.br"
                 className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors text-lg font-medium"
               >
                 <Mail className="h-5 w-5" />
-                sofia.canforlin@ufpe.br
+                sofia.zanforlin@ufpe.br
               </a>
               <a
-                href="mailto:migra.extensao@ufpe.br"
+                href="mailto:carolina.gleite@ufpe.br"
                 className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors text-lg font-medium"
               >
                 <Mail className="h-5 w-5" />
-                migra.extensao@ufpe.br
+                carolina.gleite@ufpe.br
               </a>
             </div>
           </ScrollReveal>

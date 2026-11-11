@@ -148,7 +148,7 @@ const AdminGrupos = () => {
               <Textarea value={cyclesStr} onChange={(e) => setCyclesStr(e.target.value)} rows={3} placeholder="Ciclo 1 — Tema | Mar–Jun 2026" />
             </div>
             <div className="grid grid-cols-2 gap-3">
-              <div><Label>Email de contato</Label><Input type="email" value={form.email ?? ""} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="grupo@ufpe.br" /></div>
+              <div><Label>Email de contato</Label><Input type="email" value={form.email ?? ""} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="sofia.zanforlin@ufpe.br" /></div>
               <div><Label>Ordem</Label><Input type="number" value={form.sort_order} onChange={(e) => setForm({ ...form, sort_order: Number(e.target.value) })} /></div>
             </div>
           </div>

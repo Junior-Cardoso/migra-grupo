@@ -59,8 +59,8 @@ const MigraFooter = () => {
               Contato
             </h4>
             <div className="flex flex-col gap-2 text-sm">
-              <a href="mailto:migra@ufpe.br" className="hover:text-primary transition-colors">migra@ufpe.br</a>
-              <a href="mailto:migra.extensao@ufpe.br" className="hover:text-primary transition-colors">migra.extensao@ufpe.br</a>
+              <a href="mailto:sofia.zanforlin@ufpe.br" className="hover:text-primary transition-colors">sofia.zanforlin@ufpe.br</a>
+              <a href="mailto:carolina.gleite@ufpe.br" className="hover:text-primary transition-colors">carolina.gleite@ufpe.br</a>
               <p>UFPE – Centro de Ciências Jurídicas</p>
               <p>Recife, PE – Brasil</p>
             </div>

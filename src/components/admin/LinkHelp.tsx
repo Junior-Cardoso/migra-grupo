@@ -60,7 +60,7 @@ export const LinkHelp = () => (
             <code className="bg-muted px-1 py-0.5 rounded text-[10px]">mailto:</code> — abrir e-mail
           </p>
           <p className="text-muted-foreground text-[11px] leading-relaxed">
-            Exemplo: <code className="bg-muted px-1 rounded">mailto:migra@ufpe.br</code>.
+            Exemplo: <code className="bg-muted px-1 rounded">mailto:sofia.zanforlin@ufpe.br</code>.
           </p>
         </div>
       </div>
